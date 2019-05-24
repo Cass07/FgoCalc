@@ -1,8 +1,9 @@
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
-var servTable;
-var Var1 = 1;
+
+var servTable;//csv 데이터 저장 배열
+var Var1 = 1;//디버깅용
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
@@ -68,8 +69,31 @@ var Enemy3NpDmg = document.getElementById("Enemy3NpDmg");
 
 //평균 보구 대미지 출력용 변수
 var AverNpDmg = document.getElementById("AverNpDmg");
+
+//출력 테이블용 변수
+var Enemy1OverNumMin = document.getElementById("Enemy1OverNumMin");
+var Enemy2OverNumMin = document.getElementById("Enemy2OverNumMin");
+var Enemy3OverNumMin = document.getElementById("Enemy3OverNumMin");
+
+var Enemy1OverNpMin = document.getElementById("Enemy1OverNpMin");
+var Enemy2OverNpMin = document.getElementById("Enemy2OverNpMin");
+var Enemy3OverNpMin = document.getElementById("Enemy3OverNpMin");
+var OverNpMinSum = document.getElementById("OverNpMinSum");
+
+var Enemy1OverNumMax = document.getElementById("Enemy1OverNumMax");
+var Enemy2OverNumMax = document.getElementById("Enemy2OverNumMax");
+var Enemy3OverNumMax = document.getElementById("Enemy3OverNumMax");
+
+var Enemy1OverNpMax = document.getElementById("Enemy1OverNpMax");
+var Enemy2OverNpMax = document.getElementById("Enemy2OverNpMax");
+var Enemy3OverNpMax = document.getElementById("Enemy3OverNpMax");
+var OverNpMaxSum = document.getElementById("OverNpMaxSum");
+
 //계산 버튼
 var calcBtn = document.getElementById("calc");
+
+var GotoTop = document.getElementById("GotoTop");
+var GotoMain = document.getElementById("GotoMain");
 
 
 //계산용 전역변수 선언
@@ -80,6 +104,7 @@ var NpMagTable = new Array();
 //각종 데이터 상수 테이블 선언&초기화
 const NpDmTable = new Array(300, 400, 450, 475, 500);//보구계수
 const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1);//클래스 보정계수
+const ClassNpRechargeMagTable = new Array(1,1,1,1.1,1.2,0.9,0.8,1,1,1,1.2,1);//적 클래스 NP보정계수
 const CommandMagTable = {
   1 : 0.8,
   3 : 1
@@ -129,13 +154,12 @@ const HiddenClassDefMag =
         [1,1,1,1.1,1]//수
     ];
 
-var Testvar = document.getElementById("Testvar"); //디버깅용
 
 getData();//parsing 진행 1회
 
 
 //계산 함수
-function NpDmgCalc()//무상성 비난수 보구 대미지 계산
+function NpDmgCalc()//무상성 비난수 보구 대미지 계산&출력
 {
     var tmp1 = Number(ATK.value)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]];
     var AllBuff = (100+Number(AtkBuff.value))/100*(100+Number(CmdBuff.value))/100*(100+Number(NpDmgBuff.value))/100;
@@ -164,9 +188,7 @@ function NpDmgCalc_Serv(EnemyClass, EnemyHiddenClass,EnemyDef, EnemyCmd, EnemyNp
         tmp3 = 1;
     }
 
-    var NpDmgFinal = Math.floor(tmp1*tmp2*tmp3) + Number(DmgPlus.value);
-
-    return NpDmgFinal;
+    return Math.floor(tmp1 * tmp2 * tmp3) + Number(DmgPlus.value);
 }
 
 function OverkillCal(NpDmgFinal, EnemyHP)//오버킬 횟수 계산
@@ -194,7 +216,18 @@ function OverkillCal(NpDmgFinal, EnemyHP)//오버킬 횟수 계산
     return OvkCnt;
 }
 
+function NpRechargeCal(EnemyClass,IsEnemyCase2,OverkillCnt,EnemyCmd)
+{
+    var tmp1 = Number(NpRate.value)*Number(NpCommand.value)*(100+EnemyCmd+Number(CmdBuff.value))//기본수급*커멘카드계수(1,3)*커멘뻥*100
+    *ClassNpRechargeMagTable[Number(EnemyClass)]*(100+Number(NpBuff.value))/100;//적 클래스 수급보정*수급뻥
+    if(IsEnemyCase2.checked === true)//case2의 경우 수급보정 1.2배 가산
+    {
+        tmp1 = tmp1 * 1.2;
+    }
+    tmp1 = Math.floor(tmp1);//소수점 2자리 내림
+    return Math.floor(tmp1*(1.5*OverkillCnt + (NpCount-OverkillCnt)))/100;//(오버킬*1.5 + 비오버킬) 후 소수점 내림
 
+}
 
 
 //입력 폼&드롭다운&체크박스 선택 이벤트 함수
@@ -220,9 +253,6 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 NpMag.value= NpMag_tmp*2;
             }
-
-
-
 
             break;
         }
@@ -323,11 +353,127 @@ calcBtn.addEventListener("click",function(){
     $('#calcBtn').prop('disabled',true);
     calcBtn.innerHTML = "Processing...";
 
+    var tmp1, tmp2, tmp3, tmp4, tmp5;
+    tmp4 = 0;
+    tmp5 = 0;
+
     NpDmgCalc();
-    //var ockcnt = OverkillCal(110000,20900);
-    Var1 = NpDmgCalc_Serv(Number(Enemy1Class.value), Number(Enemy1HiddenClass.value), Number(Enemy1Def.value), Number(Enemy1Cmd.value), Number(Enemy1NpDmg.value), 1);
-    Testvar.innerHTML = Var1;
+    //Enemy1 calculate
+    if(IsNotEnemy1.checked === true)
+    {
+        Enemy1OverNpMax.innerHTML = 0;
+        Enemy1OverNpMin.innerHTML = 0;
+        Enemy1OverNumMax.innerHTML = 0;
+        Enemy1OverNumMin.innerHTML = 0;
+    }else
+    {
+        //난수 1.1
+        tmp1 = NpDmgCalc_Serv(Number(Enemy1Class.value), Number(Enemy1HiddenClass.value),
+            Number(Enemy1Def.value), Number(Enemy1Cmd.value), Number(Enemy1NpDmg.value), 1.1);
+        tmp2 = OverkillCal(tmp1, Number(Enemy1HP.value));
+        tmp3 = NpRechargeCal(Number(Enemy1Class.value), IsEnemy1Case2, tmp2, Number(Enemy1Cmd.value));
+
+        Enemy1OverNumMax.innerHTML = tmp2.toFixed();
+        Enemy1OverNpMax.innerHTML = tmp3.toFixed(2);
+        tmp4 += tmp3;
+
+        //난수 0.9
+        tmp1 = NpDmgCalc_Serv(Number(Enemy1Class.value), Number(Enemy1HiddenClass.value),
+            Number(Enemy1Def.value), Number(Enemy1Cmd.value), Number(Enemy1NpDmg.value), 0.9);
+        tmp2 = OverkillCal(tmp1, Number(Enemy1HP.value));
+        tmp3 = NpRechargeCal(Number(Enemy1Class.value), IsEnemy1Case2, tmp2, Number(Enemy1Cmd.value));
+
+        Enemy1OverNumMin.innerHTML = tmp2.toFixed();
+        Enemy1OverNpMin.innerHTML = tmp3.toFixed(2);
+        tmp5 += tmp3;
+    }
+    //Enemy2 calculate
+    if(IsNotEnemy2.checked === true)
+    {
+        Enemy2OverNpMax.innerHTML = 0;
+        Enemy2OverNpMin.innerHTML = 0;
+        Enemy2OverNumMax.innerHTML = 0;
+        Enemy2OverNumMin.innerHTML = 0;
+    }else
+    {
+        //난수 1.1
+        tmp1 = NpDmgCalc_Serv(Number(Enemy2Class.value), Number(Enemy2HiddenClass.value),
+            Number(Enemy2Def.value), Number(Enemy2Cmd.value), Number(Enemy2NpDmg.value), 1.1);
+        tmp2 = OverkillCal(tmp1, Number(Enemy2HP.value));
+        tmp3 = NpRechargeCal(Number(Enemy2Class.value), IsEnemy2Case2, tmp2, Number(Enemy2Cmd.value));
+
+        Enemy2OverNumMax.innerHTML = tmp2.toFixed();
+        Enemy2OverNpMax.innerHTML = tmp3.toFixed(2);
+        tmp4 += tmp3;
+
+        //난수 0.9
+        tmp1 = NpDmgCalc_Serv(Number(Enemy2Class.value), Number(Enemy2HiddenClass.value),
+            Number(Enemy2Def.value), Number(Enemy2Cmd.value), Number(Enemy2NpDmg.value), 0.9);
+        tmp2 = OverkillCal(tmp1, Number(Enemy2HP.value));
+        tmp3 = NpRechargeCal(Number(Enemy2Class.value), IsEnemy2Case2, tmp2, Number(Enemy2Cmd.value));
+
+        Enemy2OverNumMin.innerHTML = tmp2.toFixed();
+        Enemy2OverNpMin.innerHTML = tmp3.toFixed(2);
+        tmp5 += tmp3;
+    }
+    //Enemy3 calculate
+    if(IsNotEnemy3.checked === true)
+    {
+        Enemy3OverNpMax.innerHTML = 0;
+        Enemy3OverNpMin.innerHTML = 0;
+        Enemy3OverNumMax.innerHTML = 0;
+        Enemy3OverNumMin.innerHTML = 0;
+    }else
+    {
+        //난수 1.1
+        tmp1 = NpDmgCalc_Serv(Number(Enemy3Class.value), Number(Enemy3HiddenClass.value),
+            Number(Enemy3Def.value), Number(Enemy3Cmd.value), Number(Enemy3NpDmg.value), 1.1);
+        tmp2 = OverkillCal(tmp1, Number(Enemy3HP.value));
+        tmp3 = NpRechargeCal(Number(Enemy3Class.value), IsEnemy3Case2, tmp2, Number(Enemy3Cmd.value));
+
+        Enemy3OverNumMax.innerHTML = tmp2.toFixed();
+        Enemy3OverNpMax.innerHTML = tmp3.toFixed(2);
+        tmp4 += tmp3;
+
+        //난수 0.9
+        tmp1 = NpDmgCalc_Serv(Number(Enemy3Class.value), Number(Enemy3HiddenClass.value),
+            Number(Enemy3Def.value), Number(Enemy3Cmd.value), Number(Enemy3NpDmg.value), 0.9);
+        tmp2 = OverkillCal(tmp1, Number(Enemy3HP.value));
+        tmp3 = NpRechargeCal(Number(Enemy3Class.value), IsEnemy3Case2, tmp2, Number(Enemy3Cmd.value));
+
+        Enemy3OverNumMin.innerHTML = tmp2.toFixed();
+        Enemy3OverNpMin.innerHTML = tmp3.toFixed(2);
+        tmp5 += tmp3;
+    }
+
+    OverNpMaxSum.innerHTML = tmp4.toFixed(2);
+    OverNpMinSum.innerHTML = tmp5.toFixed(2);
 
     $('#calcBtn').prop('disabled',false);
     calcBtn.innerHTML = "계산하기";
+
+    //아래로 스크롤함
+    var body = document.getElementsByTagName("body")[0];
+    window.scroll({
+        behavior:'smooth',
+        left:0,
+        top:body.offsetHeight
+    });
 })
+
+//top 버튼 클릭 이벤트 함수
+GotoTop.addEventListener('click',function(){
+    var body = document.getElementsByTagName("body")[0];
+    window.scroll({
+            behavior:'smooth',
+            left:0,
+            top:body.offsetTop
+        });
+})
+
+//main버튼 클릭 이벤트 함수
+GotoMain.addEventListener('click',function()
+{
+    window.location = '../';
+})
+
