@@ -21,14 +21,33 @@
     <h1 class="display-4" align="center">보구 리차지 계산기</h1><br>
     <p align="center">던전별 퀵, 아츠 보구 서번트의 NP 리차지량을 계산합니다.</p>
     <form>
+        <!-- Attaker Data -->
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="Servant">서번트</label>
                 <select class="form-control" id="Servant">
+                    <option value="JeanneArcher">잔 다르크 (아처)</option>
+                    <option value="Atalante">아탈란테</option>
+                    <option value="Bradamante">브라다만테</option>
+                    <option value="Valkyrie">발키리</option>
+                    <option value="Parvati">파르바티</option>
+                    <option value="Fionn">핀 막 쿨</option>
+                    <option value="Achilles">아킬레우스</option>
+                    <option value="Marie">마리 앙투아네트</option>
+                    <option value="ModredRider">모드레드 (라이더)</option>
+                    <option value="IshtarRider">이슈타르 (라이더)</option>
+                    <option value="Anastasia">아나스타샤</option>
+                    <option value="Sikibu">무라사키 시키부</option>
+                    <option value="Seig">지크</option>
+                    <option value="ScathachAssa">스카자하 (어새신)</option>
+                    <option value="NitocrisAssa">니토크리스 (어새신)</option>
+                    <option value="UshiwakaAssa">우시와카마루 (어새신)</option>
+                    <option value="Lancelot">랜슬롯</option>
+                    <option value="Frankenstein">프랑켄슈타인</option>
                     <option value="Gannkutsuou">암굴왕</option>
                     <option value="Salieri">살리에리</option>
-                    <option value="Atalante">아탈란테</option>
-                    <option value="Sikibu">시키부</option>
+                    <option value="Kiara">키아라</option>
+                    <option value="Hokusai">호쿠사이</option>
                 </select>
             </div>
             <div class="form-group col-md-6">
@@ -123,12 +142,14 @@
             </div>
         </div>
 
+        <!-- Enemy Preset -->
         <div class = "form-row">
             <div class="form-group col-md-6">
                 <label for="EnemyDataPreset">에너미 데이터 프리셋</label>
                 <select class="form-control" id="EnemyDataPreset">
                     <option value = "0">직접 입력</option>
                     <option value = '1'>보물고 초급 던전</option>
+                    <!-- <option value = '2'>test</option> -->
                 </select>
             </div>
             <div class="form-group col-md-6">
@@ -137,7 +158,7 @@
             </div>
         </div>
 
-
+        <!-- Enemy 1~3 Data -->
         <div class="form-row">
             <div class="col-md-4">
                 <div class="card">
@@ -343,6 +364,7 @@
     <button type = "button" id="calc" class="btn btn-primary btn-lg btn-block">계산하기</button>
     <br>
 
+    <!-- Result -->
     <div class="card card-primary">
         <h3 class="card-header" align="center">
             계산 결과
@@ -401,6 +423,7 @@
         </div>
     </div>
     <br>
+    <!-- Extra Button -->
     <button type = "button" id="GotoTop" class="btn btn-success btn-block">▲Top</button><br>
 
     <button type = "button" id="GotoMain" class="btn btn-success btn-block">To Main...</button><br>

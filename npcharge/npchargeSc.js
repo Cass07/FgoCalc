@@ -3,6 +3,7 @@ $(function () {
 })
 
 var servTable;//csv 데이터 저장 배열
+var EnemyPresetTable;
 var Var1 = 1;//디버깅용
 
 //csv 데이터 호출, 파싱 함수
@@ -15,6 +16,16 @@ function getData() {
         complete: function(results){
             servTable = results.data;
             //Var1 = servTable.length;
+        }
+    });
+
+   var data2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/EnemyPreset.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            EnemyPresetTable = results.data;
         }
     });
     //console.log(data);
@@ -66,6 +77,9 @@ var Enemy3HiddenClass = document.getElementById("Enemy3HiddenClass");
 var Enemy3Def = document.getElementById("Enemy3Def");
 var Enemy3Cmd = document.getElementById("Enemy3Cmd");
 var Enemy3NpDmg = document.getElementById("Enemy3NpDmg");
+
+var EnemyDataPreset = document.getElementById("EnemyDataPreset");
+var EnemyDataPresetResetBtn = document.getElementById("EnemyDataPresetResetBtn");
 
 //평균 보구 대미지 출력용 변수
 var AverNpDmg = document.getElementById("AverNpDmg");
@@ -224,9 +238,43 @@ function NpRechargeCal(EnemyClass,IsEnemyCase2,OverkillCnt,EnemyCmd)
     {
         tmp1 = tmp1 * 1.2;
     }
+
+    tmp1 = Math.round(tmp1*1000)*0.001;
     tmp1 = Math.floor(tmp1);//소수점 2자리 내림
     return Math.floor(tmp1*(1.5*OverkillCnt + (NpCount-OverkillCnt)))/100;//(오버킬*1.5 + 비오버킬) 후 소수점 내림
+}
 
+function EnemyDataAllAvail()//에너미 데이터 칸 모두 잠금해제
+{
+    $('#Enemy1HP').prop('readonly',false);
+    $('#Enemy1Class').prop('disabled',false);
+    $('#IsEnemy1Case2').prop('disabled',false);
+    $('#Enemy1HiddenClass').prop('disabled',false);
+    $('#IsNotEnemy1').prop('disabled',false);
+    $('#Enemy1Def').prop('readonly',false);
+    $('#Enemy1Cmd').prop('readonly',false);
+    $('#Enemy1NpDmg').prop('readonly',false);
+    $('#IsNotEnemy1').prop('checked', false);
+
+    $('#Enemy2HP').prop('readonly',false);
+    $('#Enemy2Class').prop('disabled',false);
+    $('#IsEnemy2Case2').prop('disabled',false);
+    $('#Enemy2HiddenClass').prop('disabled',false);
+    $('#IsNotEnemy2').prop('disabled',false);
+    $('#Enemy2Def').prop('readonly',false);
+    $('#Enemy2Cmd').prop('readonly',false);
+    $('#Enemy2NpDmg').prop('readonly',false);
+    $('#IsNotEnemy2').prop('checked', false);
+
+    $('#Enemy3HP').prop('readonly',false);
+    $('#Enemy3Class').prop('disabled',false);
+    $('#IsEnemy3Case2').prop('disabled',false);
+    $('#Enemy3HiddenClass').prop('disabled',false);
+    $('#IsNotEnemy3').prop('disabled',false);
+    $('#Enemy3Def').prop('readonly',false);
+    $('#Enemy3Cmd').prop('readonly',false);
+    $('#Enemy3NpDmg').prop('readonly',false);
+    $('#IsNotEnemy3').prop('checked', false);
 }
 
 
@@ -253,6 +301,10 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 NpMag.value= NpMag_tmp*2;
             }
+            if(servTable[i]["name"] === "Frankenstein")
+            {
+                NpMag += 100;
+            }
 
             break;
         }
@@ -263,21 +315,158 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
 
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
-    if(NpCommand.value == 3) {
+    if(NpCommand.value === 3) {
         NpMag.value=NpMag_tmp*1.5;
     }else
     {
         NpMag.value= NpMag_tmp*2;
     }
+    if(Servant.value === "Frankenstein")
+    {
+        NpMag += 100;
+    }
 })
 
 NpUpgrade.addEventListener("change",function() {//보구강화 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
-    if (NpCommand.value == 3) {
+    if (NpCommand.value === 3) {
         NpMag.value = NpMag_tmp * 1.5;
     } else {
         NpMag.value = NpMag_tmp * 2;
     }
+    if(Servant.value === "Frankenstein")
+    {
+        NpMag += 100;
+    }
+})
+
+EnemyDataPreset.addEventListener("change",function(){
+    if(EnemyDataPreset.value == 0)
+    {
+        EnemyDataAllAvail();
+    }else
+    {
+        var tmp;
+        tmp = EnemyPresetTable[Number(EnemyDataPreset.value)]["e1hp"];
+        Enemy1HP.value = tmp;
+        if(tmp == 0)
+        {
+            $('#IsNotEnemy1').prop('checked', true);
+            $('#Enemy1Def').prop('readonly',true);
+            $('#Enemy1Cmd').prop('readonly',true);
+            $('#Enemy1NpDmg').prop('readonly',true);
+        }else
+        {
+            $('#IsNotEnemy1').prop('checked', false);
+            $('#Enemy1Def').prop('readonly',false);
+            $('#Enemy1Cmd').prop('readonly',false);
+            $('#Enemy1NpDmg').prop('readonly',false);
+        }
+        Enemy1Class.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e1class"];
+        Enemy1HiddenClass.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e1hidden"];
+        if( EnemyPresetTable[Number(EnemyDataPreset.value)]["e1case2"] == 1) {
+            $('#IsEnemy1Case2').prop('checked', true);
+        }else
+        {
+            $('#IsEnemy1Case2').prop('checked', false);
+        }
+
+        tmp = EnemyPresetTable[Number(EnemyDataPreset.value)]["e2hp"];
+        Enemy2HP.value = tmp;
+        if(tmp == 0)
+        {
+            $('#IsNotEnemy2').prop('checked', true);
+            $('#Enemy2Def').prop('readonly',true);
+            $('#Enemy2Cmd').prop('readonly',true);
+            $('#Enemy2NpDmg').prop('readonly',true);
+        }else
+        {
+            $('#IsNotEnemy2').prop('checked', false);
+            $('#Enemy2Def').prop('readonly',false);
+            $('#Enemy2Cmd').prop('readonly',false);
+            $('#Enemy2NpDmg').prop('readonly',false);
+        }
+        Enemy2Class.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e2class"];
+        Enemy2HiddenClass.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e2hidden"];
+        if( EnemyPresetTable[Number(EnemyDataPreset.value)]["e2case2"] == 1) {
+            $('#IsEnemy2Case2').prop('checked', true);
+        }else
+        {
+            $('#IsEnemy2Case2').prop('checked', false);
+        }
+
+        tmp = EnemyPresetTable[Number(EnemyDataPreset.value)]["e3hp"];
+        Enemy3HP.value = tmp;
+        if(tmp == 0)
+        {
+            $('#IsNotEnemy3').prop('checked', true);
+            $('#Enemy3Def').prop('readonly',true);
+            $('#Enemy3Cmd').prop('readonly',true);
+            $('#Enemy3NpDmg').prop('readonly',true);
+        }else
+        {
+            $('#IsNotEnemy3').prop('checked', false);
+            $('#Enemy3Def').prop('readonly',false);
+            $('#Enemy3Cmd').prop('readonly',false);
+            $('#Enemy3NpDmg').prop('readonly',false);
+        }
+        Enemy3HP.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e3hp"];
+        Enemy3Class.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e3class"];
+        Enemy3HiddenClass.value = EnemyPresetTable[Number(EnemyDataPreset.value)]["e3hidden"];
+        if( EnemyPresetTable[Number(EnemyDataPreset.value)]["e3case2"] == 1) {
+            $('#IsEnemy3Case2').prop('checked', true);
+        }else
+        {
+            $('#IsEnemy3Case2').prop('checked', false);
+        }
+
+        $('#Enemy1HP').prop('readonly',true);
+        $('#Enemy1Class').prop('disabled',true);
+        $('#IsEnemy1Case2').prop('disabled',true);
+        $('#Enemy1HiddenClass').prop('disabled',true);
+        $('#IsNotEnemy1').prop('disabled',true);
+        $('#Enemy2HP').prop('readonly',true);
+        $('#Enemy2Class').prop('disabled',true);
+        $('#IsEnemy2Case2').prop('disabled',true);
+        $('#Enemy2HiddenClass').prop('disabled',true);
+        $('#IsNotEnemy2').prop('disabled',true);
+        $('#Enemy3HP').prop('readonly',true);
+        $('#Enemy3Class').prop('disabled',true);
+        $('#IsEnemy3Case2').prop('disabled',true);
+        $('#Enemy3HiddenClass').prop('disabled',true);
+        $('#IsNotEnemy3').prop('disabled',true);
+    }
+})
+
+EnemyDataPresetResetBtn.addEventListener("click",function(){
+    EnemyDataPreset.value = 0;
+
+    EnemyDataAllAvail();
+
+    Enemy1HP.value = 0;
+    Enemy1Class.value = 0;
+    Enemy1HiddenClass.value = 1;
+    $('#IsEnemy1Case2').prop('checked', false);
+    Enemy1Def.value = 0;
+    Enemy1Cmd.value = 0;
+    Enemy1NpDmg.value = 0;
+
+    Enemy2HP.value = 0;
+    Enemy2Class.value = 0;
+    Enemy2HiddenClass.value = 1;
+    $('#IsEnemy2Case2').prop('checked', false);
+    Enemy2Def.value = 0;
+    Enemy2Cmd.value = 0;
+    Enemy2NpDmg.value = 0;
+
+    Enemy3HP.value = 0;
+    Enemy3Class.value = 0;
+    Enemy3HiddenClass.value = 1;
+    $('#IsEnemy3Case2').prop('checked', false);
+    Enemy3Def.value = 0;
+    Enemy3Cmd.value = 0;
+    Enemy3NpDmg.value = 0;
+
 })
 
 IsNotEnemy1.addEventListener("change",function(){//에너미1 존재 체크박스 이벤트
@@ -462,7 +651,7 @@ calcBtn.addEventListener("click",function(){
 })
 
 //top 버튼 클릭 이벤트 함수
-GotoTop.addEventListener('click',function(){
+GotoTop.addEventListener("click",function(){
     var body = document.getElementsByTagName("body")[0];
     window.scroll({
             behavior:'smooth',
@@ -472,7 +661,7 @@ GotoTop.addEventListener('click',function(){
 })
 
 //main버튼 클릭 이벤트 함수
-GotoMain.addEventListener('click',function()
+GotoMain.addEventListener("click",function()
 {
     window.location = '../';
 })
