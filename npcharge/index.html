@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>FGO Calc_NP Recharge</title>
+
 </head>
 <body>
 
@@ -53,7 +54,7 @@
             <div class="form-group col-6 col-md-3">
                 <label for="NpCommand">보구 커멘드</label>
                 <select class="form-control" id="NpCommand" disabled>
-                    <option value="1.5">퀵</option>
+                    <option value="1">퀵</option>
                     <option value="3">아츠</option>
                 </select>
             </div>
@@ -234,15 +235,21 @@
                         </select>
                     </div>
                     <div class="form-group col-12">
-                        <label for="Enemy2Def">방어력 감소 (%)</label>
+                        <label for="Enemy2Def">
+                            <span data-toggle="tooltip" data-placement="top" title="적 1체에 걸린 방어력 감소">방어력 감소 (%)</span>
+                        </label>
                         <input id="Enemy2Def" type="number" class="form-control" value="0">
                     </div>
                     <div class="form-group col-12">
-                        <label for="Enemy2Cmd">커멘드 내성 감소 (%)</label>
+                        <label for="Enemy2Cmd">
+                            <span data-toggle="tooltip" data-placement="top" title="적 1체에 걸린 커멘드 내성 감소">커멘드 내성 감소 (%)</span>
+                        </label>
                         <input id="Enemy2Cmd" type="number" class="form-control" value="0">
                     </div>
                     <div class="form-group col-12">
-                        <label for="Enemy2NpDmg">보구내성 감소 (%)</label>
+                        <label for="Enemy2NpDmg">
+                            <span data-toggle="tooltip" data-placement="top" title="적 1체에 걸린 보구내성 감소">보구내성 감소 (%)</span>
+                        </label>
                         <input id="Enemy2NpDmg" type="number" class="form-control" value="0">
                     </div>
                 </div>
@@ -293,15 +300,21 @@
                         </select>
                     </div>
                     <div class="form-group col-12">
-                        <label for="Enemy3Def">방어력 감소 (%)</label>
+                        <label for="Enemy3Def">
+                            <span data-toggle="tooltip" data-placement="top" title="적 1체에 걸린 방어력 감소">방어력 감소 (%)</span>
+                        </label>
                         <input id="Enemy3Def" type="number" class="form-control" value="0">
                     </div>
                     <div class="form-group col-12">
-                        <label for="Enemy3Cmd">커멘드 내성 감소 (%)</label>
+                        <label for="Enemy3Cmd">
+                            <span data-toggle="tooltip" data-placement="top" title="적 1체에 걸린 커멘드 내성 감소">커멘드 내성 감소 (%)</span>
+                        </label>
                         <input id="Enemy3Cmd" type="number" class="form-control" value="0">
                     </div>
                     <div class="form-group col-12">
-                        <label for="Enemy3NpDmg">보구내성 감소 (%)</label>
+                        <label for="Enemy3NpDmg">
+                            <span data-toggle="tooltip" data-placement="top" title="적 1체에 걸린 보구내성 감소">보구내성 감소 (%)</span>
+                        </label>
                         <input id="Enemy3NpDmg" type="number" class="form-control" value="0">
                     </div>
                 </div>
