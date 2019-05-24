@@ -1,5 +1,5 @@
 ﻿name,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,mag10
-Salieri,0.7,2,2,0,avenger,3,16,33,51,0,0,0,0,0,0,0
-Gannkutsuou,0.62,1,3,1,avenger,8,3,6,10,13,16,13,10,29,0,0
-Atalante,0.5,1,2,1,archer,10,3,5,3,7,8,10,12,14,16,22
-Sikibu,0.51,2,3,0,caster,6,4,9,14,19,23,31,0,0,0,0
+Salieri,0.7,3,2,0,avenger,3,16,33,51,0,0,0,0,0,0,0
+Gannkutsuou,0.62,1.5,3,1,avenger,8,3,6,10,13,16,13,10,29,0,0
+Atalante,0.5,1.5,2,1,archer,10,3,5,3,7,8,10,12,14,16,22
+Sikibu,0.51,3,3,0,caster,6,4,9,14,19,23,31,0,0,0,0
