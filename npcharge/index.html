@@ -198,7 +198,9 @@
                             </select>
                         </div>
                         <div class="form-group col-12">
-                            <label for="Enemy1HiddenClass">히든속성</label>
+                            <label for="Enemy1HiddenClass">히든속성
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#HiddenModal">히든속성표</button>
+                            </label>
                             <select class="form-control" id="Enemy1HiddenClass">
                                 <option value="1">천(天)</option>
                                 <option value="2">지(地)</option>
@@ -264,7 +266,9 @@
                             </select>
                         </div>
                         <div class="form-group col-12">
-                            <label for="Enemy2HiddenClass">히든속성</label>
+                            <label for="Enemy2HiddenClass">히든속성
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#HiddenModal">히든속성표</button>
+                            </label>
                             <select class="form-control" id="Enemy2HiddenClass">
                                 <option value="1">천(天)</option>
                                 <option value="2">지(地)</option>
@@ -329,7 +333,9 @@
                             </select>
                         </div>
                         <div class="form-group col-12">
-                            <label for="Enemy3HiddenClass">히든속성</label>
+                            <label for="Enemy3HiddenClass">히든속성
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#HiddenModal">히든속성표</button>
+                            </label>
                             <select class="form-control" id="Enemy3HiddenClass">
                                 <option value="1">천(天)</option>
                                 <option value="2">지(地)</option>
@@ -381,11 +387,11 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>Parameters</th>
-                        <th>Enemy 1</th>
-                        <th>Enemy 2</th>
-                        <th>Enemy 3</th>
-                        <th>Sum</th>
+                        <th scope="col">Parameters</th>
+                        <th scope="col">Enemy 1</th>
+                        <th scope="col">Enemy 2</th>
+                        <th scope="col">Enemy 3</th>
+                        <th scope="col">Sum</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -426,6 +432,72 @@
     </div>
     <br>
     <!-- Extra Button -->
+    <!-- 디버깅용
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#HiddenModal">
+        에너미의 히든 속성 데이터
+    </button>
+    -->
+
+    <div class="modal fade" id="HiddenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="HiddenModal">일반 에너미의 히든속성</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive-md">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col" width="100px">속성</th>
+                                <th scope="col">해당 에너미</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>천(天)</td>
+                                <td>
+                                    손, 문, 고스트종, 데몬, 호문클루스, 헬터 스켈터 종, 골렘종, 인형존, 책, 자동방위장치, 마신주, 놋부종,
+                                    스노우맨종, 매지컬 스틱, 라훔, 구갈안나, 검은 무사, 양산형 메카에리짱, 뇌석종, 헤븐즈필・미믹크리,
+                                    공상수 솜브레로, 공상수 솜브레로의 씨앗, 이스울프르, 이스가름, 발키리, 괴뢰병, 다다익선호
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>지(地)</td>
+                                <td>
+                                    용아병, 와이번, 드래곤, 라미아, 수인종, 고블린, 켄타우로스, 키메라, 스프리건, 게이저, 바이콘, 소울이터,
+                                    스핑크스, 이프리타, 해마, 시인충, 오니, 소라게, 마저, 우리딤무, 우슘갈루, 우갈루, 무슈후슈, 셰이프시프터,
+                                    이터, 구울, 엘더구울, 샨타크, 늑대, 야가, 영령병, 수르트, 거인종, 보팔치킨, BB호텝, BBB, 오니왕 슈라,
+                                    마원(원숭이), 누에, 케가레가미
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>인(人)</td>
+                                <td>
+                                    인간종(병사, 해적, 드루이드 등), 좀비, 스켈레톤, 아마조네스, 기계화 보병, 마음을 잃은 사람, 숙정기사, 놋부,
+                                    시체, 7인의 망령, 공상수 오로치, 제육천마왕・아케치 미츠히데, 살육엽병, 공상수 메이올
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>수(獣)</td>
+                                <td>
+                                    티아마트, 벨・라훔(비스트), 마신주, 마성보살
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>같은 에너미종이여도 다른 속성을 가진 경우가 있습니다. </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button type = "button" id="GotoTop" class="btn btn-success btn-block">▲Top</button><br>
 
     <button type = "button" id="GotoMain" class="btn btn-success btn-block">To Main...</button><br>
