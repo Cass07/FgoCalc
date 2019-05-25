@@ -4,7 +4,6 @@ $(function () {
 
 var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
-var Var1 = 1;//디버깅용
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
@@ -168,9 +167,28 @@ const HiddenClassDefMag =
         [1,1,1,1.1,1]//수
     ];
 
-
-getData();//parsing 진행 1회
-
+document.addEventListener('DOMContentLoaded',function () {
+    getData();//parsing 진행 1회
+    NpRate.value = 0.68;
+    HiddenClass.value = 3;
+    NpCommand.value = 3;
+    NpMagTable = [10,20,30,40,0,0,0,0,0,0];
+    NpUpgrade.value = 0;
+    NpCount = 4;
+    ServantClass = "archer";
+    //servent 관련 변수 첫번째 데이터로 초기화
+    var NpMag_tmp = NpDmTable[0] + 100 * NpUpgrade.value;
+    if(NpCommand.value == 3) {
+        NpMag.value=NpMag_tmp*1.5;
+    }else
+    {
+        NpMag.value= NpMag_tmp*2;
+    }
+},false);
+//getData();//parsing 진행 1회
+window.onload  = function()
+{
+}
 
 //계산 함수
 function NpDmgCalc()//무상성 비난수 보구 대미지 계산&출력
@@ -301,9 +319,9 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 NpMag.value= NpMag_tmp*2;
             }
-            if(servTable[i]["name"] === "Frankenstein")
+            if(servTable[i]["name"] == "Frankenstein")
             {
-                NpMag += 100;
+                NpMag.value = Number(NpMag.value)+100;
             }
 
             break;
@@ -315,7 +333,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
 
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
-    if(NpCommand.value === 3) {
+    if(NpCommand.value == 3) {
         NpMag.value=NpMag_tmp*1.5;
     }else
     {
@@ -323,20 +341,20 @@ NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     }
     if(Servant.value === "Frankenstein")
     {
-        NpMag += 100;
+        NpMag.value = Number(NpMag.value)+100;
     }
 })
 
 NpUpgrade.addEventListener("change",function() {//보구강화 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
-    if (NpCommand.value === 3) {
+    if (NpCommand.value == 3) {
         NpMag.value = NpMag_tmp * 1.5;
     } else {
         NpMag.value = NpMag_tmp * 2;
     }
     if(Servant.value === "Frankenstein")
     {
-        NpMag += 100;
+        NpMag.value = Number(NpMag.value)+100;
     }
 })
 
