@@ -185,9 +185,6 @@ document.addEventListener('DOMContentLoaded',function () {
         NpMag.value= NpMag_tmp*2;
     }
 
-    //EnemyDataPreset.innerHTML += "<option value = \"1\">보물고 초급 던전</option>";
-
-
 },false);
 
 window.onload  = function()
