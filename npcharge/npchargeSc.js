@@ -184,10 +184,23 @@ document.addEventListener('DOMContentLoaded',function () {
     {
         NpMag.value= NpMag_tmp*2;
     }
+
+    //EnemyDataPreset.innerHTML += "<option value = \"1\">보물고 초급 던전</option>";
+
+
 },false);
-//getData();//parsing 진행 1회
+
 window.onload  = function()
 {
+    for(var i = 1; i < EnemyPresetTable.length-1; i++) {
+        EnemyDataPreset.innerHTML += "<option value = \"" + String(i) + "\">"+EnemyPresetTable[i]["name"]+"</option>";
+    }
+    for (var i = 0; i < servTable.length - 1; i++)
+    {
+        Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
+    }
+
+
 }
 
 //계산 함수
