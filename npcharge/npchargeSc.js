@@ -15,6 +15,10 @@ function getData() {
         complete: function(results){
             servTable = results.data;
             //Var1 = servTable.length;
+            for (var i = 0; i < servTable.length - 1; i++)
+            {
+                Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
+            }
         }
     });
 
@@ -25,6 +29,9 @@ function getData() {
         dynamicTyping:true,
         complete: function(results){
             EnemyPresetTable = results.data;
+            for(var i = 1; i < EnemyPresetTable.length-1; i++) {
+                EnemyDataPreset.innerHTML += "<option value = \"" + String(i) + "\">"+EnemyPresetTable[i]["name"]+"</option>";
+            }
         }
     });
     //console.log(data);
@@ -189,14 +196,6 @@ document.addEventListener('DOMContentLoaded',function () {
 
 window.onload  = function()
 {
-    for(var i = 1; i < EnemyPresetTable.length-1; i++) {
-        EnemyDataPreset.innerHTML += "<option value = \"" + String(i) + "\">"+EnemyPresetTable[i]["name"]+"</option>";
-    }
-    for (var i = 0; i < servTable.length - 1; i++)
-    {
-        Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
-    }
-
 
 }
 
