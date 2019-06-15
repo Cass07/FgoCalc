@@ -19,6 +19,23 @@ function getData() {
             {
                 Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
             }
+            //Servant table 0 index의 값으로 초기화
+            NpRate.value = servTable[0]["npa"];
+            HiddenClass.value = servTable[0]["hidden"];
+            NpCommand.value = servTable[0]["command"];
+            NpMagTable = [servTable[0]["mag1"],servTable[0]["mag2"],servTable[0]["mag3"],servTable[0]["mag4"],
+                servTable[0]["mag5"],servTable[0]["mag6"],servTable[0]["mag7"],servTable[0]["mag8"],
+                servTable[0]["mag9"],servTable[0]["mag10"]];
+            NpUpgrade.value = servTable[0]["npupgrade"];
+            NpCount = servTable[0]["npcount"];
+            ServantClass = servTable[0]["class"];
+            var NpMag_tmp = NpDmTable[0] + 100 * NpUpgrade.value;
+            if(NpCommand.value == 3) {
+                NpMag.value=NpMag_tmp*1.5;
+            }else
+            {
+                NpMag.value= NpMag_tmp*2;
+            }
         }
     });
 
@@ -176,27 +193,12 @@ const HiddenClassDefMag =
 
 document.addEventListener('DOMContentLoaded',function () {
     getData();//parsing 진행 1회
-    NpRate.value = 0.68;
-    HiddenClass.value = 3;
-    NpCommand.value = 3;
-    NpMagTable = [10,20,30,40,0,0,0,0,0,0];
-    NpUpgrade.value = 0;
-    NpCount = 4;
-    ServantClass = "archer";
-    //servent 관련 변수 첫번째 데이터로 초기화
-    var NpMag_tmp = NpDmTable[0] + 100 * NpUpgrade.value;
-    if(NpCommand.value == 3) {
-        NpMag.value=NpMag_tmp*1.5;
-    }else
-    {
-        NpMag.value= NpMag_tmp*2;
-    }
 
 },false);
 
 window.onload  = function()
 {
-
+/**/
 }
 
 //계산 함수
