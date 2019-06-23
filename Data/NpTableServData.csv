@@ -1,4 +1,4 @@
-﻿name,id,rare,atk,cmdbuf,atkbuf,npbuf,npextramul,dmgplus,hppronp,npcmd,nptype,npmul,class,charge,extranpable,debufable,isclassmul
+﻿name,id,rare,atk,cmdbuf,atkbuf,npbuf,npextramul,dmgplus,hppronp,npcmd,nptype,npmul,class,charge,isextranp,isdebuf,isclassmul
 XX밥,222,4,9751,0,70,0,0,0,0,arts,unit,0,foreigner,30,0,0,0
 XX밥(특공),222,4,9751,0,70,0,150,0,0,arts,unit,0,foreigner,30,1,0,0
 베니엔마,234,5,11607,10,40,0,0,0,0,arts,unit,0,saber,20,0,0,0
@@ -20,3 +20,22 @@ XX밥(특공),222,4,9751,0,70,0,150,0,0,arts,unit,0,foreigner,30,1,0,0
 패션립(HP1),164,4,10299,0,79.99664,0,0,200,0,buster,army,1,alterego,0,0,1,0
 "패션립(상성,HP50)",164,4,10299,0,60,0,0,200,0,buster,army,1,alterego,0,0,1,1
 "패션립(상성,HP1)",164,4,10299,0,79.99664,0,0,200,0,buster,army,1,alterego,0,0,1,1
+스카사하(2중특공),70,5,11375,50,0,200,0,0,0,quick,unit,1,lancer,0,1,0,0
+스카사하(특공),70,5,11375,50,0,100,0,0,0,quick,unit,1,lancer,0,1,0,0
+스카사하,70,5,11375,50,0,0,0,0,0,quick,unit,1,lancer,0,0,0,0
+펜테실레이아(특공),171,4,10502,32,18,100,0,175,0,buster,unit,0,berserker,0,1,0,0
+펜테실레이아,171,4,10502,32,18,0,0,175,0,buster,unit,0,berserker,0,0,0,0
+히지카타(HP1),161,5,12089,25,0,0,0,0,799.9386,buster,unit,0,berserker,0,0,1,0
+히지카타(3스 HP깎),161,5,12089,25,0,0,0,0,61.4062,buster,unit,0,berserker,0,0,0,0
+히지카타(풀피),161,5,12089,25,0,0,0,0,0,buster,unit,0,berserker,0,0,0,0
+히오스(특공),155,5,11113,30,20,0,150,0,0,quick,unit,0,berserker,0,0,0,0
+히오스,155,5,11113,30,20,0,0,0,0,quick,unit,0,berserker,0,0,0,0
+"록부(염상,특공)",178,4,10146,26,20,0,150,0,0,buster,unit,0,berserker,0,1,1,0
+록부(특공),178,4,10146,26,0,0,150,0,0,buster,unit,0,berserker,0,1,0,0
+록부(염상),178,4,10146,26,20,0,0,0,0,buster,unit,0,berserker,0,0,1,0
+록부,178,4,10146,26,0,0,0,0,0,buster,unit,0,berserker,0,0,0,0
+엑밥(2중특공),86,5,11761,12,0,50,150,0,0,quick,unit,1,assassin,0,1,0,0
+엑밥(특공),86,5,11761,12,0,50,0,0,0,quick,unit,1,assassin,0,1,0,0
+엑밥,86,5,11761,12,0,0,0,0,0,quick,unit,1,assassin,0,0,0,0
+브륜힐데(특공),88,5,11432,25,0,15,150,100,0,buster,,1,lancer,0,1,0,0
+브륜힐데,88,5,11432,25,0,15,0,100,0,buster,,1,lancer,0,0,0,0
