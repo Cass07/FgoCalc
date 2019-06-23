@@ -1,6 +1,6 @@
 ﻿name,id,rare,atk,cmdbuf,atkbuf,npbuf,npextramul,dmgplus,hppronp,npcmd,nptype,npmul,class,charge,extranpable,debufable
 XX밥,222,4,9751,0,70,0,0,0,0,arts,unit,0,foreigner,30,0,0
-XX밥(특공),222,4,9751,0,70,0,50,0,0,arts,unit,0,foreigner,30,1,0
+XX밥(특공),222,4,9751,0,70,0,150,0,0,arts,unit,0,foreigner,30,1,0
 베니엔마,234,5,11607,10,40,0,0,0,0,arts,unit,0,saber,20,0,0
 베니엔마(특공),234,5,11607,10,40,40,0,0,0,arts,unit,0,saber,20,1,0
 베니엔마(2중특공),234,5,11607,10,40,80,0,0,0,arts,unit,0,saber,20,1,0
