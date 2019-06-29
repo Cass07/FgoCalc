@@ -499,16 +499,6 @@ function TableSortingDownText(table,colindex)
     },0);
 }
 
-function TableRowsSwap(row1, row2)
-{
-    for(var i = 0; i < row1.cells.length; i++)
-    {
-        var tbltemp = row1.cells[i].innerHTML;
-        row1.cells[i].innerHTML = row2.cells[i].innerHTML;
-        row2.cells[i].innerHTML = tbltemp;
-    }
-}
-
 function TableDeleteAll(table)//1열빼고 다지우기
 {
     while(table.rows.length>1)

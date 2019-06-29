@@ -20,6 +20,7 @@ function getData() {
                 Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
             }
             //Servant table 0 index의 값으로 초기화
+
             NpRate.value = servTable[0]["npa"];
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
