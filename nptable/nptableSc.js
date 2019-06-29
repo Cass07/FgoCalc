@@ -332,7 +332,6 @@ FilNPLevInd.addEventListener("change",function()
 {
     if($('#FilNPLevInd').is(":checked"))
     {
-        alert("반드시 세부 필터링을 한 후 사용하세요! 정렬 알고리즘 최적화를 안해서 속도가 끔찍하게 느립니다!");
         $('#FilNPLev1').prop('disabled',true);
         $('#FilNPLev2').prop('disabled',true);
         $('#FilNPLev3').prop('disabled',true);
@@ -351,26 +350,31 @@ FilNPLevInd.addEventListener("change",function()
 //함수
 
 var mytimer;
+var index = 0;
+var isSortDown = true;
 function TableSortingUp(table, colindex)
 {
     var tablerows = table.rows.length;//행 크기
     wrapWindowLoadingMask();
 
+    index = colindex;
+    isSortDown = false;
+
     clearTimeout(mytimer);
 
     mytimer = setTimeout(function()
     {
-        for(var i = tablerows -1;i > 1; i--)
+        var datas = new Array();
+        for(var i = 1; i < tablerows; i++)
         {
-            for(var j = 1; j < i; j++)
-            {
-                if(Number(table.rows[j].cells[colindex].innerHTML)>Number(table.rows[j+1].cells[colindex].innerHTML))
-                {
-                    TableRowsSwap(table.rows[j],table.rows[j+1]);
-                }
-            }
-
+            datas[i-1] = table.rows[i];
         }
+        datas.sort(compareCells);
+        for(var i = 1; i < tablerows; i++)
+        {
+            table.appendChild(datas[i-1]);
+        }
+
         closeLoadingMask();
     },0);
 
@@ -381,23 +385,65 @@ function TableSortingDown(table,colindex)
     var tablerows = table.rows.length;//행 크기
     wrapWindowLoadingMask();
 
+    index = colindex;
+    isSortDown = true;
+
     clearTimeout(mytimer);
 
     mytimer = setTimeout(function()
     {
-        for(var i = tablerows -1;i > 1; i--)
+        var datas = new Array();
+        for(var i = 1; i < tablerows; i++)
         {
-            for(var j = 1; j < i; j++)
-            {
-                if(Number(table.rows[j].cells[colindex].innerHTML)<Number(table.rows[j+1].cells[colindex].innerHTML))
-                {
-                    TableRowsSwap(table.rows[j],table.rows[j+1]);
-                }
-            }
-
+            datas[i-1] = table.rows[i];
         }
+        datas.sort(compareCells);
+        for(var i = 1; i < tablerows; i++)
+        {
+            table.appendChild(datas[i-1]);
+        }
+
         closeLoadingMask();
     },0);
+}
+function compareCells(a,b)
+{
+    var aVal = Number(a.cells[index].innerHTML);
+    var bVal = Number(b.cells[index].innerHTML);
+
+    if(isSortDown)
+    {
+        var tmp = aVal;
+        aVal = bVal;
+        bVal = tmp;
+    }
+
+    if(aVal> bVal)
+        return 1;
+    else if(aVal<bVal)
+        return -1;
+    else
+        return 0;
+
+}
+
+function compareCellsText(a,b) {
+    var aVal = a.cells[index].innerHTML;
+    var bVal = b.cells[index].innerHTML;
+
+    if (isSortDown) {
+        var tmp = aVal;
+        aVal = bVal;
+        bVal = tmp;
+    }
+
+    if (aVal > bVal)
+        return 1;
+    else if (aVal < bVal)
+        return -1;
+    else
+        return 0;
+
 }
 
 function TableSortingUpText(table, colindex)
@@ -405,21 +451,23 @@ function TableSortingUpText(table, colindex)
     var tablerows = table.rows.length;//행 크기
     wrapWindowLoadingMask();
 
-    clearTimeout(mytimer);
+    index = colindex;
+    isSortDown = false;
 
+    clearTimeout(mytimer);
     mytimer = setTimeout(function()
     {
-        for(var i = tablerows -1;i > 1; i--)
+        var datas = new Array();
+        for(var i = 1; i < tablerows; i++)
         {
-            for(var j = 1; j < i; j++)
-            {
-                if(table.rows[j].cells[colindex].innerHTML>table.rows[j+1].cells[colindex].innerHTML)
-                {
-                    TableRowsSwap(table.rows[j],table.rows[j+1]);
-                }
-            }
-
+            datas[i-1] = table.rows[i];
         }
+        datas.sort(compareCellsText);
+        for(var i = 1; i < tablerows; i++)
+        {
+            table.appendChild(datas[i-1]);
+        }
+
         closeLoadingMask();
     },0);
 }
@@ -429,21 +477,24 @@ function TableSortingDownText(table,colindex)
     var tablerows = table.rows.length;//행 크기
     wrapWindowLoadingMask();
 
+    index = colindex;
+    isSortDown = true;
+
     clearTimeout(mytimer);
 
     mytimer = setTimeout(function()
     {
-        for(var i = tablerows -1;i > 1; i--)
+        var datas = new Array();
+        for(var i = 1; i < tablerows; i++)
         {
-            for(var j = 1; j < i; j++)
-            {
-                if(table.rows[j].cells[colindex].innerHTML<table.rows[j+1].cells[colindex].innerHTML)
-                {
-                    TableRowsSwap(table.rows[j],table.rows[j+1]);
-                }
-            }
-
+            datas[i-1] = table.rows[i];
         }
+        datas.sort(compareCellsText);
+        for(var i = 1; i < tablerows; i++)
+        {
+            table.appendChild(datas[i-1]);
+        }
+
         closeLoadingMask();
     },0);
 }
