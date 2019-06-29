@@ -485,7 +485,7 @@ function getGreatCmd(Serv, tablerow, NpChargeTableData)
 
     //아츠 첫수
     var A1HighNpValue =[
-        [A1 + Aa2 + Aa3 + Aex,0,0,0],
+        [A1 + Aa2 + Aa3 + Aex + 20,0,0,0],
         [A1 + Aa2 + Ab + Aex, 0,0,1],
         [A1 + Aa2 + Aq3 + Aex, 0,0,2],
         [A1 + Ab + Aa3 + Aex,0,1,0],
