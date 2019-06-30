@@ -231,19 +231,22 @@ function CmdNpGainCalcFin(Serv, NpChargeTableData, IsFirstCmdArts, Cmd, CmdOrder
 
 function getCmdString(NumA, NumB, NumQ)
 {
-    var tmp = "";
+    var tmp = "<span style=\"color:#08be47; font-weight:bold; \">";
     for(var i = 0; i < NumQ; i++)
     {
         tmp += "Q"
     }
+    tmp += "</span><span style=\"color:#0059da; font-weight:bold; \">";
     for(var i = 0; i < NumA; i++)
     {
         tmp += "A";
     }
+    tmp += "</span><span style=\"color:#c00000; font-weight:bold; \">";
     for(var i = 0; i < NumB; i++)
     {
         tmp += "B";
     }
+    tmp += "</span>";
     return tmp;
 }
 
@@ -561,17 +564,17 @@ function getCmdStringHigh(NpValueArr)
     {
         if(NpValueArr[i] == 0)
         {
-            tmp +="A";
+            tmp +="<span style=\"color:#0059da; font-weight:bold; \">A</span>";
         }else if(NpValueArr[i] == 1)
         {
-            tmp += "B";
+            tmp += "<span style=\"color:#c00000; font-weight:bold; \">B</span>";
         }else if(NpValueArr[i] == 2)
         {
-            tmp += "Q"
+            tmp += "<span style=\"color:#08be47; font-weight:bold; \">Q</span>"
         }
 
     }
-    return tmp + "Ex";
+    return tmp + "<span style=\"color:rgb(40,40,40); font-weight:bold; \">Ex</span>";
 }
 
 function compareCmdArr(a,b)

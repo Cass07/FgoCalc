@@ -53,7 +53,37 @@
             line-height : 1.5;
             border-radius : 3px;
         }
-        .tooltip-inner {
+
+        .smalltable tr td:nth-child(6),
+        .smalltable tr td:nth-child(7),
+        .smalltable tr td:nth-child(8),
+        .smalltable tr td:nth-child(13),
+        .smalltable tr td:nth-child(14)
+        {
+            background : #e1ffff;
+        }
+        .smalltable tr td:nth-child(9),
+        .smalltable tr td:nth-child(10),
+        .smalltable tr td:nth-child(15),
+        .smalltable tr td:nth-child(16),
+        .smalltable tr td:nth-child(17)
+        {
+            background : #e1ffe9;
+        }
+        .smalltable tr td:nth-child(11)
+        {
+            background : #ffebeb;
+        }
+        .smalltable tr td:nth-child(12),
+        .smalltable tr td:nth-child(18)
+        {
+            background : #f4f4f4;
+        }
+        .smalltable tr td:nth-child(19),
+        .smalltable tr td:nth-child(20)
+        {
+            text-align : center;
+            font-weight:bold;
         }
 
     </style>
@@ -129,7 +159,9 @@
                     </th>
                     <th rowspan = "2" scope="col" style="text-align:center; vertical-align:middle;">최대<br>NP수급<br>커멘드
                     </th>
-                    <th rowspan = "2" scope="col" style="text-align:center; vertical-align:middle;">최대<br>수급량<br>
+                    <th rowspan = "2" scope="col" style="text-align:center; vertical-align:middle;">
+                        <span data-toggle="tooltip" data-placement="top" title="아츠체인 효과 포함">최대<br>수급량</span>
+                            <br>
                         <button type="button" id = "index21SortUp" class="btn btn-primary btn-xs">▲</button>
                         <button type="button" id = "index21SortDown" class="btn btn-primary btn-xs">▼</button>
                     </th>
