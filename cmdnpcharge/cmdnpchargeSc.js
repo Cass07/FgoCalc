@@ -198,11 +198,12 @@ function CmdNpGainCalcFin(Serv, NpChargeTableData, IsFirstCmdArts, Cmd, CmdOrder
     IsCrit = false;
     IsOverKill = false;
     EnemyMul = 1;
-    CmdBuf = 0;
 
     var NpGainBuf = NpChargeTableData["npgainbuf"];
 
     var Na, CmdBuf, Hits;
+
+    CmdBuf = 0;
 
     if(Cmd == "arts")
     {
