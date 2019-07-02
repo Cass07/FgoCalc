@@ -34,6 +34,15 @@
         div.tooltip-inner {
             max-width: 350px;
         }
+        .nptable{
+            margin:auto;
+            overflow-x : auto;
+        }
+        .nptable tr td:nth-child(1),
+        .nptable tr td:nth-child(2)
+        {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +68,7 @@
 
 
     <div class="form-row" style="align:center;">
-        <table class="table table-bordered table-sm" align = "middle" style="margin:auto;overflow-x : auto;" id="ResultTbl">
+        <table class="table table-bordered table-sm nptable" align = "middle" id="ResultTbl">
             <colgroup>
                 <col width = "17%">
                 <col width = "8%">
