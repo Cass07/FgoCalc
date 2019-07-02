@@ -70,6 +70,7 @@ var CraftBufQuickNp = document.getElementById("CraftBufQuickNp");
 var FilNPExtraOnly = document.getElementById("FilNPExtraOnly");
 var FilClsDmgMul = document.getElementById("FilClsDmgMul");
 var FilClsExtraDmgMul = document.getElementById("FilClsExtraDmgMul");
+var NameTooltipUse = document.getElementById("NameTooltipUse");
 
 var GotoTop = document.getElementById("GotoTop");
 var GotoMain = document.getElementById("GotoMain");
@@ -198,7 +199,7 @@ function getData(){
                     for(var j = 0; j < ResultTbl.rows[0].cells.length; j++) {
                         oCell[j] = gRows.insertCell();
                     }
-                    oCell[0].innerHTML = NpTable[i]["name"];
+                    oCell[0].innerHTML = NameTooltipAdder(NpTable[i]);//NpTable[i]["name"];
                     oCell[1].innerHTML = ClassNameKor[ClassIndex[NpTable[i]["class"]]];
                     oCell[2].innerHTML = CommTextHTML[CommIndex[NpTable[i]["npcmd"]]];
                     for(j = 1; j < 6; j++) {
@@ -618,6 +619,48 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
 
 }
 
+function NameTooltipAdder(Serv)//이름 툴팁 출력
+{
+    var tmp = "<span data-toggle=\"tooltip\" data-placement=\"top\" data-html=\"true\" title=\"";
+    //아뻥
+        if(Serv["cmdbuf"] > 0)
+        {
+            if(CommIndex[Serv["npcmd"]] == 0)
+            {
+                tmp += "버스터";
+            }else if(CommIndex[Serv["npcmd"]] == 1)
+            {
+                tmp += "아츠";
+            }else
+            {
+                tmp += "퀵";
+            }
+            tmp += " 커멘드 버프 " + Serv["cmdbuf"] + "%" + "<br>";
+        }
+    //퀵뻥
+    if(Serv["atkbuf"] > 0)
+        tmp += "공격력 버프 "+Serv["atkbuf"]+"%"+"<br>";
+    //수급뻥
+    if(Serv["npbuf"] > 0)
+        tmp += "보구 위력 버프 + 특공 버프 "+Serv["npbuf"]+"%"+"<br>";
+    if(Serv["npextramul"]>0)
+        tmp += "특공보구 특공 배율 "+Serv["npextramul"]+"%"+"<br>";
+    if(Serv["dmgplus"]>0)
+        tmp += "대미지 플러스 "+Serv["dmgplus"]+"<br>";
+    if(Serv["hppronp"]>0)
+        tmp += "HP 반비례 추가 대미지 배율 "+Math.floor(Number(Serv["hppronp"]*100))/100+"%";
+
+
+    return tmp + "\">"+ Serv["name"]+"</span>"
+}
+
+function PrintName(Serv)
+{
+    if($('#NameTooltipUse').is(":checked"))
+        return NameTooltipAdder(Serv);
+    return Serv["name"];
+}
+
 function GetFilteredResult()
 {
     for(var i = 0; i < NpTable.length - 1; i++)
@@ -634,7 +677,7 @@ function GetFilteredResult()
                     {
                         oCell[k] = gRows.insertCell();
                     }
-                    oCell[0].innerHTML = NpTable[i]["name"];
+                    oCell[0].innerHTML = PrintName(NpTable[i]);
                     oCell[1].innerHTML = ClassNameKor[ClassIndex[NpTable[i]["class"]]];
                     oCell[2].innerHTML = CommTextHTML[CommIndex[NpTable[i]["npcmd"]]];
                     oCell[8].innerHTML = Number(j+1);
@@ -649,7 +692,7 @@ function GetFilteredResult()
                 for(var j = 0; j < ResultTbl.rows[0].cells.length; j++) {
                     oCell[j] = gRows.insertCell();
                 }
-                oCell[0].innerHTML = NpTable[i]["name"];
+                oCell[0].innerHTML = PrintName(NpTable[i]);
                 oCell[1].innerHTML = ClassNameKor[ClassIndex[NpTable[i]["class"]]];
                 oCell[2].innerHTML = CommTextHTML[CommIndex[NpTable[i]["npcmd"]]];
                 for(j = 1; j < 6; j++) {
@@ -768,6 +811,8 @@ function closeLoadingMask()
     console.log("mask hide");
 }
 
+
+
 $("#HiddenModal").on('hidden.bs.modal',function(){
 
     TableDeleteAll(ResultTbl);
@@ -785,9 +830,9 @@ $("#HiddenModal").on('hidden.bs.modal',function(){
 })
 
 //기타
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+$('body').tooltip({
+    selector: '[data-toggle="tooltip"]'
+});
 
 GotoTop.addEventListener("click",function(){
     var body = document.getElementsByTagName("body")[0];

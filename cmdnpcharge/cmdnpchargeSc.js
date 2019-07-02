@@ -2,14 +2,14 @@ $('body').tooltip({
     selector: '[data-toggle="tooltip"]'
 });
 
-
 var GotoTop = document.getElementById("GotoTop");
 var GotoMain = document.getElementById("GotoMain");
 
-
+var ResultTbl = document.getElementById("ResultTbl");
 
 var ServDataBase = new Array();
 var CmdNpChargeData = new Array();
+
 
 function getData(){
     var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv",{

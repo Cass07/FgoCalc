@@ -29,6 +29,12 @@
     <meta property="og:image:width" content = "1200">
     <meta property="og:image:height" content = "630">
     <meta property="og:image:type" content = "image/png">
+
+    <style>
+        div.tooltip-inner {
+            max-width: 350px;
+        }
+    </style>
 </head>
 <body>
 
@@ -53,7 +59,7 @@
 
 
     <div class="form-row" style="align:center;">
-        <table class="table table-bordered table-sm" align = "middle" style="word-break:break-all;margin:auto;" id="ResultTbl">
+        <table class="table table-bordered table-sm" align = "middle" style="margin:auto;overflow-x : auto;" id="ResultTbl">
             <colgroup>
                 <col width = "17%">
                 <col width = "8%">
@@ -329,6 +335,9 @@
                             </label>
                             <label class="checkbox-inline"><input type="checkbox" id = "FilClsExtraDmgMul">
                                 <span data-toggle="tooltip" data-placement="top" title="룰러, 어벤저, 문캔서 상성 보구딜 (2배) 적용">엑스트라 클래스 상성 적용</span>
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "NameTooltipUse" checked>
+                                적용 버프 툴팁 보여주기
                             </label>
                         </div>
                     </div>
