@@ -147,6 +147,7 @@ const CommandMagTable = {
   1 : 0.8,
   3 : 1
 };//커멘드 보정계수
+
 const ClassIndexTable=//클래스 텍스트 인덱스 테이블
     {
         "saber" : 0,
@@ -194,7 +195,6 @@ const HiddenClassDefMag =
 
 document.addEventListener('DOMContentLoaded',function () {
     getData();//parsing 진행 1회
-
 },false);
 
 window.onload  = function()

@@ -94,29 +94,6 @@ document.addEventListener('DOMContentLoaded',function () {
 },false);
 
 
-const CommIndex = {
-    "arts" : 0,
-    "buster" : 1,
-    "quick" : 2,
-    "extra" : 3,
-    "noble" : 4
-}
-
-const CommIndexInv = {
-    0 : "arts",
-    1 : "buster",
-    2 : "quick",
-    3 : "extra",
-    4 : "noble"
-}
-
-const CommNpGainMul = [
-    [3,4.5,6],
-    [0,0,0],
-    [1,1.5,2],
-    [1]
-];
-
 const ClassNameIndex=
     {
         "saber" : "세이버",
@@ -169,19 +146,6 @@ function NameTooltipAdder(Serv, NpChargeTableData)
 
 }
 
-function CmdNpGainCalc(IsFirstCmdArts, Cmd, CmdOrder, Na, CmdBuf, NpGainBuf, IsFifthform, EnemyMul, Hits, IsCrit, IsOverKill)
-{
-    var temp = Na*(CommNpGainMul[CommIndex[Cmd]][CmdOrder-1]*(100+CmdBuf)/100 + IsFirstCmdArts)*EnemyMul*(100+NpGainBuf)/100;
-    if(IsCrit)
-        temp *= 2;
-    temp = Math.floor(Math.round(temp*10000)/100);//소수점 오류 (가끔 -0.0001됨) 방지위해 낮은 자리수 반올림 후 내림
-    if(IsOverKill)
-        temp *= 1.5;
-    if(IsFifthform)//제오세
-        temp *= 2;
-    return Math.floor(temp*Hits)/100;
-}
-
 function CmdNpGainCalcFin(Serv, NpChargeTableData, IsFirstCmdArts, Cmd, CmdOrder, EnemyMul, IsCrit, IsOverKill)
 {
     if(IsFirstCmdArts)
@@ -227,7 +191,7 @@ function CmdNpGainCalcFin(Serv, NpChargeTableData, IsFirstCmdArts, Cmd, CmdOrder
         Hits = Serv["hitex"];
     }
 
-    return CmdNpGainCalc(IsFirstCmdArts, Cmd, CmdOrder, Na, CmdBuf, NpGainBuf, IsFifthform, EnemyMul, Hits, IsCrit, IsOverKill);
+    return FGOcal.CmdNpGainCalc(IsFirstCmdArts, Cmd, CmdOrder, Na, CmdBuf, NpGainBuf, IsFifthform, EnemyMul, Hits, IsCrit, IsOverKill);
 }
 
 function getCmdString(NumA, NumB, NumQ)

@@ -7,6 +7,9 @@ document.getElementById('NpTable').addEventListener('click',function(){
 document.getElementById('CmdNpCharge').addEventListener('click',function(){
     window.location = './cmdnpcharge/';
 })
+document.getElementById('CmdStar').addEventListener('click',function(){
+    window.location = './test/';
+})
 document.getElementById('FeedbackLink').addEventListener('click',function(){
-    window.open('https://gallog.dcinside.com/bakerst221/guestbook','_blank');
+    window.open('https://cass07.dev/wp/?page_id=6','_blank');
 })

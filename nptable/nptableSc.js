@@ -508,19 +508,6 @@ function TableDeleteAll(table)//1열빼고 다지우기
     }
 }
 
-function NpDamageCalc(ServFinalATK, ServClass, ClassMagMul, NpCmd, NpType, NpMul,NpLev, AtkBuf, CmdBuff, NpBuf, NpExtraMul, DmgPlus, HpProNpDmg)
-{
-    var NpDmg = ServFinalATK*0.23*CommMagTable[CommIndex[NpCmd]]*ClassDmgMagTable[ClassIndex[ServClass]]*ClassMagMul*(100+AtkBuf)/100*(100+CmdBuff)/100*
-        (100+NpBuf)/100;
-    if(NpExtraMul > 0)
-    {
-        NpDmg = NpDmg*NpExtraMul/100;
-    }
-
-    return Math.floor(NpDmg * (NpDmTable[NpTypeIndex[NpType]][CommIndex[NpCmd]][NpMul][NpLev - 1] + HpProNpDmg) / 100 + DmgPlus);
-
-}
-
 function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프 같이 계산
 {
     var ServFinalATK = Number(Serv["atk"]) + Number(FourATK.value) + Number(CraftATK.value);
@@ -558,9 +545,9 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     //console.log("최종공 : "+ServFinalATK + "상성배율 : "+ ClassMagMul + Serv["npcmd"]+Serv["nptype"]+Number(Serv["npmul"])+"보렙 : "+NpLev
     //+"공벞 : "+AtkBuf+"색벞" +CmdBuf + "보벞"+NpBuf+ "특공보구 : "+Number(Serv["npextramul"]));
 
-    return NpDamageCalc(ServFinalATK,Serv["class"],ClassMagMul, Serv["npcmd"],Serv["nptype"], Number(Serv["npmul"]), NpLev,
-        AtkBuf, CmdBuf, NpBuf, Number(Serv["npextramul"]),Number(Serv["dmgplus"]), Number(Serv["hppronp"]));
-
+    return FGOcal.NpDamageCalc(ServFinalATK, Serv["class"], ClassMagMul, Serv["npcmd"],
+        NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][NpLev - 1], AtkBuf, CmdBuf, NpBuf,
+        Number(Serv["npextramul"]), Number(Serv["dmgplus"]), Number(Serv["hppronp"]), 1,1);
 }
 
 function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
@@ -799,16 +786,12 @@ function wrapWindowLoadingMask()
     $('#mask').show();
     $('#loadingImg').show();
 
-    console.log("mask show");
-
 }
 
 function closeLoadingMask()
 {
     $('#mask, #loadingImg').hide();
     $('#mask, #loadingImg').empty();
-
-    console.log("mask hide");
 }
 
 
