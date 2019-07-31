@@ -11,5 +11,5 @@ document.getElementById('CmdStar').addEventListener('click',function(){
     window.location = './test/';
 })
 document.getElementById('FeedbackLink').addEventListener('click',function(){
-    window.open('https://cass07.dev/wp/?page_id=6','_blank');
+    window.open('https://cass07.dev/?page_id=6','_blank');
 })
