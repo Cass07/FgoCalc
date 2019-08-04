@@ -10,4 +10,4 @@
 정렬 가능한 스타 수급표  
 평타 커멘드 계산기  
 
-https://gallog.dcinside.com/bakerst221/guestbook
+https://cass07.dev/?page_id=6
