@@ -210,6 +210,7 @@ function getData(){
                     for(j = 1; j < 6; j++) {
                         oCell[j+2].innerHTML = NpDamageCalcFin(NpTable[i], j);
                     }
+                    oCell[10].innerHTML = NpTable[i]["name"];
 
                 }
             }
@@ -218,6 +219,7 @@ function getData(){
 
             $('#ResultTbl tr > *:nth-child(9)').hide();
             $('#ResultTbl tr > *:nth-child(10)').hide();
+            $('#ResultTbl tr > *:nth-child(11)').hide();
 
         }
     });
@@ -279,10 +281,10 @@ FilRareAllUnCkd.addEventListener("click",function() {
 
 index1SortUp.addEventListener("click",function () {
     //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUpText(ResultTbl,0);
+    TableSortingUpText(ResultTbl,10);
 })//오름&내림차순 버튼 이벤트
 index1SortDown.addEventListener("click",function () {
-    TableSortingDownText(ResultTbl,0);
+    TableSortingDownText(ResultTbl,10);
 })
 index4SortUp.addEventListener("click",function () {
     //ResultTbl.deleteRow(ResultTbl.rows.length-1);
