@@ -676,6 +676,7 @@ function GetFilteredResult()
                     oCell[2].innerHTML = CommTextHTML[CommIndex[NpTable[i]["npcmd"]]];
                     oCell[8].innerHTML = Number(j+1);
                     oCell[9].innerHTML = NpDamageCalcFin(NpTable[i], j+1);
+                    oCell[10].innerHTML = NpTable[i]["name"];
                 }
             }
         }else{
@@ -692,6 +693,7 @@ function GetFilteredResult()
                 for(j = 1; j < 6; j++) {
                     oCell[j+2].innerHTML = NpDamageCalcFin(NpTable[i], j);
                 }
+                oCell[10].innerHTML = NpTable[i]["name"];
             }
         }
     }
@@ -708,6 +710,7 @@ function GetNpLevFilteredResult()
     $('#ResultTbl tr > *:nth-child(8)').show();
     $('#ResultTbl tr > *:nth-child(9)').hide();
     $('#ResultTbl tr > *:nth-child(10)').hide();
+    $('#ResultTbl tr > *:nth-child(11)').hide();
 
     ResultTbl.style.width = 100+"%";
     colserv.style.width = 17+"%";
@@ -724,6 +727,8 @@ function GetNpLevFilteredResult()
         $('#ResultTbl tr > *:nth-child(8)').hide();
         $('#ResultTbl tr > *:nth-child(9)').show();
         $('#ResultTbl tr > *:nth-child(10)').show();
+        $('#ResultTbl tr > *:nth-child(11)').hide();
+
         ResultTbl.style.width = 60+"%";
         colserv.style.width = 28+"%";
         colclass.style.width = 12+"%";
