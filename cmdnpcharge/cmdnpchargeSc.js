@@ -5,7 +5,9 @@ $('body').tooltip({
 var GotoTop = document.getElementById("GotoTop");
 var GotoMain = document.getElementById("GotoMain");
 
-var ResultTbl = document.getElementById("ResultTbl");
+var ResultTbl = document.getElementById("ResultTbl")
+
+var UpdateDate = document.getElementById("UpdateDate");
 
 var ServDataBase = new Array();
 var CmdNpChargeData = new Array();
@@ -90,6 +92,7 @@ function getData(){
 
 document.addEventListener('DOMContentLoaded',function () {
     getData();//parsing 진행 1회
+    printDate(UpdateDate);
 
 },false);
 
@@ -681,6 +684,24 @@ document.getElementById('index21SortUp').addEventListener('click',function(){
 document.getElementById('index21SortDown').addEventListener('click',function(){
     TableSortingDown(ResultTbl, 20);
 })
+
+
+function loadFile(filePath)//날짜
+{
+    var result = null;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", filePath, false);
+    xmlhttp.send();
+    if(xmlhttp.status == 200)
+        result = xmlhttp.responseText;
+    return result;
+}
+
+function printDate(dateid)//UpdateDate
+{
+    var date = loadFile("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/updateDate.txt")
+    dateid.innerHTML = "업데이트 날짜 : " + date;
+}
 
 
 GotoTop.addEventListener("click",function(){

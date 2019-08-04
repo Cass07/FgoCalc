@@ -55,6 +55,8 @@ function getData() {
     //console.log(data);
 }
 
+var UpdateDate = document.getElementById("UpdateDate");
+
 //입력 데이터 선언-서번트 데이터
 var Servant = document.getElementById("Servant");
 var ATK = document.getElementById("ATK");
@@ -195,6 +197,7 @@ const HiddenClassDefMag =
 
 document.addEventListener('DOMContentLoaded',function () {
     getData();//parsing 진행 1회
+    printDate(UpdateDate);
 },false);
 
 window.onload  = function()
@@ -679,6 +682,23 @@ calcBtn.addEventListener("click",function(){
         top:body.offsetHeight
     });
 })
+
+function loadFile(filePath)//날짜
+{
+    var result = null;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", filePath, false);
+    xmlhttp.send();
+    if(xmlhttp.status == 200)
+        result = xmlhttp.responseText;
+    return result;
+}
+
+function printDate(dateid)//UpdateDate
+{
+    var date = loadFile("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/updateDate.txt")
+    dateid.innerHTML = "업데이트 날짜 : " + date;
+}
 
 //top 버튼 클릭 이벤트 함수
 GotoTop.addEventListener("click",function(){

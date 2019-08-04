@@ -1,4 +1,6 @@
 
+var UpdateDate = document.getElementById("UpdateDate");
+
 //1. table sorters
 var index1SortUp = document.getElementById("index1SortUp");
 var index1SortDown = document.getElementById("index1SortDown");
@@ -126,7 +128,8 @@ const NpDmTableBusterUnit = [
 const NpDmTableArtsArmy = [
     [450,600,675,712.5,750],
     [600,750,825,862.5,900],
-    [400,500,550,575,600]//파라켈
+    [400,500,550,575,600],//파라켈
+    [900,1200,1350,1425,1500]//진궁
 ];
 const NpDmTableArtsUnit = [
     [900,1200,1350,1425,1500],
@@ -222,7 +225,7 @@ function getData(){
 document.addEventListener('DOMContentLoaded',function () {
 
     getData();
-
+    printDate(UpdateDate);
     //$('#ResultTbl tr > *:nth-child(9)').hide();
 
 },false);
@@ -795,7 +798,22 @@ function closeLoadingMask()
     $('#mask, #loadingImg').empty();
 }
 
+function loadFile(filePath)//날짜
+{
+    var result = null;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", filePath, false);
+    xmlhttp.send();
+    if(xmlhttp.status == 200)
+        result = xmlhttp.responseText;
+    return result;
+}
 
+function printDate(dateid)//UpdateDate
+{
+    var date = loadFile("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/updateDate.txt")
+    dateid.innerHTML = "업데이트 날짜 : " + date;
+}
 
 $("#HiddenModal").on('hidden.bs.modal',function(){
 
