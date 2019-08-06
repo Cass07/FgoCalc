@@ -143,6 +143,11 @@ var NpMagTable = new Array();
 
 //각종 데이터 상수 테이블 선언&초기화
 const NpDmTable = new Array(300, 400, 450, 475, 500);//보구계수
+const NpDmTableSp = [
+    [400,500,550,575,600],//파라켈
+    [900,1200,1350,1425,1500] //진궁
+];
+
 const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1);//클래스 보정계수
 const ClassNpRechargeMagTable = new Array(1,1,1,1.1,1.2,0.9,0.8,1,1,1,1.2,1);//적 클래스 NP보정계수
 const CommandMagTable = {
@@ -179,7 +184,7 @@ const ClassDefMag =
         [1.5,1.5,1.5,1.5,1.5,1.5,1.5,1,1.5,1.5,1.5,1.5,0.5],//berserker
         [1,1,1,1,1,1,1,1,1,1,1,1,1],//sheilder
         [1,1,1,1,1,1,2,1,1,0.5,2,1,1],//ruler
-        [1,1,1,1,1,1,2,1,2,1,0.5,1,1],//avenger
+        [1,1,1,1,1,1,2,1,2,1,0.5,1,1],//avengerㅞ
         [1,1,1,1,1,1,2,1,0.5,2,1,1,1],//mooncancer
         [0.5,0.5,0.5,1.5,1.5,1.5,2,1,1,1,1,1,2],//alterego
         [1,1,1,1,1,1,2,1,1,1,1,0.5,2]//foreigner
@@ -317,6 +322,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     {
         if(servTable[i]["name"]==Servant.value)
         {
+            console.log(servTable[i]["name"]);
             NpRate.value = servTable[i]["npa"];
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
@@ -338,6 +344,14 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 NpMag.value = Number(NpMag.value)+100;
             }
+            if(servTable[i]["name"] == "Paracelsus")
+            {
+                NpMag.value = NpMag_tmp;
+            }
+            if(servTable[i]["name"] == "ChenGong")
+            {
+                NpMag.value = NpMag_tmp * 3;
+            }
 
             break;
         }
@@ -358,6 +372,14 @@ NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     {
         NpMag.value = Number(NpMag.value)+100;
     }
+    if(Servant.value == "Paracelsus")
+    {
+        NpMag.value = NpMag_tmp;
+    }
+    if(Servant.value == "ChenGong")
+    {
+        NpMag.value = NpMag_tmp * 3;
+    }
 })
 
 NpUpgrade.addEventListener("change",function() {//보구강화 드롭다운 이벤트
@@ -370,6 +392,14 @@ NpUpgrade.addEventListener("change",function() {//보구강화 드롭다운 이�
     if(Servant.value === "Frankenstein")
     {
         NpMag.value = Number(NpMag.value)+100;
+    }
+    if(Servant.value == "Paracelsus")
+    {
+        NpMag.value = NpMag_tmp;
+    }
+    if(Servant.value == "ChenGong")
+    {
+        NpMag.value = NpMag_tmp * 3;
     }
 })
 
