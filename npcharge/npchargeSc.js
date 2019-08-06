@@ -184,7 +184,7 @@ const ClassDefMag =
         [1.5,1.5,1.5,1.5,1.5,1.5,1.5,1,1.5,1.5,1.5,1.5,0.5],//berserker
         [1,1,1,1,1,1,1,1,1,1,1,1,1],//sheilder
         [1,1,1,1,1,1,2,1,1,0.5,2,1,1],//ruler
-        [1,1,1,1,1,1,2,1,2,1,0.5,1,1],//avengerㅞ
+        [1,1,1,1,1,1,2,1,2,1,0.5,1,1],//avenger
         [1,1,1,1,1,1,2,1,0.5,2,1,1,1],//mooncancer
         [0.5,0.5,0.5,1.5,1.5,1.5,2,1,1,1,1,1,2],//alterego
         [1,1,1,1,1,1,2,1,1,1,1,0.5,2]//foreigner
@@ -322,7 +322,6 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     {
         if(servTable[i]["name"]==Servant.value)
         {
-            console.log(servTable[i]["name"]);
             NpRate.value = servTable[i]["npa"];
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
