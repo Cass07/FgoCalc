@@ -161,6 +161,10 @@ function CmdNpGainCalcFin(Serv, NpChargeTableData, IsFirstCmdArts, Cmd, CmdOrder
     {
         IsFifthform = true;
     }
+    if((Number(NpChargeTableData["fifthform"]) == 2)&&(Cmd == "arts"))
+    {
+        IsFifthform = true;
+    }
 
     IsCrit = false;
     IsOverKill = false;
