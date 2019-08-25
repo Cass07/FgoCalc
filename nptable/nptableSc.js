@@ -72,6 +72,7 @@ var CraftBufQuickNp = document.getElementById("CraftBufQuickNp");
 var FilNPExtraOnly = document.getElementById("FilNPExtraOnly");
 var FilClsDmgMul = document.getElementById("FilClsDmgMul");
 var FilClsExtraDmgMul = document.getElementById("FilClsExtraDmgMul");
+var RewardServNpLev5 = document.getElementById("RewardServNpLev5");
 var NameTooltipUse = document.getElementById("NameTooltipUse");
 
 var GotoTop = document.getElementById("GotoTop");
@@ -547,6 +548,11 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         AtkBuf += Number(CraftBufQuickAtk.value);
         CmdBuf += Number(CraftBufQuick.value);
         NpBuf += Number(CraftBufQuickNp.value);
+    }
+
+    if($('#RewardServNpLev5').is(":checked")){
+        if(Serv["isreward"] == 1)
+            NpLev = 5;
     }
 
     //console.log("최종공 : "+ServFinalATK + "상성배율 : "+ ClassMagMul + Serv["npcmd"]+Serv["nptype"]+Number(Serv["npmul"])+"보렙 : "+NpLev
