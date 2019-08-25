@@ -73,6 +73,7 @@ var FilNPExtraOnly = document.getElementById("FilNPExtraOnly");
 var FilClsDmgMul = document.getElementById("FilClsDmgMul");
 var FilClsExtraDmgMul = document.getElementById("FilClsExtraDmgMul");
 var RewardServNpLev5 = document.getElementById("RewardServNpLev5");
+var LowRareServNpLev5 = document.getElementById("LowRareServNpLev5");
 var NameTooltipUse = document.getElementById("NameTooltipUse");
 
 var GotoTop = document.getElementById("GotoTop");
@@ -550,8 +551,12 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         NpBuf += Number(CraftBufQuickNp.value);
     }
 
-    if($('#RewardServNpLev5').is(":checked")){
+    if($('#RewardServNpLev5').is(":checked") && !($('#FilNPLevInd').is(":checked"))){
         if(Serv["isreward"] == 1)
+            NpLev = 5;
+    }
+    if($('#LowRareServNpLev5').is(":checked") && !($('#FilNPLevInd').is(":checked"))){
+        if(Number(Serv["rare"]) < 4)
             NpLev = 5;
     }
 
