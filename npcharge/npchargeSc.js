@@ -149,7 +149,7 @@ const NpDmTableSp = [
 ];
 
 const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1);//클래스 보정계수
-const ClassNpRechargeMagTable = new Array(1,1,1,1.1,1.2,0.9,0.8,1,1,1,1.2,1);//적 클래스 NP보정계수
+const ClassNpRechargeMagTable = new Array(1,1,1,1.1,1.2,0.9,0.8,1,1,1,1.2,1,1);//적 클래스 NP보정계수
 const CommandMagTable = {
   1 : 0.8,
   3 : 1
