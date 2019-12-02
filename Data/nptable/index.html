@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143004793-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-143004793-1');
+    </script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>페그오 보구딜표</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../32.ico">
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="../16.ico">
+
+    <meta property="og:title" content = "페그오 보구딜표">
+    <meta property="og:description" content="일판 페그오(일그오) 데이터를 기준으로 한 필터링 가능한 보구딜표.">
+    <meta property="og:site_name" content = "페그오 보구딜표">
+    <meta property="og:image" content = "https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/image/metaimage.png">
+    <meta property="og:image:width" content = "1200">
+    <meta property="og:image:height" content = "630">
+    <meta property="og:image:type" content = "image/png">
+
+    <style>
+        div.tooltip-inner {
+            max-width: 350px;
+        }
+        .nptable{
+            margin:auto;
+            overflow-x : auto;
+        }
+        .nptable tr td:nth-child(1),
+        .nptable tr td:nth-child(2)
+        {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<div class="container">
+
+    <h1 align="center">페그오 보구딜표</h1><br>
+    <p align="center">일판 페그오(일그오) 데이터를 기준으로 한 필터링 가능한 보구딜표.</p>
+    <p align = "center" id = "UpdateDate"></p>
+
+    <form>
+    <div class="form-row justify-content-end">
+        <div class="col-md-3">
+            <button type="button" id="BaseTableFilter" class="btn btn-primary btn-block" data-toggle="modal" data-target="#HiddenModal">필터</button>
+        </div>
+    </div><br>
+
+
+    <div class="form-row" style="align:center;">
+        <table class="table table-bordered table-sm nptable" align = "middle" id="ResultTbl">
+            <colgroup>
+                <col width = "17%">
+                <col width = "8%">
+                <col width = "8%">
+
+            </colgroup>
+            <thead class="thead-dark" id="tablehd">
+            <tr>
+                <th scope="col" id = "colserv" style="text-align:center; vertical-align:middle;">서번트
+                    <button type="button" id = "index1SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index1SortDown" class="btn btn-primary btn-sm">▼</button>
+                </th>
+                <th scope="col" id = "colclass" style="text-align:center; vertical-align:middle;">클래스</th>
+                <th scope="col" id = "colcmd" style="text-align:center; vertical-align:middle;">보구색</th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">보구 1렙
+                    <button type="button" id = "index4SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index4SortDown" class="btn btn-primary btn-sm">▼</button></th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">보구 2렙
+                    <button type="button" id = "index5SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index5SortDown" class="btn btn-primary btn-sm">▼</button>
+                </th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">보구 3렙
+                    <button type="button" id = "index6SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index6SortDown" class="btn btn-primary btn-sm">▼</button>
+                </th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">보구 4렙
+                    <button type="button" id = "index7SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index7SortDown" class="btn btn-primary btn-sm">▼</button>
+                </th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">보구 5렙
+                    <button type="button" id = "index8SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index8SortDown" class="btn btn-primary btn-sm">▼</button></th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">
+                    보구 레벨
+                    <button type="button" id = "index9SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index9SortDown" class="btn btn-primary btn-sm">▼</button>
+                </th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">
+                    보구딜
+                    <button type="button" id = "index10SortUp" class="btn btn-primary btn-sm">▲</button>
+                    <button type="button" id = "index10SortDown" class="btn btn-primary btn-sm">▼</button>
+                </th>
+                <th scope="col" style="text-align:center; vertical-align:middle;">
+                    ServNameDummy
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tablebd">
+            </tbody>
+        </table>
+    </div>
+    </form>
+
+
+    <div class="modal fade" id="HiddenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="HiddenModalTitle">Filter</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="FilterCloseX"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>클래스 필터</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsSaber" checked>
+                                <img src="../Data/image/classicon/saber.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsArcher" checked>
+                                <img src="../Data/image/classicon/archer.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsLancer" checked>
+                                <img src="../Data/image/classicon/lancer.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsRider" checked>
+                                <img src="../Data/image/classicon/rider.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsCaster" checked>
+                                <img src="../Data/image/classicon/caster.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsAssassin" checked>
+                                <img src="../Data/image/classicon/assassin.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsBerserker" checked>
+                                <img src="../Data/image/classicon/berserker.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsRuler" checked>
+                                <img src="../Data/image/classicon/ruler.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsAvenger" checked>
+                                <img src="../Data/image/classicon/avenger.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsMooncancer" checked>
+                                <img src="../Data/image/classicon/mooncancer.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsAlterego" checked>
+                                <img src="../Data/image/classicon/alterego.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsForeigner" checked>
+                                <img src="../Data/image/classicon/foreigner.png" width="36" height ="36">
+                            </label>
+                            <button type = "button" id = "FilClsAllCkd" class = "btn btn-primary btn-sm">모두 선택</button>
+                            <button type = "button" id = "FilClsAllUnCkd" class = "btn btn-primary btn-sm">모두 선택해제</button>
+                        </div>
+                    </div>
+                    <p>레어도 필터</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare1" checked>
+                                1성
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare2" checked>
+                                2성
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare3" checked>
+                                3성
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare4" checked>
+                                4성
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare5" checked>
+                                5성
+                            </label>
+                            <button type = "button" id = "FilRareAllCkd" class = "btn btn-primary btn-sm">모두 선택</button>
+                            <button type = "button" id = "FilRareAllUnCkd" class = "btn btn-primary btn-sm">모두 선택해제</button>
+                        </div>
+                    </div>
+                    <p>보구 커멘드 필터</p>
+                    <div class="form-row">
+                        <div class = "form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommBuster" checked>
+                                <img src="../Data/image/commandicon/Buster.png" width="70" height ="70">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommArts" checked>
+                                <img src="../Data/image/commandicon/Arts.png" width="70" height ="70">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommQuick" checked>
+                                <img src="../Data/image/commandicon/Quick.png" width="70" height ="70">
+                            </label>
+                        </div>
+                    </div>
+                    <p>보구 타입 필터</p>
+                    <div class="form-row">
+                        <div class = "form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPTypeArmy" checked>
+                                대군보구
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPTypeUnit">
+                                대인보구
+                            </label>
+                        </div>
+                    </div>
+                    <p>보구 레벨 표시</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev1" checked>
+                                Lv.1
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev2" checked>
+                                Lv.2
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev3" checked>
+                                Lv.3
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev4" checked>
+                                Lv.4
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev5" checked>
+                                Lv.5
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLevInd" >
+                                레벨별로 따로 보기
+                            </label>
+                        </div>
+                    </div>
+                    <p>포우작, 예장 공격력 세팅</p>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="FourATK">
+                                포우작 수치
+                            </label>
+                            <input id="FourATK" type="number" class="form-control" min="0" max="2000" step = "1000" value="1000">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="CraftATK">
+                                개념예장 공격력
+                            </label>
+                            <input id="CraftATK" type="number" class="form-control" min="0" step = "1000" value="786">
+                        </div>
+                    </div>
+                    <p>추가 버프 세팅</p>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="CraftBufBuster">
+                                버스터 보구 커멘드 버프 (%)
+                            </label>
+                            <input id="CraftBufBuster" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CraftBufBusterAtk">
+                                버스터 보구 공격력 버프 (%)
+                            </label>
+                            <input id="CraftBufBusterAtk" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CraftBufBusterNp">
+                                버스터 보구 보구위력 버프 (%)
+                            </label>
+                            <input id="CraftBufBusterNp" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="CraftBufArts">
+                                아츠 보구 커멘드 버프 (%)
+                            </label>
+                            <input id="CraftBufArts" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CraftBufArtsAtk">
+                                아츠 보구 공격력 버프 (%)
+                            </label>
+                            <input id="CraftBufArtsAtk" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CraftBufArtsNp">
+                                아츠 보구 보구위력 버프 (%)
+                            </label>
+                            <input id="CraftBufArtsNp" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="CraftBufQuick">
+                                퀵 보구 커멘드 버프 (%)
+                            </label>
+                            <input id="CraftBufQuick" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CraftBufQuickAtk">
+                                퀵 보구 공격력 버프 (%)
+                            </label>
+                            <input id="CraftBufQuickAtk" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CraftBufQuickNp">
+                                퀵 보구 보구위력 버프 (%)
+                            </label>
+                            <input id="CraftBufQuickNp" type="number" class="form-control" min="-100" value="0">
+                        </div>
+                    </div>
+                    <!--
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="NpOverLev">
+                                <span data-toggle="tooltip" data-placement="right" title="오버차지 스킬이 있어 보구딜에 이미 적용된 경우 오버차지 배율이 합산됩니다.">오버차지</span>
+                            </label>
+                            <select class="form-control" id="NpOverLev">
+                                <option value="1">100%</option>
+                                <option value="2">200%</option>
+                                <option value="3">300%</option>
+                                <option value="4">400%</option>
+                                <option value="5">500%</option>
+                            </select>
+                        </div>
+                    </div>
+                    -->
+                    <p>기타</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPExtraOnly" disabled>
+                                특공 적용 보구딜만 보기
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsDmgMul">
+                                <span data-toggle="tooltip" data-placement="top" title="세이버, 아처, 랜서, 라이더, 캐스터, 어새신 상성 보구딜 (2배) 적용">정규 클래스 상성 적용</span>
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsExtraDmgMul">
+                                <span data-toggle="tooltip" data-placement="top" title="룰러, 어벤저, 문캔서 상성 보구딜 (2배) 적용">엑스트라 클래스 상성 적용</span>
+                            </label><br>
+                            <label class="checkbox-inline"><input type="checkbox" id = "NameTooltipUse" checked>
+                                적용 버프 툴팁 보여주기
+                            </label><br>
+                            <label class="checkbox-inline"><input type = "checkbox" id = "RewardServNpLev5" checked>
+                                배포 서번트 보구 5레벨 고정
+                            </label>
+                            <label class="checkbox-inline"><input type = "checkbox" id = "LowRareServNpLev5">
+                                3성 이하 서번트 보구 5레벨 고정
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="FilterCloseBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <button type = "button" id="GotoTop" class="btn btn-success btn-block">▲Top</button><br>
+
+    <button type = "button" id="GotoMain" class="btn btn-success btn-block">To Main...</button><br>
+
+    <script src="../lib/PapaParse/papaparse.min.js"></script>
+
+    <script src="../lib/FGOcalculate/fgocalculate.js"></script>
+
+    <script src="nptableSc.js"></script>
+</div>
+
+</body>
+</html>
