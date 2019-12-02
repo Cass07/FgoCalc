@@ -4,6 +4,9 @@ document.getElementById('NpRecharge').addEventListener('click',function(){
 document.getElementById('NpTable').addEventListener('click',function(){
     window.location = './nptable/';
 })
+document.getElementById('NpTableKor').addEventListener('click',function(){
+    window.location = './nptablekor/';
+})
 document.getElementById('CmdNpCharge').addEventListener('click',function(){
     window.location = './cmdnpcharge/';
 })

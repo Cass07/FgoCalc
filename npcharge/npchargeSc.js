@@ -219,6 +219,10 @@ function NpDmgCalc()//무상성 비난수 보구 대미지 계산&출력
     if(NpOriSp_tmp == 0) {
         NpOriSp_tmp = 1;
     }
+    if(ServantClass == "berserker")
+    {
+        NpOriSp_tmp *= 1.5;
+    }
     var Damage = Math.floor(tmp1*AllBuff*NpOriSp_tmp*Number(NpMag.value)/100)+Number(DmgPlus.value);
     AverNpDmg.innerHTML = "무상성 난수 1 보구 대미지 : " + Number(Damage).toFixed();
 

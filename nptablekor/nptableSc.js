@@ -1,5 +1,5 @@
 
-var UpdateDate = document.getElementById("UpdateDate");
+var UpdateDateKor = document.getElementById("UpdateDateKor");
 
 //1. table sorters
 var index1SortUp = document.getElementById("index1SortUp");
@@ -189,7 +189,7 @@ var colcmd = document.getElementById("colcmd");
 var NpTable;
 
 function getData(){
-    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServData.csv",{
+    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServDatakor.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -231,7 +231,7 @@ function getData(){
 document.addEventListener('DOMContentLoaded',function () {
 
     getData();
-    printDate(UpdateDate);
+    printDate(UpdateDateKor);
     //$('#ResultTbl tr > *:nth-child(9)').hide();
 
 },false);
@@ -831,7 +831,7 @@ function loadFile(filePath)//날짜
 
 function printDate(dateid)//UpdateDate
 {
-    var date = loadFile("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/updateDate.txt")
+    var date = loadFile("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/updateDateKor.txt")
     dateid.innerHTML = "업데이트 날짜 : " + date;
 }
 
