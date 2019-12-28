@@ -283,6 +283,12 @@ function NpRechargeCal(EnemyClass,IsEnemyCase2,OverkillCnt,EnemyCmd)
 
     tmp1 = Math.round(tmp1*1000)*0.001;
     tmp1 = Math.floor(tmp1);//소수점 2자리 내림
+
+    //진궁처럼 보구에 추가 데미지가 달린 보구의 경우, 오버차지 없어도 보구로 적이 죽지 않으면 원 보구 타수만큼 0%의 추가 대미지를 입힘
+    //따라서 오버킬 횟수가 0인 경우, 보구 타수가 2배가 되기에 NP차지도 2배로 하게 되어 이를 예외처리함
+    if((Servant.value == "ChenGong") && (OverkillCnt == 0))
+        return Math.floor(tmp1*NpCount*2)/100;
+
     return Math.floor(tmp1*(1.5*OverkillCnt + (NpCount-OverkillCnt)))/100;//(오버킬*1.5 + 비오버킬) 후 소수점 내림
 }
 
