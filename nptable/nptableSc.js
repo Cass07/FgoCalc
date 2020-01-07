@@ -74,6 +74,7 @@ var CraftBufQuickNp = document.getElementById("CraftBufQuickNp");
 
 var RanNum = document.getElementById("RanNum");
 var EnemyHidden = document.getElementById("EnemyHidden");
+var EnemyClass = document.getElementById("EnemyClass");
 
 var FilClsDmgMul = document.getElementById("FilClsDmgMul");
 var FilClsExtraDmgMul = document.getElementById("FilClsExtraDmgMul");
@@ -383,7 +384,24 @@ RanNum.addEventListener("change", function()
         RanNum.value = 0.9;
     if(RanNum.value > 1.1)
         RanNum.value = 1.1;
-})
+});
+
+EnemyClass.addEventListener("change", function()
+{
+    //클래스 항목으로 옮기고 기존 체크 지울것
+    if(EnemyClass.value != "-1")
+    {
+        $('#FilClsDmgMul').prop('checked', false);
+        $('#FilClsDmgMul').prop('disabled', true);
+        $('#FilClsExtraDmgMul').prop('checked', false);
+        $('#FilClsExtraDmgMul').prop('disabled', true);
+    }
+    else
+    {
+        $('#FilClsDmgMul').prop('disabled', false);
+        $('#FilClsExtraDmgMul').prop('disabled', false);
+    }
+});
 
 
 //함수
@@ -563,6 +581,10 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
             ClassMagMul = 2;
         }
     }
+    if(EnemyClass.value != "-1")
+    {
+        ClassMagMul = FGOcal.GetClassMagMul(Serv["class"], Number(EnemyClass.value));
+    }
     var AtkBuf = Number(Serv["atkbuf"]);
     var CmdBuf = Number(Serv["cmdbuf"]);
     var NpBuf = Number(Serv["npbuf"]);
@@ -663,6 +685,9 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
 
     //엑스트라 상성 적용시 얼터에고 1.5배 필터링
     if($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) == 1))
+        return false;
+    //적 서번트 클래스 적용시 얼터에고 1.5배 필터링
+    if((EnemyClass.value != "-1") && (Number(Serv["isclassmul"]) == 1))
         return false;
 
 

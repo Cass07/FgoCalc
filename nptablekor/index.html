@@ -58,7 +58,7 @@
 
     <h1 align="center">페그오 보구딜표</h1><br>
     <p align="center">한그오 데이터를 기준으로 한 필터링 가능한 보구딜표.</p>
-    <p align = "center" id = "UpdateDateKor"></p>
+    <p align = "center" id = "UpdateDate"></p>
 
     <form>
     <div class="form-row justify-content-end">
@@ -222,6 +222,18 @@
                             </label>
                         </div>
                     </div>
+                    <p>특공 필터</p>
+                    <div class = "form-row">
+                        <div class = "form-group col-12">
+                            <label class = "checkbox-inline"><input type = "checkbox" id = "FilNPExtra" checked>
+                                특공 보구
+                            </label>
+                            <label class = "checkbox-inline"><input type = "checkbox" id = "FilNPExtraNot" checked>
+                                비 특공 보구
+                            </label>
+
+                        </div>
+                    </div>
                     <p>보구 레벨 표시</p>
                     <div class="form-row">
                         <div class="form-group col-12">
@@ -321,6 +333,49 @@
                             <input id="CraftBufQuickNp" type="number" class="form-control" min="-100" value="0">
                         </div>
                     </div>
+                    <p>난수, 히든상성, 적 클래스 세팅</p>
+                    <div class = "form-row">
+                        <div class = "form-group col-4">
+                            <label for = "RanNum">
+                                난수 (0.9~1.1)
+                            </label>
+                            <input id = "RanNum" type = "number" class = "form-control" min = "0.9" max = "1.1" value = "1">
+                        </div>
+                        <div class = "form-group col-4">
+                            <label for = "EnemyHidden">
+                                적 히든 클래스
+                            </label>
+                            <select class = "form-control" id = "EnemyHidden">
+                                <option value ="0">미적용</option>
+                                <option value="1">천(天)</option>
+                                <option value="2">지(地)</option>
+                                <option value="3">인(人)</option>
+                                <option value="4">성(星)</option>
+                                <option value="5">수(獣)</option>
+                            </select>
+                        </div>
+                        <div class = "form-group col-4">
+                            <label for = "EnemyClass">
+                                적 클래스
+                            </label>
+                            <select class = "form-control" id = "EnemyClass">
+                                <option value = "-1">미적용</option>
+                                <option value = "0">세이버</option>
+                                <option value = "1">아처</option>
+                                <option value = "2">랜서</option>
+                                <option value = "3">라이더</option>
+                                <option value = "4">캐스터</option>
+                                <option value = "5">어새신</option>
+                                <option value = "6">버서커</option>
+                                <option value = "7">실더</option>
+                                <option value = "8">룰러</option>
+                                <option value = "9">어벤저</option>
+                                <option value = "10">문캔서</option>
+                                <option value = "11">얼터에고</option>
+                                <option value = "12">포리너</option>
+                            </select>
+                        </div>
+                    </div>
                     <!--
                     <div class="form-row">
                         <div class="form-group col-6">
@@ -340,14 +395,11 @@
                     <p>기타</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPExtraOnly" disabled>
-                                특공 적용 보구딜만 보기
-                            </label>
                             <label class="checkbox-inline"><input type="checkbox" id = "FilClsDmgMul">
                                 <span data-toggle="tooltip" data-placement="top" title="세이버, 아처, 랜서, 라이더, 캐스터, 어새신 상성 보구딜 (2배) 적용">정규 클래스 상성 적용</span>
                             </label>
                             <label class="checkbox-inline"><input type="checkbox" id = "FilClsExtraDmgMul">
-                                <span data-toggle="tooltip" data-placement="top" title="룰러, 어벤저, 문캔서 상성 보구딜 (2배) 적용">엑스트라 클래스 상성 적용</span>
+                                <span data-toggle="tooltip" data-placement="top" title="룰러, 어벤저, 문캔서, 얼터에고 상성 보구딜 (2배) 적용">엑스트라 클래스 상성 적용</span>
                             </label><br>
                             <label class="checkbox-inline"><input type="checkbox" id = "NameTooltipUse" checked>
                                 적용 버프 툴팁 보여주기

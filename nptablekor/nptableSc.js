@@ -1,5 +1,5 @@
 
-var UpdateDateKor = document.getElementById("UpdateDateKor");
+var UpdateDate = document.getElementById("UpdateDate");
 
 //1. table sorters
 var index1SortUp = document.getElementById("index1SortUp");
@@ -54,6 +54,9 @@ var FilNPLev4 = document.getElementById("FilNPLev4");
 var FilNPLev5 = document.getElementById("FilNPLev5");
 var FilNPLevInd = document.getElementById("FilNPLevInd");
 
+var FilNPExtra = document.getElementById("FilNPExtra");
+var FilNPExtraNot = document.getElementById("FilNPExtraNot");
+
 var FourATK = document.getElementById("FourATK");
 var CraftATK = document.getElementById("CraftATK");
 
@@ -69,12 +72,16 @@ var CraftBufQuick = document.getElementById("CraftBufQuick");
 var CraftBufQuickAtk = document.getElementById("CraftBufQuickAtk");
 var CraftBufQuickNp = document.getElementById("CraftBufQuickNp");
 
-var FilNPExtraOnly = document.getElementById("FilNPExtraOnly");
+var RanNum = document.getElementById("RanNum");
+var EnemyHidden = document.getElementById("EnemyHidden");
+var EnemyClass = document.getElementById("EnemyClass");
+
 var FilClsDmgMul = document.getElementById("FilClsDmgMul");
 var FilClsExtraDmgMul = document.getElementById("FilClsExtraDmgMul");
 var RewardServNpLev5 = document.getElementById("RewardServNpLev5");
 var LowRareServNpLev5 = document.getElementById("LowRareServNpLev5");
 var NameTooltipUse = document.getElementById("NameTooltipUse");
+
 
 var GotoTop = document.getElementById("GotoTop");
 var GotoMain = document.getElementById("GotoMain");
@@ -188,6 +195,8 @@ var colcmd = document.getElementById("colcmd");
 
 var NpTable;
 
+var ServDataBase;
+
 function getData(){
     var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServDatakor.csv",{
         delimiter : ",",
@@ -218,7 +227,7 @@ function getData(){
                 }
             }
 
-                TableSortingDown(ResultTbl,3);
+            TableSortingDown(ResultTbl,3);
 
             $('#ResultTbl tr > *:nth-child(9)').hide();
             $('#ResultTbl tr > *:nth-child(10)').hide();
@@ -226,12 +235,23 @@ function getData(){
 
         }
     });
+    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            ServDataBase = results.data;
+        }
+    });
 }
+// 서번트 데이터 테이블 참조해서 히든속성 데이터 받아올것 (add? 100렙 데이터 추가해서 100렙데이터 비교해버리기
+// 이후 히든적용 체크, 히든선택 - 히든속성적용 (계산식은 라이브러리에 적용완료)
 
 document.addEventListener('DOMContentLoaded',function () {
 
     getData();
-    printDate(UpdateDateKor);
+    printDate(UpdateDate);
     //$('#ResultTbl tr > *:nth-child(9)').hide();
 
 },false);
@@ -357,6 +377,32 @@ FilNPLevInd.addEventListener("change",function()
         $('#FilNPLev5').prop('disabled',false);
     }
 })
+
+RanNum.addEventListener("change", function()
+{
+    if(RanNum.value < 0.9)
+        RanNum.value = 0.9;
+    if(RanNum.value > 1.1)
+        RanNum.value = 1.1;
+});
+
+EnemyClass.addEventListener("change", function()
+{
+    //클래스 항목으로 옮기고 기존 체크 지울것
+    if(EnemyClass.value != "-1")
+    {
+        $('#FilClsDmgMul').prop('checked', false);
+        $('#FilClsDmgMul').prop('disabled', true);
+        $('#FilClsExtraDmgMul').prop('checked', false);
+        $('#FilClsExtraDmgMul').prop('disabled', true);
+    }
+    else
+    {
+        $('#FilClsDmgMul').prop('disabled', false);
+        $('#FilClsExtraDmgMul').prop('disabled', false);
+    }
+});
+
 
 //함수
 
@@ -531,9 +577,13 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         }
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
-        if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer")) {
+        if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer") || (Serv["class"] == "alterego")) {
             ClassMagMul = 2;
         }
+    }
+    if(EnemyClass.value != "-1")
+    {
+        ClassMagMul = FGOcal.GetClassMagMul(Serv["class"], Number(EnemyClass.value));
     }
     var AtkBuf = Number(Serv["atkbuf"]);
     var CmdBuf = Number(Serv["cmdbuf"]);
@@ -561,12 +611,20 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
             NpLev = 5;
     }
 
+    var HiddenDefMagMul = 1;
+
+
+    if(Number(EnemyHidden.value) > 0)
+    {
+        HiddenDefMagMul = FGOcal.GetHiddenMagMul(ServDataBase[Serv["id"]]["hidden"], Number(EnemyHidden.value)-1);
+    }
+
     //console.log("최종공 : "+ServFinalATK + "상성배율 : "+ ClassMagMul + Serv["npcmd"]+Serv["nptype"]+Number(Serv["npmul"])+"보렙 : "+NpLev
     //+"공벞 : "+AtkBuf+"색벞" +CmdBuf + "보벞"+NpBuf+ "특공보구 : "+Number(Serv["npextramul"]));
 
     return FGOcal.NpDamageCalc(ServFinalATK, Serv["class"], ClassMagMul, Serv["npcmd"],
         NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][NpLev - 1], AtkBuf, CmdBuf, NpBuf,
-        Number(Serv["npextramul"]), Number(Serv["dmgplus"]), Number(Serv["hppronp"]), 1,1);
+        Number(Serv["npextramul"]), Number(Serv["dmgplus"]), Number(Serv["hppronp"]), Number(RanNum.value),HiddenDefMagMul);
 }
 
 function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
@@ -619,6 +677,18 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
         return false;
     if(!$('#FilNPTypeUnit').is(":checked") && (Serv["nptype"] == "unit"))
         return false;
+    //특공보구여부
+    if(!$('#FilNPExtra').is(":checked") && (Serv["isextranp"] == "1"))
+        return false;
+    if(!$('#FilNPExtraNot').is(":checked") && (Serv["isextranp"] == "0"))
+        return false;
+
+    //엑스트라 상성 적용시 얼터에고 1.5배 필터링
+    if($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) == 1))
+        return false;
+    //적 서번트 클래스 적용시 얼터에고 1.5배 필터링
+    if((EnemyClass.value != "-1") && (Number(Serv["isclassmul"]) == 1))
+        return false;
 
 
     return true;
@@ -629,20 +699,20 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
 {
     var tmp = "<span data-toggle=\"tooltip\" data-placement=\"top\" data-html=\"true\" title=\"";
     //아뻥
-        if(Serv["cmdbuf"] > 0)
+    if(Serv["cmdbuf"] > 0)
+    {
+        if(CommIndex[Serv["npcmd"]] == 0)
         {
-            if(CommIndex[Serv["npcmd"]] == 0)
-            {
-                tmp += "버스터";
-            }else if(CommIndex[Serv["npcmd"]] == 1)
-            {
-                tmp += "아츠";
-            }else
-            {
-                tmp += "퀵";
-            }
-            tmp += " 커멘드 버프 " + Serv["cmdbuf"] + "%" + "<br>";
+            tmp += "버스터";
+        }else if(CommIndex[Serv["npcmd"]] == 1)
+        {
+            tmp += "아츠";
+        }else
+        {
+            tmp += "퀵";
         }
+        tmp += " 커멘드 버프 " + Serv["cmdbuf"] + "%" + "<br>";
+    }
     //퀵뻥
     if(Serv["atkbuf"] > 0)
         tmp += "공격력 버프 "+Serv["atkbuf"]+"%"+"<br>";
