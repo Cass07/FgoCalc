@@ -1,7 +1,7 @@
 ﻿name,id,rare,atk,cmdbuf,atkbuf,npbuf,npextramul,dmgplus,hppronp,npcmd,nptype,npmul,class,charge,isextranp,isdebuf,isclassmul,isreward
 청밥,2,5,11221,50,18,0,0,0,0,buster,army,1,saber,0,0,0,0,0
 흑밥,3,4,10248,50,12,0,0,0,0,buster,army,2,saber,0,0,0,0,0
-세릴리,4,4,7726,50,0,0,0,0,0,buster,army,5,saber,0,0,0,0,1
+세릴리,4,4,7726,50,0,0,0,0,0,buster,army,3,saber,0,0,0,0,1
 네로,5,4,9449,0,0,0,0,0,0,arts,army,1,saber,0,0,0,0,0
 네로(황특),5,4,9449,0,44,0,0,0,0,arts,army,1,saber,0,0,1,0,0
 스마나이,6,4,8181,50,0,0,0,0,0,buster,army,1,saber,0,0,0,0,0
