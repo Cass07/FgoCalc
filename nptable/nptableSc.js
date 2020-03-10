@@ -60,6 +60,9 @@ var FilNPExtraNot = document.getElementById("FilNPExtraNot");
 var FourATK = document.getElementById("FourATK");
 var CraftATK = document.getElementById("CraftATK");
 
+var FourHP = document.getElementById("FourHP");
+var CraftHP = document.getElementById("CraftHP");
+
 var CraftBufBuster = document.getElementById("CraftBufBuster");
 var CraftBufBusterAtk = document.getElementById("CraftBufBusterAtk");
 var CraftBufBusterNp = document.getElementById("CraftBufBusterNp");
@@ -158,6 +161,10 @@ const NpDmTableQuickUnit = [
     [1200,1600,1800,1900,2000],
     [1600,2000,2200,2300,2400],
     [1400,1800,2000,2100,2200]//잭
+];
+const NpDmTableHpproNP = [
+    [[600,800],[0,0],[1200,1200]],//대인버아퀵 (노구퀘,보구퀘)
+    [[0,0],[0,0],[0,0]]//대군버아퀵(dummy)
 ];
 //보구 계수 대군대인 [NpTypeIndex[보구유형문자],CommIndex[커멘드문자],npmul,보구레벨]
 const NpDmTable = [
@@ -567,6 +574,21 @@ function TableDeleteAll(table)//1열빼고 다지우기
 function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프 같이 계산
 {
     var ServFinalATK = Number(Serv["atk"]) + Number(FourATK.value) + Number(CraftATK.value);
+    var ServFinalHP = 0;
+
+    if($('#StatGrailed').is(":checked"))
+    {
+        ServFinalHP = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["hp_init"]),Number(ServDataBase[Serv["id"]]["hp"]),
+            Number(Serv["rare"]),100) + Number(FourHP.value) + Number(CraftHP.value);
+        ServFinalATK = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]),Number(Serv["atk"]),
+            Number(Serv["rare"]),100) + Number(FourATK.value) + Number(CraftATK.value);
+        //console.log("성배" + Serv["name"] + " 체 : " + ServFinalHP + "공 : " + ServFinalATK);
+    }else if(Number(FourHP.value) + Number(CraftHP.value) != 1000)
+    {
+        ServFinalHP = Number(ServDataBase[Serv["id"]]["hp"]) + Number(FourHP.value) + Number(CraftHP.value);
+    }
+
+
     var ClassMagMul = 1;
     if ((Number(Serv["isclassmul"]) == 1) || (Serv["class"] == "berserker"))
         ClassMagMul = 1.5;
@@ -619,12 +641,27 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         HiddenDefMagMul = FGOcal.GetHiddenMagMul(ServDataBase[Serv["id"]]["hidden"], Number(EnemyHidden.value)-1);
     }
 
+    var HpproNp = Number(Serv["hppronp"]);
+
+    if(($('#StatGrailed').is(":checked") || (Number(FourHP.value) + Number(CraftHP.value) != 1000)) && (HpproNp > 0)) {
+
+        var HpproNp_init = NpDmTableHpproNP[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])];
+        if ((HpproNp / HpproNp_init) > 0.5) // HP 1남은 상태
+        {
+            HpproNp = HpproNp_init * (1 - 1 / ServFinalHP);
+        } else//피깎스킬
+        {
+            HpproNp = Math.round(HpproNp * ((Number(ServDataBase[Serv["id"]]["hp"]) + 1000) / ServFinalHP) * 10000) / 10000;
+        }
+    }
+
+
     //console.log("최종공 : "+ServFinalATK + "상성배율 : "+ ClassMagMul + Serv["npcmd"]+Serv["nptype"]+Number(Serv["npmul"])+"보렙 : "+NpLev
     //+"공벞 : "+AtkBuf+"색벞" +CmdBuf + "보벞"+NpBuf+ "특공보구 : "+Number(Serv["npextramul"]));
 
     return FGOcal.NpDamageCalc(ServFinalATK, Serv["class"], ClassMagMul, Serv["npcmd"],
         NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][NpLev - 1], AtkBuf, CmdBuf, NpBuf,
-        Number(Serv["npextramul"]), Number(Serv["dmgplus"]), Number(Serv["hppronp"]), Number(RanNum.value),HiddenDefMagMul);
+        Number(Serv["npextramul"]), Number(Serv["dmgplus"]), HpproNp, Number(RanNum.value),HiddenDefMagMul);
 }
 
 function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수

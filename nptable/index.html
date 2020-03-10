@@ -132,7 +132,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="FilterCloseX"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <p>클래스 필터</p>
+                    <p class = "lead">클래스 필터</p>
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label class="checkbox-inline"><input type="checkbox" id = "FilClsSaber" checked>
@@ -175,7 +175,7 @@
                             <button type = "button" id = "FilClsAllUnCkd" class = "btn btn-primary btn-sm">모두 선택해제</button>
                         </div>
                     </div>
-                    <p>레어도 필터</p>
+                    <p class = "lead">레어도 필터</p>
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label class="checkbox-inline"><input type="checkbox" id = "FilRare1" checked>
@@ -197,7 +197,7 @@
                             <button type = "button" id = "FilRareAllUnCkd" class = "btn btn-primary btn-sm">모두 선택해제</button>
                         </div>
                     </div>
-                    <p>보구 커멘드 필터</p>
+                    <p class = "lead">보구 커멘드 필터</p>
                     <div class="form-row">
                         <div class = "form-group col-12">
                             <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommBuster" checked>
@@ -211,7 +211,7 @@
                             </label>
                         </div>
                     </div>
-                    <p>보구 타입 필터</p>
+                    <p class = "lead">보구 타입 필터</p>
                     <div class="form-row">
                         <div class = "form-group col-12">
                             <label class="checkbox-inline"><input type="checkbox" id = "FilNPTypeArmy" checked>
@@ -222,7 +222,7 @@
                             </label>
                         </div>
                     </div>
-                    <p>특공 필터</p>
+                    <p class = "lead">특공 필터</p>
                     <div class = "form-row">
                         <div class = "form-group col-12">
                             <label class = "checkbox-inline"><input type = "checkbox" id = "FilNPExtra" checked>
@@ -234,7 +234,7 @@
 
                         </div>
                     </div>
-                    <p>보구 레벨 표시</p>
+                    <p class = "lead">보구 레벨 표시</p>
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev1" checked>
@@ -257,11 +257,11 @@
                             </label>
                         </div>
                     </div>
-                    <p>포우작, 예장 공격력 세팅</p>
+                    <p class = "lead">포우작, 예장 공격력 세팅</p>
                     <div class="form-row">
                         <div class="form-group col-6">
                             <label for="FourATK">
-                                포우작 수치
+                                ATK 포우작 수치
                             </label>
                             <input id="FourATK" type="number" class="form-control" min="0" max="2000" step = "1000" value="1000">
                         </div>
@@ -272,7 +272,22 @@
                             <input id="CraftATK" type="number" class="form-control" min="0" step = "1000" value="786">
                         </div>
                     </div>
-                    <p>추가 버프 세팅</p>
+                    <p class = "lead">포우작, 예장 체력 세팅</p>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="FourATK">
+                                HP 포우작 수치
+                            </label>
+                            <input id="FourHP" type="number" class="form-control" min="0" max="2000" step = "1000" value="1000">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="CraftATK">
+                                개념예장 체력
+                            </label>
+                            <input id="CraftHP" type="number" class="form-control" min="0" step = "1000" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead">추가 버프 세팅</p>
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="CraftBufBuster">
@@ -333,7 +348,7 @@
                             <input id="CraftBufQuickNp" type="number" class="form-control" min="-100" value="0">
                         </div>
                     </div>
-                    <p>난수, 히든상성, 적 클래스 세팅</p>
+                    <p class = "lead">난수, 히든상성, 적 클래스 세팅</p>
                     <div class = "form-row">
                         <div class = "form-group col-4">
                             <label for = "RanNum">
@@ -392,7 +407,7 @@
                         </div>
                     </div>
                     -->
-                    <p>기타</p>
+                    <p class = "lead">기타</p>
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label class="checkbox-inline"><input type="checkbox" id = "FilClsDmgMul">
@@ -409,6 +424,9 @@
                             </label>
                             <label class="checkbox-inline"><input type = "checkbox" id = "LowRareServNpLev5">
                                 3성 이하 서번트 보구 5레벨 고정
+                            </label><br>
+                            <label class = "checkbox-inline"><input type = "checkbox" id = "StatGrailed">
+                                100레벨 성배작 스탯 적용
                             </label>
                         </div>
                     </div>
