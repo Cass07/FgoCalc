@@ -599,7 +599,8 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         }
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
-        if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer") || (Serv["class"] == "alterego")) {
+        if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer") || (Serv["class"] == "alterego")
+            || (Serv["class"] == "foreigner")) {
             ClassMagMul = 2;
         }
     }
