@@ -7,7 +7,7 @@ var EnemyPresetTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
-    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/npRecharge.csv",{
+    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/master/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -24,6 +24,7 @@ function getData() {
             NpRate.value = servTable[0]["npa"];
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
+            ServantATK.value = Number(servTable[0]["atk"])+1000; //은포우 기본 적용
             NpMagTable = [servTable[0]["mag1"],servTable[0]["mag2"],servTable[0]["mag3"],servTable[0]["mag4"],
                 servTable[0]["mag5"],servTable[0]["mag6"],servTable[0]["mag7"],servTable[0]["mag8"],
                 servTable[0]["mag9"],servTable[0]["mag10"]];
@@ -59,8 +60,10 @@ var UpdateDate = document.getElementById("UpdateDate");
 
 //입력 데이터 선언-서번트 데이터
 var Servant = document.getElementById("Servant");
-var ATK = document.getElementById("ATK");
-
+var ServantATK = document.getElementById("ServantATK");
+var CraftATK = document.getElementById("CraftATK");
+var Goldfow = document.getElementById("Goldfow");
+var ATK;
 var NpLev = document.getElementById("NpLev");
 var NpCommand = document.getElementById("NpCommand");
 var NpUpgrade = document.getElementById("NpUpgrade");
@@ -213,7 +216,7 @@ window.onload  = function()
 //계산 함수
 function NpDmgCalc()//무상성 비난수 보구 대미지 계산&출력
 {
-    var tmp1 = Number(ATK.value)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]];
+    var tmp1 = Number(ATK)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]];
     var AllBuff = (100+Number(AtkBuff.value))/100*(100+Number(CmdBuff.value))/100*(100+Number(NpDmgBuff.value))/100;
     var NpOriSp_tmp = Number(NpOriSp.value)*0.01;
     if(NpOriSp_tmp == 0) {
@@ -230,7 +233,7 @@ function NpDmgCalc()//무상성 비난수 보구 대미지 계산&출력
 
 function NpDmgCalc_Serv(EnemyClass, EnemyHiddenClass,EnemyDef, EnemyCmd, EnemyNpDmg,RanNum)//에너미별 실제 보구 대미지 계산, param은 Number로 받을것
 {
-    var tmp1 = Number(ATK.value)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]]//공*0.23*커멘계수*클래스보정
+    var tmp1 = Number(ATK)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]]//공*0.23*커멘계수*클래스보정
     *ClassDefMag[ClassIndexTable[ServantClass]][EnemyClass]//상성계수
     *HiddenClassDefMag[HiddenClass.value-1][EnemyHiddenClass-1]//히든상성
     *Number(NpMag.value)/100*RanNum;//보구배율/100*난수
@@ -336,6 +339,11 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
             NpUpgrade.value = servTable[i]["npupgrade"];
+            ServantATK.value = Number(servTable[i]["atk"]) + 1000;
+            if(Goldfow.checked === true)
+            {
+                ServantATK.value = Number(ServantATK.value) + 1000;
+            }
             NpCount = servTable[i]["npcount"];
             ServantClass = servTable[i]["class"];
             for(var j = 1; j < 11; j++)
@@ -541,6 +549,15 @@ EnemyDataPresetResetBtn.addEventListener("click",function(){
 
 })
 
+Goldfow.addEventListener("change",function(){//금포우 체크박스 이벤트
+    if(this.checked === true)
+    {
+        ServantATK.value = Number(ServantATK.value) + 1000;
+    }
+    else{
+        ServantATK.value = Number(ServantATK.value) - 1000;
+    }
+})
 IsNotEnemy1.addEventListener("change",function(){//에너미1 존재 체크박스 이벤트
     if(this.checked === true)
     {
@@ -617,7 +634,7 @@ calcBtn.addEventListener("click",function(){
     var tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp4 = 0;
     tmp5 = 0;
-
+    ATK = Number(ServantATK.value) + Number(CraftATK.value);
     NpDmgCalc();
     //Enemy1 calculate
     if(IsNotEnemy1.checked === true)

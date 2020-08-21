@@ -55,14 +55,22 @@
 
                 </select>
             </div>
-            <div class="form-group col-md-6">
-                <label for="ATK">
-                    <span data-toggle="tooltip" data-placement="top" data-html="true" title="서번트 공격력+<br>포우+예장 공격력">최종 공격력</span>
+            <div class="form-group col-md-3">
+                <label for="ServantATK">
+                    <span data-toggle="tooltip" data-placement="top" data-html="true" title="서번트 공격력+은포우+<br>금포우(선택)">서번트 공격력 (금포우작  
+                        <input id="Goldfow" type="checkbox" value="manual">
+                        )</span>
                 </label>
-                <input id="ATK" type="number" class="form-control" min="0" value="10000">
+                <input id="ServantATK" type="number" class="form-control" min="0" value="10000">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="CraftATK">
+                    <span data-toggle="tooltip" data-placement="top" data-html="true" title="예장 공격력">예장 공격력</span>
+                </label>
+                <input id="CraftATK" type="number" class="form-control" min="0" value="786">
+
             </div>
         </div>
-
 
         <div class="form-row">
             <div class="form-group col-6 col-md-3">
@@ -146,7 +154,7 @@
                 <input id="DmgPlus" type="number" class="form-control" value="0">
             </div>
         </div>
-
+       
         <!-- Enemy Preset -->
         <div class = "form-row">
             <div class="form-group col-md-6">
