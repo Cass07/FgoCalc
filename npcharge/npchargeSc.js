@@ -4,6 +4,7 @@ $(function () {
 
 var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
+var SupportTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
@@ -55,17 +56,52 @@ function getData() {
         }
     });
     //console.log(data);
+    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop/Data/SupporterData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            supportTable = results.data;
+            for(var i = 0; i < supportTable.length-1; i++) {
+                Supporter1.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
+                Supporter2.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
+                Supporter3.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
+            }
+        }
+    });
+
 }
 
 var UpdateDate = document.getElementById("UpdateDate");
 
 //입력 데이터 선언-서번트 데이터
 var Servant = document.getElementById("Servant");
+<<<<<<< HEAD
 var ServantATK = document.getElementById("ServantATK");
 var CraftATK = document.getElementById("CraftATK");
 var Goldfow = document.getElementById("Goldfow");
 var ATK;
 ATK = Number(ServantATK.value) + Number(CraftATK.value);
+=======
+var ServantATK = document.getElementById("servantATK");
+var CraftATK = document.getElementById("craftATK");
+var ATK = ServantATK.value + CraftATK.value;
+var Goldfow = document.getElementById("Goldfow");
+
+var Support_busterbuf;
+var Support_artsbuf;
+var Support_quickbuf;
+var Support_npgainbuf;
+var Support_atkbuf;
+var Support_npplus;
+var Support_dmgplus;
+var Support_criiticalbuf;
+var Support_startbuf;
+var Support_npbuf;
+var Support_npextramul;
+
+>>>>>>> develop
 var NpLev = document.getElementById("NpLev");
 var NpCommand = document.getElementById("NpCommand");
 var NpUpgrade = document.getElementById("NpUpgrade");
@@ -378,6 +414,22 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
 
     }
 
+})
+function changeSupporter(num) {
+/*
+    for(var i = 1; i < supportTable.length-1; i++)
+    {
+        if(supportTable[i]["name"]==Supporter1.value)
+        {
+            Support_atkbuf.value = supportTable[i]["atkbuf"];
+            Support_busterbuf.value = supportTable[i]["busterbuf"];
+        }}
+        AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
+*/
+    }
+
+Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
+    changeSupporter(1);
 })
 
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
