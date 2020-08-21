@@ -7,7 +7,40 @@ var EnemyPresetTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
-    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/npRecharge.csv",{
+    var servdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/master/Data/ServDataBase.csv",{
+            delimiter : ",",
+            download: true,
+            header:true,
+            dynamicTyping:true,
+            complete: function(results){
+                servTable = results.data;
+                //Var1 = servTable.length;
+                for (var i = 0; i < servTable.length - 1; i++)
+                {
+                    Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
+                }
+                //Servant table 0 index의 값으로 초기화
+    
+                NpRate.value = servTable[0]["npa"];
+                HiddenClass.value = servTable[0]["hidden"];
+                NpCommand.value = servTable[0]["command"];
+                NpMagTable = [servTable[0]["mag1"],servTable[0]["mag2"],servTable[0]["mag3"],servTable[0]["mag4"],
+                    servTable[0]["mag5"],servTable[0]["mag6"],servTable[0]["mag7"],servTable[0]["mag8"],
+                    servTable[0]["mag9"],servTable[0]["mag10"]];
+                NpUpgrade.value = servTable[0]["npupgrade"];
+                NpCount = servTable[0]["npcount"];
+                ServantClass = servTable[0]["class"];
+                var NpMag_tmp = NpDmTable[0] + 100 * NpUpgrade.value;
+                if(NpCommand.value == 3) {
+                    NpMag.value=NpMag_tmp*1.5;
+                }else
+                {
+                    NpMag.value= NpMag_tmp*2;
+                }
+            }
+        });
+    /*
+    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/master/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -39,7 +72,7 @@ function getData() {
             }
         }
     });
-
+*/
    var data2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/EnemyPreset.csv",{
         delimiter : ",",
         download: true,
