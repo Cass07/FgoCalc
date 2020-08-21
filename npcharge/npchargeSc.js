@@ -560,6 +560,7 @@ Goldfow.addEventListener("change",function(){//금포우 체크박스 이벤트
     else{
         ServantATK.value = Number(ServantATK.value) - 1000;
     }
+    ATK = Number(ServantATK.value) + Number(CraftATK.value);
 })
 IsNotEnemy1.addEventListener("change",function(){//에너미1 존재 체크박스 이벤트
     if(this.checked === true)
