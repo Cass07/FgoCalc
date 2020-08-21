@@ -7,7 +7,7 @@ var EnemyPresetTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
-    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/master/Data/npRecharge.csv",{
+    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
         header:true,
