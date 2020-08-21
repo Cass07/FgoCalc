@@ -77,18 +77,11 @@ var UpdateDate = document.getElementById("UpdateDate");
 
 //입력 데이터 선언-서번트 데이터
 var Servant = document.getElementById("Servant");
-<<<<<<< HEAD
 var ServantATK = document.getElementById("ServantATK");
 var CraftATK = document.getElementById("CraftATK");
 var Goldfow = document.getElementById("Goldfow");
 var ATK;
 ATK = Number(ServantATK.value) + Number(CraftATK.value);
-=======
-var ServantATK = document.getElementById("servantATK");
-var CraftATK = document.getElementById("craftATK");
-var ATK = ServantATK.value + CraftATK.value;
-var Goldfow = document.getElementById("Goldfow");
-
 var Support_busterbuf;
 var Support_artsbuf;
 var Support_quickbuf;
@@ -101,7 +94,6 @@ var Support_startbuf;
 var Support_npbuf;
 var Support_npextramul;
 
->>>>>>> develop
 var NpLev = document.getElementById("NpLev");
 var NpCommand = document.getElementById("NpCommand");
 var NpUpgrade = document.getElementById("NpUpgrade");
