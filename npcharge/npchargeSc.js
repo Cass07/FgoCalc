@@ -59,7 +59,7 @@ var UpdateDate = document.getElementById("UpdateDate");
 
 //입력 데이터 선언-서번트 데이터
 var Servant = document.getElementById("Servant");
-var ATK = document.getElementById("ATK");
+var ATK = document.getElementById("servantATK")+document.getElementById("craftATK");
 
 var NpLev = document.getElementById("NpLev");
 var NpCommand = document.getElementById("NpCommand");
