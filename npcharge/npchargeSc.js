@@ -25,7 +25,6 @@ function getData() {
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
             ServantATK.value = servTable[0]["atk"];
-            ATK = Number(ServantATK.value) + Number(CraftATK.value);
             NpMagTable = [servTable[0]["mag1"],servTable[0]["mag2"],servTable[0]["mag3"],servTable[0]["mag4"],
                 servTable[0]["mag5"],servTable[0]["mag6"],servTable[0]["mag7"],servTable[0]["mag8"],
                 servTable[0]["mag9"],servTable[0]["mag10"]];
@@ -65,7 +64,6 @@ var ServantATK = document.getElementById("ServantATK");
 var CraftATK = document.getElementById("CraftATK");
 var Goldfow = document.getElementById("Goldfow");
 var ATK;
-ATK = Number(ServantATK.value) + Number(CraftATK.value);
 var NpLev = document.getElementById("NpLev");
 var NpCommand = document.getElementById("NpCommand");
 var NpUpgrade = document.getElementById("NpUpgrade");
@@ -346,7 +344,6 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 ServantATK.value = Number(ServantATK.value) + 1000;
             }
-            ATK = Number(ServantATK.value) + Number(CraftATK.value);
             NpCount = servTable[i]["npcount"];
             ServantClass = servTable[i]["class"];
             for(var j = 1; j < 11; j++)
@@ -560,7 +557,6 @@ Goldfow.addEventListener("change",function(){//금포우 체크박스 이벤트
     else{
         ServantATK.value = Number(ServantATK.value) - 1000;
     }
-    ATK = Number(ServantATK.value) + Number(CraftATK.value);
 })
 IsNotEnemy1.addEventListener("change",function(){//에너미1 존재 체크박스 이벤트
     if(this.checked === true)
@@ -638,7 +634,7 @@ calcBtn.addEventListener("click",function(){
     var tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp4 = 0;
     tmp5 = 0;
-
+    ATK = Number(ServantATK.value) + Number(CraftATK.value);
     NpDmgCalc();
     //Enemy1 calculate
     if(IsNotEnemy1.checked === true)
