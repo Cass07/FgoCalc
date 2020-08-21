@@ -4,7 +4,7 @@ $(function () {
 
 var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
-var SupportTable;
+var supportTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
@@ -80,6 +80,9 @@ var ServantATK = document.getElementById("ServantATK");
 var CraftATK = document.getElementById("CraftATK");
 var Goldfow = document.getElementById("Goldfow");
 var ATK;
+var Supporter1 = document.getElementById("Supporter1");
+var Supporter2 = document.getElementById("Supporter2");
+var Supporter3 = document.getElementById("Supporter3");
 var Support_busterbuf;
 var Support_artsbuf;
 var Support_quickbuf;
@@ -405,20 +408,29 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
 
 })
 function changeSupporter(num) {
-/*
-    for(var i = 1; i < supportTable.length-1; i++)
-    {
-        if(supportTable[i]["name"]==Supporter1.value)
-        {
-            Support_atkbuf.value = supportTable[i]["atkbuf"];
-            Support_busterbuf.value = supportTable[i]["busterbuf"];
-        }}
-        AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
-*/
-    }
+    var i;
+    if(num===1) i = Supporter1.value;
+    else if(num==2) i = Supporter2.value;
+    else if(num==3) i = Supporter3.value;
+    //busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul,maxbondt,maxbondv
+    //supportTable[i]["atkbuf"] = supportTable[i]["atkbuf"] + 30;
+    Support_atkbuf = supportTable[i]["atkbuf"];
+    Support_busterbuf = supportTable[i]["busterbuf"];
+    Support_artsbuf = supportTable[i]["artsbuf"];
+    Support_quickbuf = supportTable[i]["quickbuf"];
+    Support_dmgplus = supportTable[i]["dmgplus"];
+    Support_npplus = supportTable[i]["npplus"];
+    Support_npgainbuf = supportTable[i]["npgainbuf"];
+    Support_starbuf = supportTable[i]["starbuf"];
+    Support_npextramul = supportTable[i]["npextramul"];
+    Support_criiticalbuf = supportTable[i]["criticalbuf"];
+ 
+    AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
+}
 
 Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     changeSupporter(1);
+    
 })
 
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
