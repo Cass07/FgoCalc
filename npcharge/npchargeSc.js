@@ -25,11 +25,6 @@ function getData() {
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
             ServantATK.value = servTable[0]["atk"];
-            /*
-            if(Goldfow.checked === true)
-            {
-                ServantATK.value = Number(ServantATK.value) + 1000;
-            }*/
             NpMagTable = [servTable[0]["mag1"],servTable[0]["mag2"],servTable[0]["mag3"],servTable[0]["mag4"],
                 servTable[0]["mag5"],servTable[0]["mag6"],servTable[0]["mag7"],servTable[0]["mag8"],
                 servTable[0]["mag9"],servTable[0]["mag10"]];
@@ -59,6 +54,19 @@ function getData() {
         }
     });
     //console.log(data);
+    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/master/Data/SupporterData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            supportTable = results.data;
+            for(var i = 1; i < supportTable.length-1; i++) {
+                Supporter1.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
+            }
+        }
+    });
+
 }
 
 var UpdateDate = document.getElementById("UpdateDate");
@@ -382,7 +390,29 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     }
 
 })
-
+/*
+Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
+    var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
+    if(NpCommand.value == 3) {
+        NpMag.value=NpMag_tmp*1.5;
+    }else
+    {
+        NpMag.value= NpMag_tmp*2;
+    }
+    if(Servant.value === "Frankenstein")
+    {
+        NpMag.value = Number(NpMag.value)+100;
+    }
+    if(Servant.value == "Paracelsus")
+    {
+        NpMag.value = NpMag_tmp;
+    }
+    if(Servant.value == "ChenGong")
+    {
+        NpMag.value = NpMag_tmp * 3;
+    }
+})
+*/
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
     if(NpCommand.value == 3) {
