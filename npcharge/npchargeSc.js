@@ -55,7 +55,7 @@ function getData() {
         }
     });
     //console.log(data);
-    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop/Data/SupporterData.csv",{
+    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterData.csv",{
         delimiter : ",",
         download: true,
         header:true,
