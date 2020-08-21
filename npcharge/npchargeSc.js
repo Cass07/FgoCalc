@@ -78,13 +78,14 @@ var UpdateDate = document.getElementById("UpdateDate");
 var Servant = document.getElementById("Servant");
 var ServantATK = document.getElementById("servantATK");
 var CraftATK = document.getElementById("craftATK");
-var ATK = ServantATK + CraftATK;
+var ATK = ServantATK.value + CraftATK.value;
 var Goldfow = document.getElementById("Goldfow");
 
 var Support_busterbuf;
 var Support_artsbuf;
 var Support_quickbuf;
 var Support_npgainbuf;
+var Support_atkbuf;
 var Support_npplus;
 var Support_dmgplus;
 var Support_criiticalbuf;
@@ -404,29 +405,23 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     }
 
 })
+function changeSupporter(num) {
 /*
-Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
-    var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
-    if(NpCommand.value == 3) {
-        NpMag.value=NpMag_tmp*1.5;
-    }else
+    for(var i = 1; i < supportTable.length-1; i++)
     {
-        NpMag.value= NpMag_tmp*2;
-    }
-    if(Servant.value === "Frankenstein")
-    {
-        NpMag.value = Number(NpMag.value)+100;
-    }
-    if(Servant.value == "Paracelsus")
-    {
-        NpMag.value = NpMag_tmp;
-    }
-    if(Servant.value == "ChenGong")
-    {
-        NpMag.value = NpMag_tmp * 3;
-    }
-})
+        if(supportTable[i]["name"]==Supporter1.value)
+        {
+            Support_atkbuf.value = supportTable[i]["atkbuf"];
+            Support_busterbuf.value = supportTable[i]["busterbuf"];
+        }}
+        AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
 */
+    }
+
+Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
+    changeSupporter(1);
+})
+
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
     if(NpCommand.value == 3) {
