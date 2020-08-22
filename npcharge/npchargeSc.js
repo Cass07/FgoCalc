@@ -6,6 +6,7 @@ var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
 var supportTable;
 var supportSkillTable;
+var bufflength = 13;
 //csv 데이터 호출, 파싱 함수
 function getData() {
     //(StartStat,MaxStat, Rare, GrailLev)
@@ -80,7 +81,7 @@ function getData() {
         }
     });
 
-    var skilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterSKillData.csv",{
+    var skilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterSkillData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -101,16 +102,24 @@ var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
-var SupportBuff1 = new Array(12);
-var SupportBuff2 = new Array(12);
-var SupportBuff3 = new Array(12);
+var SupportBuff1 = makeZeroArray(bufflength);
+var SupportBuff2 = makeZeroArray(bufflength);
+var SupportBuff3 = makeZeroArray(bufflength);
 var Supporter1 = document.getElementById("Supporter1");
 var Supporter2 = document.getElementById("Supporter2");
 var Supporter3 = document.getElementById("Supporter3");
+var Bond1 = document.getElementById("Bond1");
 var Skill1_1 = document.getElementById("Skill1_1");
 var Skill1_2 = document.getElementById("Skill1_2");
 var Skill1_3 = document.getElementById("Skill1_3");
-var Bond1 = document.getElementById("Bond1");
+var Bond2 = document.getElementById("Bond2");
+var Skill2_1 = document.getElementById("Skill2_1");
+var Skill2_2 = document.getElementById("Skill2_2");
+var Skill2_3 = document.getElementById("Skill2_3");
+var Bond3 = document.getElementById("Bond3");
+var Skill3_1 = document.getElementById("Skill3_1");
+var Skill3_2 = document.getElementById("Skill3_2");
+var Skill3_3 = document.getElementById("Skill3_3");
 var Support_busterbuf;
 var Support_artsbuf;
 var Support_quickbuf;
@@ -446,48 +455,56 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     }
 
 })
+
+function makeZeroArray(length){
+    return Array.apply(null, new Array(length)).map(Number.prototype.valueOf,0);
+}
+
 function changeSupporter(support) {
     var id;
     var BuffArray;
     if(support===1){
         id = Supporter1.value;
-        SupportBuff1 = new Array(12);
+        SupportBuff1 = makeZeroArray(bufflength);
         if(Bond1.checked === true) changeSupporterSkill(SupportBuff1,id,0,true);
         if(Skill1_1.checked === true) changeSupporterSkill(SupportBuff1,id,1,true);
         if(Skill1_2.checked === true) changeSupporterSkill(SupportBuff1,id,2,true);
         if(Skill1_3.checked === true) changeSupporterSkill(SupportBuff1,id,3,true);
     }
-    /*
     else if(support===2){
         id = Supporter2.value;
-        SupportBuff2 = new Array(12);
+        SupportBuff2 = makeZeroArray(bufflength);
+        if(Bond2.checked === true) changeSupporterSkill(SupportBuff2,id,0,true);
+        if(Skill2_1.checked === true) changeSupporterSkill(SupportBuff2,id,1,true);
+        if(Skill2_2.checked === true) changeSupporterSkill(SupportBuff2,id,2,true);
+        if(Skill2_3.checked === true) changeSupporterSkill(SupportBuff2,id,3,true);
     }
     else if(support===3){
         id = Supporter3.value;
-        SupportBuff3 = new Array(12);
+        SupportBuff3 = makeZeroArray(bufflength);
+        if(Bond3.checked === true) changeSupporterSkill(SupportBuff3,id,0,true);
+        if(Skill3_1.checked === true) changeSupporterSkill(SupportBuff3,id,1,true);
+        if(Skill3_2.checked === true) changeSupporterSkill(SupportBuff3,id,2,true);
+        if(Skill3_3.checked === true) changeSupporterSkill(SupportBuff3,id,3,true);
     }
-*/
-    console.log('array = '+SupportBuff1);    
-
-    //busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul,maxbondt,maxbondv
-    //supportTable[i]["atkbuf"] = supportTable[i]["atkbuf"] + 30;
-
 }
 function changeSupporterSkill(SupportBuff, id, skill, onoff){
     if(Number(id) === 0) return ;
     var i = (Number(id) * 4) -3 + Number(skill);
-    var date = i;
-    UpdateDate.innerHTML = "업데이트 날짜 : " + date;
-    var temparray = supportSkillTable[i];
-    console.log('array = '+temparray);
-    /*
+    var arraytemp = Object.entries(supportSkillTable[i]);
+
     if(onoff === true){
-        for(var j=0; j<SupportBuff.length; j++){
-          SupportBuff[j] = Number(SupportBuff[j]) + Number(supportSkillTable[i][j+3]);
+        for(var j=0; j<bufflength; j++){
+          SupportBuff[j] = SupportBuff[j] + arraytemp[j+3][1];
         }
-    }*/
-    
-    //supportSkillTable[i];
+    }
+    else if(onoff === false){
+        for(var j=0; j<bufflength; j++){
+            SupportBuff[j] = SupportBuff[j] - arraytemp[j+3][1];
+        }
+    }
+    console.log('array= '+SupportBuff);    
+
     /*
     Support_atkbuf = supportTable[i]["atkbuf"];
     Support_busterbuf = supportTable[i]["busterbuf"];
@@ -502,13 +519,11 @@ function changeSupporterSkill(SupportBuff, id, skill, onoff){
  */
     AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
 
-
 }
 
 Supporter1.addEventListener("change",function(){//서포터1 변경 이벤트
     changeSupporter(1);
 })
-
 Bond1.addEventListener("change",function(){//서포터1 인연예장 변경 이벤트
     var id = Supporter1.value;
     if(this.checked === true)
@@ -547,6 +562,94 @@ Skill1_3.addEventListener("change",function(){//서포터1 스킬3 변경 이벤
     }
     else{
         changeSupporterSkill(SupportBuff1,id,3,false)
+    }
+})
+
+Supporter2.addEventListener("change",function(){//서포터2 변경 이벤트
+    changeSupporter(2);
+})
+Bond2.addEventListener("change",function(){//서포터2 인연예장 변경 이벤트
+    var id = Supporter2.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff2,id,0,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff2,id,0,false)
+    }
+})
+Skill2_1.addEventListener("change",function(){//서포터2 스킬1 변경 이벤트
+    var id = Supporter2.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff2,id,1,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff2,id,1,false)
+    }
+})
+Skill2_2.addEventListener("change",function(){//서포터2 스킬2 변경 이벤트
+    var id = Supporter2.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff2,id,2,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff2,id,2,false)
+    }
+})
+Skill2_3.addEventListener("change",function(){//서포터2 스킬3 변경 이벤트
+    var id = Supporter2.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff2,id,3,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff2,id,3,false)
+    }
+})
+
+Supporter3.addEventListener("change",function(){//서포터3 변경 이벤트
+    changeSupporter(3);
+})
+Bond3.addEventListener("change",function(){//서포터3 인연예장 변경 이벤트
+    var id = Supporter3.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff3,id,0,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff3,id,0,false)
+    }
+})
+Skill3_1.addEventListener("change",function(){//서포터3 스킬1 변경 이벤트
+    var id = Supporter3.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff3,id,1,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff3,id,1,false)
+    }
+})
+Skill3_2.addEventListener("change",function(){//서포터3 스킬2 변경 이벤트
+    var id = Supporter3.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff3,id,2,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff3,id,2,false)
+    }
+})
+Skill3_3.addEventListener("change",function(){//서포터3 스킬3 변경 이벤트
+    var id = Supporter3.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(SupportBuff3,id,3,true)
+    }
+    else{
+        changeSupporterSkill(SupportBuff3,id,3,false)
     }
 })
 
@@ -817,6 +920,7 @@ calcBtn.addEventListener("click",function(){
     var tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp4 = 0;
     tmp5 = 0;
+    var allbuff = 
     ATK = Number(ServantATK.value) + Number(CraftATK.value);
     NpDmgCalc();
     //Enemy1 calculate
