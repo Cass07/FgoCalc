@@ -8,7 +8,9 @@ var supportTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
-    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/master/Data/npRecharge.csv",{
+    FGOcal;
+    //(StartStat,MaxStat, Rare, GrailLev)
+    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -21,7 +23,6 @@ function getData() {
                 Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
             }
             //Servant table 0 index의 값으로 초기화
-
             NpRate.value = servTable[0]["npa"];
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
@@ -41,8 +42,18 @@ function getData() {
             }
         }
     });
+    var servdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/ServDataBase.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            servTable2 = results.data;
 
-   var data2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/EnemyPreset.csv",{
+        }
+    });
+
+    var data2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/EnemyPreset.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -79,6 +90,7 @@ var Servant = document.getElementById("Servant");
 var ServantATK = document.getElementById("ServantATK");
 var CraftATK = document.getElementById("CraftATK");
 var Goldfow = document.getElementById("Goldfow");
+var Grail = document.getElementById("Grail");
 var ATK;
 var Supporter1 = document.getElementById("Supporter1");
 var Supporter2 = document.getElementById("Supporter2");
@@ -366,6 +378,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     {
         if(servTable[i]["name"]==Servant.value)
         {
+            var servId = servTable[i]["id"];
             NpRate.value = servTable[i]["npa"];
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
@@ -375,6 +388,11 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 ServantATK.value = Number(ServantATK.value) + 1000;
             }
+            date = (servTable2[servId]["atk_init"]);
+            date = servId;
+            UpdateDate.innerHTML = "업데이트 날짜 : " + date;
+            
+
             NpCount = servTable[i]["npcount"];
             ServantClass = servTable[i]["class"];
             for(var j = 1; j < 11; j++)
