@@ -738,14 +738,36 @@ Skill3_3.addEventListener("change",function(){//서포터3 스킬3 변경 이벤
 
 MysticCode.addEventListener("change",function(){//마술예장 드롭다운 이벤트
     MysticBuff = makeZeroArray(buffLength);
+    var i = Number(MysticCode.value) * 3;
+    if(mysticSkillTable[i][used]===0){
+        MysticSkill1.checked = false;
+        $('#MysticSkill1').prop('disabled',true); 
+    }
+    else if(mysticSkillTable[i][used]===1){
+        $('#MysticSkill1').prop('disabled',false); 
+    }
+    if(mysticSkillTable[i+1][used]===0){
+        MysticSkill2.checked = false;
+        $('#MysticSkill2').prop('disabled',true); 
+    }
+    else if(mysticSkillTable[i+1][used]===1){
+        $('#MysticSkill2').prop('disabled',false); 
+    }
+    if(mysticSkillTable[i+2][used]===0){
+        MysticSkill3.checked = false;
+        $('#MysticSkill3').prop('disabled',true); 
+    }
+    else if(mysticSkillTable[i+2][used]===1){
+        $('#MysticSkill3').prop('disabled',false); 
+    }
+
     if(MysticSkill1.checked === true) changeMysticSkill(1,true);
     if(MysticSkill2.checked === true) changeMysticSkill(2,true);
     if(MysticSkill3.checked === true) changeMysticSkill(3,true);
     
 })
 function changeMysticSkill(skill, onoff){
-    var id = Number(MysticCode.value) + 1;
-    var i = id * 3 - 4 + Number(skill);
+    var i = Number(MysticCode.value) * 3 - 1 + Number(skill);
     var arraytemp = Object.entries(mysticSkillTable[i]);
 
     if(onoff === true){
