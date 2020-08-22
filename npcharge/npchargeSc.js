@@ -95,6 +95,10 @@ var GrailATK;
 var Supporter1 = document.getElementById("Supporter1");
 var Supporter2 = document.getElementById("Supporter2");
 var Supporter3 = document.getElementById("Supporter3");
+var Skill1_1 = document.getElementById("Skill1_1");
+var Skill1_2 = document.getElementById("Skill1_2");
+var Skill1_3 = document.getElementById("Skill1_3");
+var Bond1 = document.getElementById("Bond1");
 var Support_busterbuf;
 var Support_artsbuf;
 var Support_quickbuf;
@@ -391,11 +395,14 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             var atk_init = servTable2[servId]["atk_init"];
             var atk_final = servTable2[servId]["atk"];
             var rare = servTable2[servId]["rare"];
-            var names = servTable2[servId]["name"];
             var atk_100 = FGOcal.GetGrailStat(atk_init,atk_final, rare, 100);
             GrailATK = Number(atk_100) - Number(atk_final);
-            var date = atk_final;
-           UpdateDate.innerHTML = "업데이트 날짜 : " + date;
+            if(Grail.checked === true)
+            {
+                ServantATK.value = Number(ServantATK.value) + GrailATK;
+            }
+           // var date = GrailATK;
+           //UpdateDate.innerHTML = "업데이트 날짜 : " + date;
             NpCount = servTable[i]["npcount"];
             ServantClass = servTable[i]["class"];
             for(var j = 1; j < 11; j++)
@@ -428,13 +435,41 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     }
 
 })
-function changeSupporter(num) {
-    var i;
-    if(num===1) i = Supporter1.value;
-    else if(num==2) i = Supporter2.value;
-    else if(num==3) i = Supporter3.value;
+function changeSupporter(support) {
+    if(support===1){
+        if(Bond1.checked === true) changeSupporterSkill(1,0,true);
+        if(Skill1_1.checked === true) changeSupporterSkill(1,1,true);
+        if(Skill1_2.checked === true) changeSupporterSkill(1,2,true);
+        if(Skill1_3.checked === true) changeSupporterSkill(1,3,true);
+    }
+    /*
+    else if(support===2){
+        if(Bond2.checked === true) changeSupporterSkill(2,0,true);
+        if(Skill2_1.checked === true) changeSupporterSkill(2,1,true);
+        if(Skill2_2.checked === true) changeSupporterSkill(2,2,true);
+        if(Skill2_3.checked === true) changeSupporterSkill(2,3,true);
+    }
+    else if(support===3){
+        if(Bond3.checked === true) changeSupporterSkill(3,0,true);
+        if(Skill3_1.checked === true) changeSupporterSkill(3,1,true);
+        if(Skill3_2.checked === true) changeSupporterSkill(3,2,true);
+        if(Skill3_3.checked === true) changeSupporterSkill(3,3,true);
+    }
+*/
     //busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul,maxbondt,maxbondv
     //supportTable[i]["atkbuf"] = supportTable[i]["atkbuf"] + 30;
+
+}
+
+Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
+    changeSupporter(1);
+})
+
+function changeSupporterSkill(supporter, skill, onoff){
+    var i;
+    if(support===1) i = Supporter1.value;
+    else if(support==2) i = Supporter2.value;
+    else if(support==3) i = Supporter3.value;
     Support_atkbuf = supportTable[i]["atkbuf"];
     Support_busterbuf = supportTable[i]["busterbuf"];
     Support_artsbuf = supportTable[i]["artsbuf"];
@@ -447,11 +482,17 @@ function changeSupporter(num) {
     Support_criiticalbuf = supportTable[i]["criticalbuf"];
  
     AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
-}
 
-Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
-    changeSupporter(1);
-    
+
+}
+Skill1_1.addEventListener("change",function(){//금포우 체크박스 이벤트
+    if(this.checked === true)
+    {
+        changeSupporterSkill(1,1,true)
+    }
+    else{
+        changeSupporterSkill(1,1,false)
+    }
 })
 
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
