@@ -5,7 +5,7 @@ $(function () {
 var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
 var supportTable;
-
+var supportSkillTable;
 //csv 데이터 호출, 파싱 함수
 function getData() {
     //(StartStat,MaxStat, Rare, GrailLev)
@@ -80,6 +80,15 @@ function getData() {
         }
     });
 
+    var skilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterSKillData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            supportSkillTable = results.data;
+        }
+    });
 }
 
 var UpdateDate = document.getElementById("UpdateDate");
@@ -92,6 +101,7 @@ var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
+var SupportBuff = new Array(12);
 var Supporter1 = document.getElementById("Supporter1");
 var Supporter2 = document.getElementById("Supporter2");
 var Supporter3 = document.getElementById("Supporter3");
@@ -401,8 +411,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 ServantATK.value = Number(ServantATK.value) + GrailATK;
             }
-           // var date = GrailATK;
-           //UpdateDate.innerHTML = "업데이트 날짜 : " + date;
+
             NpCount = servTable[i]["npcount"];
             ServantClass = servTable[i]["class"];
             for(var j = 1; j < 11; j++)
@@ -436,40 +445,36 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
 
 })
 function changeSupporter(support) {
+    var id;
     if(support===1){
-        if(Bond1.checked === true) changeSupporterSkill(1,0,true);
-        if(Skill1_1.checked === true) changeSupporterSkill(1,1,true);
-        if(Skill1_2.checked === true) changeSupporterSkill(1,2,true);
-        if(Skill1_3.checked === true) changeSupporterSkill(1,3,true);
+        id = Supporter1.value;
     }
     /*
     else if(support===2){
-        if(Bond2.checked === true) changeSupporterSkill(2,0,true);
-        if(Skill2_1.checked === true) changeSupporterSkill(2,1,true);
-        if(Skill2_2.checked === true) changeSupporterSkill(2,2,true);
-        if(Skill2_3.checked === true) changeSupporterSkill(2,3,true);
+        id = Supporter2.value;
     }
     else if(support===3){
-        if(Bond3.checked === true) changeSupporterSkill(3,0,true);
-        if(Skill3_1.checked === true) changeSupporterSkill(3,1,true);
-        if(Skill3_2.checked === true) changeSupporterSkill(3,2,true);
-        if(Skill3_3.checked === true) changeSupporterSkill(3,3,true);
+        id = Supporter3.value;
     }
 */
+    SupportBuff = new Array(12);
+    console.log('array = '+SupportBuff);    
+    if(Number(id) === 0) return ;
+    if(Bond1.checked === true) changeSupporterSkill(id,0,true);
+    if(Skill1_1.checked === true) changeSupporterSkill(id,1,true);
+    if(Skill1_2.checked === true) changeSupporterSkill(id,2,true);
+    if(Skill1_3.checked === true) changeSupporterSkill(id,3,true);
     //busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul,maxbondt,maxbondv
     //supportTable[i]["atkbuf"] = supportTable[i]["atkbuf"] + 30;
 
 }
-
-Supporter1.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
-    changeSupporter(1);
-})
-
-function changeSupporterSkill(supporter, skill, onoff){
-    var i;
-    if(support===1) i = Supporter1.value;
-    else if(support==2) i = Supporter2.value;
-    else if(support==3) i = Supporter3.value;
+function changeSupporterSkill(id, skill, onoff){
+    if(Number(id) === 0) return ;
+    var i = Number(id) + Number(skill);
+    var date = i;
+    UpdateDate.innerHTML = "업데이트 날짜 : " + date;
+    //supportSkillTable[i];
+    /*
     Support_atkbuf = supportTable[i]["atkbuf"];
     Support_busterbuf = supportTable[i]["busterbuf"];
     Support_artsbuf = supportTable[i]["artsbuf"];
@@ -480,18 +485,54 @@ function changeSupporterSkill(supporter, skill, onoff){
     Support_starbuf = supportTable[i]["starbuf"];
     Support_npextramul = supportTable[i]["npextramul"];
     Support_criiticalbuf = supportTable[i]["criticalbuf"];
- 
+ */
     AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
 
 
 }
-Skill1_1.addEventListener("change",function(){//금포우 체크박스 이벤트
+
+Supporter1.addEventListener("change",function(){//서포터1 변경 이벤트
+    changeSupporter(1);
+})
+
+Bond1.addEventListener("change",function(){//서포터1 인연예장 변경 이벤트
+    var id = Supporter1.value;
     if(this.checked === true)
     {
-        changeSupporterSkill(1,1,true)
+        changeSupporterSkill(id,0,true)
     }
     else{
-        changeSupporterSkill(1,1,false)
+        changeSupporterSkill(id,0,false)
+    }
+})
+Skill1_1.addEventListener("change",function(){//서포터1 스킬1 변경 이벤트
+    var id = Supporter1.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(id,1,true)
+    }
+    else{
+        changeSupporterSkill(id,1,false)
+    }
+})
+Skill1_2.addEventListener("change",function(){//서포터1 스킬2 변경 이벤트
+    var id = Supporter1.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(id,2,true)
+    }
+    else{
+        changeSupporterSkill(id,2,false)
+    }
+})
+Skill1_3.addEventListener("change",function(){//서포터1 스킬3 변경 이벤트
+    var id = Supporter1.value;
+    if(this.checked === true)
+    {
+        changeSupporterSkill(id,3,true)
+    }
+    else{
+        changeSupporterSkill(id,3,false)
     }
 })
 

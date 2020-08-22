@@ -1,6 +1,6 @@
-id,name,skill,busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul
-0,없음,0,0,0,0,0,0,0,0,0,0,0,0
-1,공명,0,15,0,0,0,0,0,0,0,0,0,0
-1,공명,1,0,0,0,0,0,0,30,0,0,50,0
-1,공명,2,0,0,0,0,0,0,10,0,0,0,0
-1,공명,3,0,0,0,0,30,500,10,0,0,0,0
+id,name,skill,busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul,poison
+0,없음,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,공명,0,15,0,0,0,0,0,0,0,0,0,0,0
+1,공명,1,0,0,0,0,0,0,30,0,0,50,0,0
+1,공명,2,0,0,0,0,0,0,10,0,0,0,0,0
+1,공명,3,0,0,0,0,30,500,10,0,0,0,0,0
