@@ -89,6 +89,7 @@ function getData() {
             for(var i = 0; i < craftlistTable.length-1; i++) {
                 Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftlistTable[i]["name"]+"</option>";
             }
+            $('#LimitBreak').prop('disabled',true);
         }
     });
 
@@ -561,6 +562,16 @@ function changeCraft()
     var i;
     var craft;
     CraftBuff = makeZeroArray(buffLength);
+
+    if(Number(Craft.value)===0){
+        $('#LimitBreak').prop('disabled',true);
+        LimitBreak.checked = false;
+        CraftATK.value = 0;
+        updateBuff();
+        return;
+    }
+  
+    $('#LimitBreak').prop('disabled',false);
     if(LimitBreak.checked === true)
     {
         i = Number(Craft.value) * 2;
@@ -572,7 +583,7 @@ function changeCraft()
         i = Number(Craft.value) * 2 - 1;
         craft = craftTable[i];
         var atk_20 = Math.floor(FGOcal.GetCraftStat(craft["atk_init"], craft["atk_final"], craft["rare"], 20));
-        CraftATK.value = Number(atk_20)
+        CraftATK.value = Number(atk_20);
     }
     var arraytemp = Object.entries(craftTable[i]);
     for(var j=0; j<buffLength; j++){
