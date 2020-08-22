@@ -8,7 +8,6 @@ var supportTable;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
-    FGOcal;
     //(StartStat,MaxStat, Rare, GrailLev)
     var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/npRecharge.csv",{
         delimiter : ",",
@@ -378,7 +377,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     {
         if(servTable[i]["name"]==Servant.value)
         {
-            var servId = servTable[i]["id"];
+            var servId = Number(servTable[i]["id"]) - 2;
             NpRate.value = servTable[i]["npa"];
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
@@ -388,8 +387,16 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 ServantATK.value = Number(ServantATK.value) + 1000;
             }
-            date = (servTable2[servId]["atk_init"]);
-            date = servId;
+            var atk_init = servTable2[servId]["atk_init"];
+            var atk = servTable2[servId]["atk"];
+            var rare = servTable2[servId]["rare"];
+            var names = servTable2[servId]["name"];
+            var grails = 5;
+            if(rare<5) grails += 2;
+            if(rare<4) grails += 2;
+            if(rare<3) grails += 1;
+            var grailatk = FGOcal.GetGrailStat(atk_init,atk, rare, 100);
+            date = names;
             UpdateDate.innerHTML = "업데이트 날짜 : " + date;
             
 
