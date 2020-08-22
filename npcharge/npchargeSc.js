@@ -45,7 +45,7 @@ function getData() {
             var rare = servTable2[servId]["rare"];
             var atk_100 = FGOcal.GetGrailStat(atk_init,atk_final, rare, 100);
             GrailATK = Number(atk_100) - Number(atk_final);
-            
+
             NpRate.value = servTable[0]["npa"];
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
@@ -607,8 +607,7 @@ function changeSupporter(support) {
         if(Skill2_2.checked === true) changeSupporterSkill(SupportBuff2,id,2,true);
         if(Skill2_3.checked === true) changeSupporterSkill(SupportBuff2,id,3,true);
         }
-        else if(support===3){
-        // $('#Craft').prop('readonly',false);
+    else if(support===3){
         id = Supporter3.value;
         if(Number(id)==0){
             $('#MysticCode').prop('disabled',false);
@@ -625,6 +624,7 @@ function changeSupporter(support) {
             if(MysticCode.value!=1){
                 MysticCode.value = 1;
                 changeMysticCode();
+                MysticSkill3.checked = true;
                 $('#MysticCode').prop('disabled',true);
             }
             $('#Skill3_1').prop('disabled',false);
