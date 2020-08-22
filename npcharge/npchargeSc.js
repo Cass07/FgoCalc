@@ -6,7 +6,7 @@ var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
 var supportTable;
 var supportSkillTable;
-var bufflength = 13;
+var buffLength = 13;
 //csv 데이터 호출, 파싱 함수
 function getData() {
     //(StartStat,MaxStat, Rare, GrailLev)
@@ -102,9 +102,9 @@ var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
-var SupportBuff1 = makeZeroArray(bufflength);
-var SupportBuff2 = makeZeroArray(bufflength);
-var SupportBuff3 = makeZeroArray(bufflength);
+var SupportBuff1 = makeZeroArray(buffLength);
+var SupportBuff2 = makeZeroArray(buffLength);
+var SupportBuff3 = makeZeroArray(buffLength);
 var Supporter1 = document.getElementById("Supporter1");
 var Supporter2 = document.getElementById("Supporter2");
 var Supporter3 = document.getElementById("Supporter3");
@@ -465,7 +465,7 @@ function changeSupporter(support) {
     var BuffArray;
     if(support===1){
         id = Supporter1.value;
-        SupportBuff1 = makeZeroArray(bufflength);
+        SupportBuff1 = makeZeroArray(buffLength);
         if(Bond1.checked === true) changeSupporterSkill(SupportBuff1,id,0,true);
         if(Skill1_1.checked === true) changeSupporterSkill(SupportBuff1,id,1,true);
         if(Skill1_2.checked === true) changeSupporterSkill(SupportBuff1,id,2,true);
@@ -473,7 +473,7 @@ function changeSupporter(support) {
     }
     else if(support===2){
         id = Supporter2.value;
-        SupportBuff2 = makeZeroArray(bufflength);
+        SupportBuff2 = makeZeroArray(buffLength);
         if(Bond2.checked === true) changeSupporterSkill(SupportBuff2,id,0,true);
         if(Skill2_1.checked === true) changeSupporterSkill(SupportBuff2,id,1,true);
         if(Skill2_2.checked === true) changeSupporterSkill(SupportBuff2,id,2,true);
@@ -481,7 +481,7 @@ function changeSupporter(support) {
     }
     else if(support===3){
         id = Supporter3.value;
-        SupportBuff3 = makeZeroArray(bufflength);
+        SupportBuff3 = makeZeroArray(buffLength);
         if(Bond3.checked === true) changeSupporterSkill(SupportBuff3,id,0,true);
         if(Skill3_1.checked === true) changeSupporterSkill(SupportBuff3,id,1,true);
         if(Skill3_2.checked === true) changeSupporterSkill(SupportBuff3,id,2,true);
@@ -494,16 +494,15 @@ function changeSupporterSkill(SupportBuff, id, skill, onoff){
     var arraytemp = Object.entries(supportSkillTable[i]);
 
     if(onoff === true){
-        for(var j=0; j<bufflength; j++){
+        for(var j=0; j<buffLength; j++){
           SupportBuff[j] = SupportBuff[j] + arraytemp[j+3][1];
         }
     }
     else if(onoff === false){
-        for(var j=0; j<bufflength; j++){
+        for(var j=0; j<buffLength; j++){
             SupportBuff[j] = SupportBuff[j] - arraytemp[j+3][1];
         }
     }
-    console.log('array= '+SupportBuff);    
 
     /*
     Support_atkbuf = supportTable[i]["atkbuf"];
@@ -920,7 +919,11 @@ calcBtn.addEventListener("click",function(){
     var tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp4 = 0;
     tmp5 = 0;
-    var allbuff = 
+    var allbuf = makeZeroArray(buffLength);
+    for(var i = 0; i<buffLength; i++){
+        allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i];
+    }
+    console.log(allbuf);
     ATK = Number(ServantATK.value) + Number(CraftATK.value);
     NpDmgCalc();
     //Enemy1 calculate
