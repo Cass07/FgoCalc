@@ -79,6 +79,19 @@ function getData() {
         }
     });
 
+    var craftlist = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/CraftList.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            craftlistTable = results.data;
+            for(var i = 0; i < craftTable.length-1; i++) {
+                Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftTable[i]["name"]+"</option>";
+            }
+        }
+    });
+
     var craftdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/CraftData.csv",{
         delimiter : ",",
         download: true,
@@ -86,8 +99,21 @@ function getData() {
         dynamicTyping:true,
         complete: function(results){
             craftTable = results.data;
-            for(var i = 0; i < craftTable.length-1; i++) {
-                Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftTable[i]["name"]+"</option>";
+        }
+    });
+
+        //console.log(data);
+    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            supportTable = results.data;
+            for(var i = 0; i < supportTable.length-1; i++) {
+                Supporter1.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
+                Supporter2.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
+                Supporter3.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
             }
             $('#Skill1_1').prop('disabled',true);
             $('#Skill1_2').prop('disabled',true);            
@@ -101,22 +127,6 @@ function getData() {
             $('#Skill3_2').prop('disabled',true);            
             $('#Skill3_3').prop('disabled',true);
             $('#Bond3').prop('disabled',true);
-        }
-    });
-
-    //console.log(data);
-    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterData.csv",{
-        delimiter : ",",
-        download: true,
-        header:true,
-        dynamicTyping:true,
-        complete: function(results){
-            supportTable = results.data;
-            for(var i = 0; i < supportTable.length-1; i++) {
-                Supporter1.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
-                Supporter2.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
-                Supporter3.innerHTML += "<option value = \"" + String(i) + "\">"+supportTable[i]["name"]+"</option>";
-            }
         }
     });
 
@@ -167,7 +177,7 @@ var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
-
+var LimitBreak = document.getElementById("LimitBreak");
 var SupportBuff1 = makeZeroArray(buffLength);
 var SupportBuff2 = makeZeroArray(buffLength);
 var SupportBuff3 = makeZeroArray(buffLength);
@@ -1066,6 +1076,16 @@ Goldfow.addEventListener("change",function(){//금포우 체크박스 이벤트
     }
 })
 Grail.addEventListener("change",function(){//성배작 체크박스 이벤트
+    if(this.checked === true)
+    {
+        ServantATK.value = Number(ServantATK.value) + GrailATK;
+    }
+    else{
+        ServantATK.value = Number(ServantATK.value) - GrailATK;
+    }
+})
+
+LimitBreak.addEventListener("change",function(){//성배작 체크박스 이벤트
     if(this.checked === true)
     {
         ServantATK.value = Number(ServantATK.value) + GrailATK;
