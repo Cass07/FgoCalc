@@ -91,7 +91,7 @@ var CraftATK = document.getElementById("CraftATK");
 var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
-var grailatk;
+var GrailATK;
 var Supporter1 = document.getElementById("Supporter1");
 var Supporter2 = document.getElementById("Supporter2");
 var Supporter3 = document.getElementById("Supporter3");
@@ -392,7 +392,8 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             var atk_final = servTable2[servId]["atk"];
             var rare = servTable2[servId]["rare"];
             var names = servTable2[servId]["name"];
-            var grailatk = Number(FGOcal.GetGrailStat(atk_init,atk_final, rare, 100)) - Number(atk_final);
+            var atk_100 = FGOcal.GetGrailStat(atk_init,atk_final, rare, 100);
+            GrailATK = Number(atk_100) - Number(atk_final);
             var date = atk_final;
            UpdateDate.innerHTML = "업데이트 날짜 : " + date;
             NpCount = servTable[i]["npcount"];
@@ -637,10 +638,10 @@ Goldfow.addEventListener("change",function(){//금포우 체크박스 이벤트
 Grail.addEventListener("change",function(){//성배작 체크박스 이벤트
     if(this.checked === true)
     {
-        ServantATK.value = Grailatk;
+        ServantATK.value = Number(ServantATK.value) + GrailATK;
     }
     else{
-        ServantATK.value = Number(ServantATK.value) - 1000;
+        ServantATK.value = Number(ServantATK.value) - GrailATK;
     }
 })
 
