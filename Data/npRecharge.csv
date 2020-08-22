@@ -1,5 +1,5 @@
 ﻿id,name,name_list,npa,command,hidden,npupgrade,class,atk,npcount,mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,mag10
-245,Lakshmibai,라크슈미 바이,1.01,1,3,0,saber,9959,4,10,20,30,40,0,0,0,0,0,0
+245,Lakshmibai,라크슈미 바이,1.01,1,3,0,saber,9949,4,10,20,30,40,0,0,0,0,0,0
 254,Jason,이아손,0.37,3,2,0,saber,5457,5,6,13,20,26,35,0,0,0,0,0
 216,JeanneArcher,잔 다르크 (아처),0.68,3,3,0,archer,12252,4,10,20,30,40,0,0,0,0,0,0
 276,SeiShonagonn,세이 쇼나곤,0.57,1,3,0,archer,12218,4,10,20,30,40,0,0,0,0,0,0
