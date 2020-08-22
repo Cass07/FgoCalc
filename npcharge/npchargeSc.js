@@ -3,6 +3,7 @@ $(function () {
 })
 
 var servTable;//csv 데이터 저장 배열
+var servTable2;
 var EnemyPresetTable;
 var supportTable;
 var supportSkillTable;
@@ -10,9 +11,21 @@ var craftTable;
 var mysticTable;
 var mysticSkillTable;
 var buffLength = 13;
+
 //csv 데이터 호출, 파싱 함수
 function getData() {
     //(StartStat,MaxStat, Rare, GrailLev)
+    var servdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/ServDataBase.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            servTable2 = results.data;
+
+        }
+    });
+
     var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
@@ -26,6 +39,13 @@ function getData() {
                 Servant.innerHTML += "<option value = \"" + servTable[i]["name"] + "\">"+servTable[i]["name_list"]+"</option>";
             }
             //Servant table 0 index의 값으로 초기화
+            var servId = Number(servTable[0]["id"]);
+            var atk_init = servTable2[servId]["atk_init"];
+            var atk_final = servTable2[servId]["atk"];
+            var rare = servTable2[servId]["rare"];
+            var atk_100 = FGOcal.GetGrailStat(atk_init,atk_final, rare, 100);
+            GrailATK = Number(atk_100) - Number(atk_final);
+            
             NpRate.value = servTable[0]["npa"];
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
@@ -43,16 +63,6 @@ function getData() {
             {
                 NpMag.value= NpMag_tmp*2;
             }
-        }
-    });
-    var servdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/ServDataBase.csv",{
-        delimiter : ",",
-        download: true,
-        header:true,
-        dynamicTyping:true,
-        complete: function(results){
-            servTable2 = results.data;
-
         }
     });
 
@@ -79,6 +89,18 @@ function getData() {
             for(var i = 0; i < craftTable.length-1; i++) {
                 Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftTable[i]["name"]+"</option>";
             }
+            $('#Skill1_1').prop('disabled',true);
+            $('#Skill1_2').prop('disabled',true);            
+            $('#Skill1_3').prop('disabled',true);
+            $('#Bond1').prop('disabled',true);
+            $('#Skill2_1').prop('disabled',true);
+            $('#Skill2_2').prop('disabled',true);            
+            $('#Skill2_3').prop('disabled',true);
+            $('#Bond2').prop('disabled',true);
+            $('#Skill3_1').prop('disabled',true);
+            $('#Skill3_2').prop('disabled',true);            
+            $('#Skill3_3').prop('disabled',true);
+            $('#Bond3').prop('disabled',true);
         }
     });
 
@@ -473,7 +495,6 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             {
                 ServantATK.value = Number(ServantATK.value) + GrailATK;
             }
-
             NpCount = servTable[i]["npcount"];
             ServantClass = servTable[i]["class"];
             for(var j = 1; j < 11; j++)
@@ -540,6 +561,22 @@ function changeSupporter(support) {
     var id;
     if(support===1){
         id = Supporter1.value;
+        if(Number(id)==0){
+            Skill1_1.checked=false;
+            $('#Skill1_1').prop('disabled',true);
+            Skill1_2.checked=false;
+            $('#Skill1_2').prop('disabled',true);            
+            Skill1_3.checked=false;
+            $('#Skill1_3').prop('disabled',true);
+            Bond1.checked=false;
+            $('#Bond1').prop('disabled',true);
+        }
+        else{
+            $('#Skill1_1').prop('disabled',false);
+            $('#Skill1_2').prop('disabled',false);
+            $('#Skill1_3').prop('disabled',false);
+            $('#Bond1').prop('disabled',false);
+        }
         SupportBuff1 = makeZeroArray(buffLength);
         if(Bond1.checked === true) changeSupporterSkill(SupportBuff1,id,0,true);
         if(Skill1_1.checked === true) changeSupporterSkill(SupportBuff1,id,1,true);
@@ -548,28 +585,61 @@ function changeSupporter(support) {
     }
     else if(support===2){
         id = Supporter2.value;
+        if(Number(id)==0){
+            Skill2_1.checked=false;
+            $('#Skill2_1').prop('disabled',true);
+            Skill2_2.checked=false;
+            $('#Skill2_2').prop('disabled',true);            
+            Skill2_3.checked=false;
+            $('#Skill2_3').prop('disabled',true);
+            Bond2.checked=false;
+            $('#Bond2').prop('disabled',true);
+        }
+        else{
+            $('#Skill2_1').prop('disabled',false);
+            $('#Skill2_2').prop('disabled',false);
+            $('#Skill2_3').prop('disabled',false);
+            $('#Bond2').prop('disabled',false);
+        }
         SupportBuff2 = makeZeroArray(buffLength);
         if(Bond2.checked === true) changeSupporterSkill(SupportBuff2,id,0,true);
         if(Skill2_1.checked === true) changeSupporterSkill(SupportBuff2,id,1,true);
         if(Skill2_2.checked === true) changeSupporterSkill(SupportBuff2,id,2,true);
         if(Skill2_3.checked === true) changeSupporterSkill(SupportBuff2,id,3,true);
-    }
-    else if(support===3){
-       // $('#Craft').prop('readonly',false);
-       if(Number(id)!=0){
-           MysticCode.value = 5;
-            $('#MysticCode').prop('disabled',true);
-       }
-       else{
-            $('#MysticCode').prop('disabled',false);
-    }
+        }
+        else if(support===3){
+        // $('#Craft').prop('readonly',false);
         id = Supporter3.value;
+        if(Number(id)==0){
+            $('#MysticCode').prop('disabled',false);
+            Skill3_1.checked=false;
+            $('#Skill3_1').prop('disabled',true);
+            Skill3_2.checked=false;
+            $('#Skill3_2').prop('disabled',true);            
+            Skill3_3.checked=false;
+            $('#Skill3_3').prop('disabled',true);
+            Bond3.checked=false;
+            $('#Bond3').prop('disabled',true);
+        }
+        else{
+            if(MysticCode.value!=1){
+                MysticCode.value = 1;
+                changeMysticCode();
+                $('#MysticCode').prop('disabled',true);
+            }
+            $('#Skill3_1').prop('disabled',false);
+            $('#Skill3_2').prop('disabled',false);
+            $('#Skill3_3').prop('disabled',false);
+            $('#Bond3').prop('disabled',false);
+        }
+
         SupportBuff3 = makeZeroArray(buffLength);
         if(Bond3.checked === true) changeSupporterSkill(SupportBuff3,id,0,true);
         if(Skill3_1.checked === true) changeSupporterSkill(SupportBuff3,id,1,true);
         if(Skill3_2.checked === true) changeSupporterSkill(SupportBuff3,id,2,true);
         if(Skill3_3.checked === true) changeSupporterSkill(SupportBuff3,id,3,true);
     }
+    updateBuff();
 }
 
 function changeSupporterSkill(SupportBuff, id, skill, onoff){
@@ -736,35 +806,40 @@ Skill3_3.addEventListener("change",function(){//서포터3 스킬3 변경 이벤
     }
 })
 
-MysticCode.addEventListener("change",function(){//마술예장 드롭다운 이벤트
+function changeMysticCode(){
     MysticBuff = makeZeroArray(buffLength);
     var i = Number(MysticCode.value) * 3;
-    if(mysticSkillTable[i][used]===0){
+    if(mysticSkillTable[i]["used"]===0){
         MysticSkill1.checked = false;
         $('#MysticSkill1').prop('disabled',true); 
     }
-    else if(mysticSkillTable[i][used]===1){
+    else if(mysticSkillTable[i]["used"]===1){
         $('#MysticSkill1').prop('disabled',false); 
     }
-    if(mysticSkillTable[i+1][used]===0){
+    if(mysticSkillTable[i+1]["used"]===0){
         MysticSkill2.checked = false;
         $('#MysticSkill2').prop('disabled',true); 
     }
-    else if(mysticSkillTable[i+1][used]===1){
+    else if(mysticSkillTable[i+1]["used"]===1){
         $('#MysticSkill2').prop('disabled',false); 
     }
-    if(mysticSkillTable[i+2][used]===0){
+    if(mysticSkillTable[i+2]["used"]===0){
         MysticSkill3.checked = false;
         $('#MysticSkill3').prop('disabled',true); 
     }
-    else if(mysticSkillTable[i+2][used]===1){
+    else if(mysticSkillTable[i+2]["used"]===1){
         $('#MysticSkill3').prop('disabled',false); 
     }
 
     if(MysticSkill1.checked === true) changeMysticSkill(1,true);
     if(MysticSkill2.checked === true) changeMysticSkill(2,true);
     if(MysticSkill3.checked === true) changeMysticSkill(3,true);
-    
+    updateBuff();
+
+}
+
+MysticCode.addEventListener("change",function(){//마술예장 드롭다운 이벤트
+    changeMysticCode();
 })
 function changeMysticSkill(skill, onoff){
     var i = Number(MysticCode.value) * 3 - 1 + Number(skill);
