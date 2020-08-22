@@ -506,17 +506,38 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     }
 
 })
-Craft.addEventListener("change",function(){//예장 드롭다운 이벤트
 
-})
+function updateBuff(){
+    var allbuf = makeZeroArray(buffLength);
+    for(var i = 0; i<buffLength; i++){
+        allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i] + CraftBuff[i] + MysticBuff[i];
+    }
+    console.log(allbuf);
+    if(NpCommand===3) CmdBuff.value = allbuf[1];
+    else if(NpCommand===1) CmdBuff.value = allbuf[2];
+    NpBuff.value = allbuf[3];
+    AtkBuff.value = allbuf[4];
+    DmgPlus.value = allbuf[5];
+    NpDmgBuff.value = allbuf[8];
+}
 
 function makeZeroArray(length){
     return Array.apply(null, new Array(length)).map(Number.prototype.valueOf,0);
 }
 
+Craft.addEventListener("change",function(){//예장 드롭다운 이벤트
+    var i = Craft.value;
+    CraftBuff = makeZeroArray(buffLength);
+    CraftATK.value = Number(craftTable[i]["atk"]);
+    var arraytemp = Object.entries(craftTable[i]);
+    for(var j=0; j<buffLength; j++){
+        CraftBuff[j] = arraytemp[j+3][1];
+    }
+    updateBuff();
+})
+
 function changeSupporter(support) {
     var id;
-    var BuffArray;
     if(support===1){
         id = Supporter1.value;
         SupportBuff1 = makeZeroArray(buffLength);
@@ -534,6 +555,14 @@ function changeSupporter(support) {
         if(Skill2_3.checked === true) changeSupporterSkill(SupportBuff2,id,3,true);
     }
     else if(support===3){
+       // $('#Craft').prop('readonly',false);
+       if(Number(id)!=0){
+           MysticCode.value = 5;
+            $('#MysticCode').prop('disabled',true);
+       }
+       else{
+            $('#MysticCode').prop('disabled',false);
+    }
         id = Supporter3.value;
         SupportBuff3 = makeZeroArray(buffLength);
         if(Bond3.checked === true) changeSupporterSkill(SupportBuff3,id,0,true);
@@ -542,6 +571,7 @@ function changeSupporter(support) {
         if(Skill3_3.checked === true) changeSupporterSkill(SupportBuff3,id,3,true);
     }
 }
+
 function changeSupporterSkill(SupportBuff, id, skill, onoff){
     if(Number(id) === 0) return ;
     var i = (Number(id) * 4) -3 + Number(skill);
@@ -557,7 +587,7 @@ function changeSupporterSkill(SupportBuff, id, skill, onoff){
             SupportBuff[j] = SupportBuff[j] - arraytemp[j+3][1];
         }
     }
-
+    updateBuff();
     /*
     Support_atkbuf = supportTable[i]["atkbuf"];
     Support_busterbuf = supportTable[i]["busterbuf"];
@@ -570,7 +600,7 @@ function changeSupporterSkill(SupportBuff, id, skill, onoff){
     Support_npextramul = supportTable[i]["npextramul"];
     Support_criiticalbuf = supportTable[i]["criticalbuf"];
  */
-    AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
+   // AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
 
 }
 
@@ -706,18 +736,56 @@ Skill3_3.addEventListener("change",function(){//서포터3 스킬3 변경 이벤
     }
 })
 
-MysticCode.addEventListener("change",function(){//예장 드롭다운 이벤트
-
+MysticCode.addEventListener("change",function(){//마술예장 드롭다운 이벤트
+    MysticBuff = makeZeroArray(buffLength);
+    if(MysticSkill1.checked === true) changeMysticSkill(1,true);
+    if(MysticSkill2.checked === true) changeMysticSkill(2,true);
+    if(MysticSkill3.checked === true) changeMysticSkill(3,true);
+    
 })
+function changeMysticSkill(skill, onoff){
+    var id = Number(MysticCode.value) + 1;
+    var i = id * 3 - 4 + Number(skill);
+    var arraytemp = Object.entries(mysticSkillTable[i]);
 
-MysticSkill1.addEventListener("change",function(){//예장 드롭다운 이벤트
-
+    if(onoff === true){
+        for(var j=0; j<buffLength; j++){
+          MysticBuff[j] = MysticBuff[j] + arraytemp[j+3][1];
+        }
+    }
+    else if(onoff === false){
+        for(var j=0; j<buffLength; j++){
+          MysticBuff[j] = MysticBuff[j] - arraytemp[j+3][1];
+        }
+    }
+    updateBuff();
+}
+MysticSkill1.addEventListener("change",function(){//마술예장 스킬1 변경 이벤트
+    if(this.checked === true)
+    {
+        changeMysticSkill(1,true)
+    }
+    else{
+        changeMysticSkill(1,false)
+    }
 })
-MysticSkill2.addEventListener("change",function(){//예장 드롭다운 이벤트
-
+MysticSkill2.addEventListener("change",function(){//마술예장 스킬2 변경 이벤트
+    if(this.checked === true)
+    {
+        changeMysticSkill(2,true)
+    }
+    else{
+        changeMysticSkill(2,false)
+    }
 })
-MysticSkill3.addEventListener("change",function(){//예장 드롭다운 이벤트
-
+MysticSkill3.addEventListener("change",function(){//마술예장 스킬3 변경 이벤트
+    if(this.checked === true)
+    {
+        changeMysticSkill(3,true)
+    }
+    else{
+        changeMysticSkill(3,false)
+    }
 })
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
@@ -986,11 +1054,6 @@ calcBtn.addEventListener("click",function(){
     var tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp4 = 0;
     tmp5 = 0;
-    var allbuf = makeZeroArray(buffLength);
-    for(var i = 0; i<buffLength; i++){
-        allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i];
-    }
-    console.log(allbuf);
     ATK = Number(ServantATK.value) + Number(CraftATK.value);
     NpDmgCalc();
     //Enemy1 calculate
