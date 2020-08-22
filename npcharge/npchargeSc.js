@@ -377,7 +377,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     {
         if(servTable[i]["name"]==Servant.value)
         {
-            var servId = Number(servTable[i]["id"]) - 2;
+            var servId = Number(servTable[i]["id"]);
             NpRate.value = servTable[i]["npa"];
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
@@ -391,10 +391,6 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             var atk = servTable2[servId]["atk"];
             var rare = servTable2[servId]["rare"];
             var names = servTable2[servId]["name"];
-            var grails = 5;
-            if(rare<5) grails += 2;
-            if(rare<4) grails += 2;
-            if(rare<3) grails += 1;
             var grailatk = FGOcal.GetGrailStat(atk_init,atk, rare, 100);
             date = names;
             UpdateDate.innerHTML = "업데이트 날짜 : " + date;
