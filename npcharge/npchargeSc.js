@@ -15,7 +15,7 @@ var buffLength = 13;
 //csv 데이터 호출, 파싱 함수
 function getData() {
     //(StartStat,MaxStat, Rare, GrailLev)
-    var servdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/ServDataBase.csv",{
+    var servdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/ServDataBase.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -26,7 +26,7 @@ function getData() {
         }
     });
 
-    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/npRecharge.csv",{
+    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -79,20 +79,20 @@ function getData() {
         }
     });
 
-    var craftlist = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/CraftList.csv",{
+    var craftlist = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/CraftList.csv",{
         delimiter : ",",
         download: true,
         header:true,
         dynamicTyping:true,
         complete: function(results){
             craftlistTable = results.data;
-            for(var i = 0; i < craftTable.length-1; i++) {
-                Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftTable[i]["name"]+"</option>";
+            for(var i = 0; i < craftlistTable.length-1; i++) {
+                Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftlistTable[i]["name"]+"</option>";
             }
         }
     });
 
-    var craftdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/CraftData.csv",{
+    var craftdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/CraftData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -103,7 +103,7 @@ function getData() {
     });
 
         //console.log(data);
-    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterData.csv",{
+    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/SupporterData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -556,15 +556,37 @@ function makeZeroArray(length){
     return Array.apply(null, new Array(length)).map(Number.prototype.valueOf,0);
 }
 
-Craft.addEventListener("change",function(){//예장 드롭다운 이벤트
-    var i = Craft.value;
+function changeCraft()
+{
+    var i;
+    var craft;
     CraftBuff = makeZeroArray(buffLength);
-    CraftATK.value = Number(craftTable[i]["atk"]);
+    if(LimitBreak.checked === true)
+    {
+        i = Number(Craft.value) * 2;
+        craft = craftTable[i];
+        CraftATK.value = Number(craft["atk_final"]);
+    }  
+    if(LimitBreak.checked === false)
+    { 
+        i = Number(Craft.value) * 2 - 1;
+        craft = craftTable[i];
+        var atk_20 = Math.floor(FGOcal.GetCraftStat(craft["atk_init"], craft["atk_final"], craft["rare"], 20));
+        CraftATK.value = Number(atk_20)
+    }
     var arraytemp = Object.entries(craftTable[i]);
     for(var j=0; j<buffLength; j++){
-        CraftBuff[j] = arraytemp[j+3][1];
+        CraftBuff[j] = arraytemp[j+5][1];
     }
     updateBuff();
+
+}
+Craft.addEventListener("change",function(){//예장 드롭다운 이벤트
+    changeCraft();
+})
+
+LimitBreak.addEventListener("change",function(){//성배작 체크박스 이벤트
+    changeCraft();
 })
 
 function changeSupporter(support) {
@@ -1076,16 +1098,6 @@ Goldfow.addEventListener("change",function(){//금포우 체크박스 이벤트
     }
 })
 Grail.addEventListener("change",function(){//성배작 체크박스 이벤트
-    if(this.checked === true)
-    {
-        ServantATK.value = Number(ServantATK.value) + GrailATK;
-    }
-    else{
-        ServantATK.value = Number(ServantATK.value) - GrailATK;
-    }
-})
-
-LimitBreak.addEventListener("change",function(){//성배작 체크박스 이벤트
     if(this.checked === true)
     {
         ServantATK.value = Number(ServantATK.value) + GrailATK;
