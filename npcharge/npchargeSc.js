@@ -6,6 +6,9 @@ var servTable;//csv 데이터 저장 배열
 var EnemyPresetTable;
 var supportTable;
 var supportSkillTable;
+var craftTable;
+var mysticTable;
+var mysticSkillTable;
 var buffLength = 13;
 //csv 데이터 호출, 파싱 함수
 function getData() {
@@ -53,7 +56,7 @@ function getData() {
         }
     });
 
-    var data2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/EnemyPreset.csv",{
+    var enermydata = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/EnemyPreset.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -65,6 +68,20 @@ function getData() {
             }
         }
     });
+
+    var craftdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/CraftData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            craftTable = results.data;
+            for(var i = 0; i < craftTable.length-1; i++) {
+                Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftTable[i]["name"]+"</option>";
+            }
+        }
+    });
+
     //console.log(data);
     var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterData.csv",{
         delimiter : ",",
@@ -81,7 +98,7 @@ function getData() {
         }
     });
 
-    var skilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterSkillData.csv",{
+    var supportskilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterSkillData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -90,6 +107,30 @@ function getData() {
             supportSkillTable = results.data;
         }
     });
+
+    var mysticdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/MysticCodeData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            mysticTable = results.data;
+            for(var i = 0; i < mysticTable.length-1; i++) {
+                MysticCode.innerHTML += "<option value = \"" + String(i) + "\">"+mysticTable[i]["name"]+"</option>";
+            }
+        }
+    });
+    var mysticdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/MysticCodeSkillData.csv",{
+        delimiter : ",",
+        download: true,
+        header:true,
+        dynamicTyping:true,
+        complete: function(results){
+            mysticSkillTable = results.data;
+
+        }
+    });
+
 }
 
 var UpdateDate = document.getElementById("UpdateDate");
@@ -97,11 +138,14 @@ var UpdateDate = document.getElementById("UpdateDate");
 //입력 데이터 선언-서번트 데이터
 var Servant = document.getElementById("Servant");
 var ServantATK = document.getElementById("ServantATK");
+var Craft = document.getElementById("Craft");
 var CraftATK = document.getElementById("CraftATK");
+var CraftBuff = makeZeroArray(buffLength);
 var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
+
 var SupportBuff1 = makeZeroArray(buffLength);
 var SupportBuff2 = makeZeroArray(buffLength);
 var SupportBuff3 = makeZeroArray(buffLength);
@@ -120,6 +164,13 @@ var Bond3 = document.getElementById("Bond3");
 var Skill3_1 = document.getElementById("Skill3_1");
 var Skill3_2 = document.getElementById("Skill3_2");
 var Skill3_3 = document.getElementById("Skill3_3");
+
+var MysticCode = document.getElementById("MysticCode");
+var MysticSkill1  = document.getElementById("MysticSkill1");
+var MysticSkill2  = document.getElementById("MysticSkill2");
+var MysticSkill3  = document.getElementById("MysticSkill3");
+var MysticBuff = makeZeroArray(buffLength);
+
 var Support_busterbuf;
 var Support_artsbuf;
 var Support_quickbuf;
@@ -455,6 +506,9 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
     }
 
 })
+Craft.addEventListener("change",function(){//예장 드롭다운 이벤트
+
+})
 
 function makeZeroArray(length){
     return Array.apply(null, new Array(length)).map(Number.prototype.valueOf,0);
@@ -652,6 +706,19 @@ Skill3_3.addEventListener("change",function(){//서포터3 스킬3 변경 이벤
     }
 })
 
+MysticCode.addEventListener("change",function(){//예장 드롭다운 이벤트
+
+})
+
+MysticSkill1.addEventListener("change",function(){//예장 드롭다운 이벤트
+
+})
+MysticSkill2.addEventListener("change",function(){//예장 드롭다운 이벤트
+
+})
+MysticSkill3.addEventListener("change",function(){//예장 드롭다운 이벤트
+
+})
 NpLev.addEventListener("change",function(){//보구레벨 드롭다운 이벤트
     var NpMag_tmp = NpDmTable[NpLev.value - 1] + 100 * NpUpgrade.value;
     if(NpCommand.value == 3) {
