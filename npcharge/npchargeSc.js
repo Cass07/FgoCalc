@@ -49,7 +49,7 @@ function getData() {
             NpRate.value = servTable[0]["npa"];
             HiddenClass.value = servTable[0]["hidden"];
             NpCommand.value = servTable[0]["command"];
-            ServantATK.value = Number(servTable[0]["atk"])+1000; //은포우 기본 적용
+            ServantATK.value = atk_final+1000; //은포우 기본 적용
             NpMagTable = [servTable[0]["mag1"],servTable[0]["mag2"],servTable[0]["mag3"],servTable[0]["mag4"],
                 servTable[0]["mag5"],servTable[0]["mag6"],servTable[0]["mag7"],servTable[0]["mag8"],
                 servTable[0]["mag9"],servTable[0]["mag10"]];
@@ -481,16 +481,16 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
             HiddenClass.value = servTable[i]["hidden"];
             NpCommand.value = servTable[i]["command"];
             NpUpgrade.value = servTable[i]["npupgrade"];
-            ServantATK.value = Number(servTable[i]["atk"]) + 1000;
-            if(Goldfow.checked === true)
-            {
-                ServantATK.value = Number(ServantATK.value) + 1000;
-            }
             var atk_init = servTable2[servId]["atk_init"];
             var atk_final = servTable2[servId]["atk"];
             var rare = servTable2[servId]["rare"];
             var atk_100 = FGOcal.GetGrailStat(atk_init,atk_final, rare, 100);
             GrailATK = Number(atk_100) - Number(atk_final);
+            ServantATK.value = atk_final + 1000;
+            if(Goldfow.checked === true)
+            {
+                ServantATK.value = Number(ServantATK.value) + 1000;
+            }
             if(Grail.checked === true)
             {
                 ServantATK.value = Number(ServantATK.value) + GrailATK;
