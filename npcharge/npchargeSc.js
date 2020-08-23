@@ -90,6 +90,7 @@ function getData() {
                 Craft.innerHTML += "<option value = \"" + String(i) + "\">"+craftlistTable[i]["name"]+"</option>";
             }
             $('#LimitBreak').prop('disabled',true);
+            $('#CraftMax').prop('disabled',true);
         }
     });
 
@@ -179,6 +180,7 @@ var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
 var LimitBreak = document.getElementById("LimitBreak");
+var CraftMax = document.getElementById("CraftMax");
 var SupportBuff1 = makeZeroArray(buffLength);
 var SupportBuff2 = makeZeroArray(buffLength);
 var SupportBuff3 = makeZeroArray(buffLength);
@@ -562,9 +564,9 @@ function changeCraft()
     var i;
     var craft;
     CraftBuff = makeZeroArray(buffLength);
-
     if(Number(Craft.value)===0){
         $('#LimitBreak').prop('disabled',true);
+        $('#CraftMax').prop('disabled',true);
         LimitBreak.checked = false;
         CraftATK.value = 0;
         updateBuff();
@@ -575,16 +577,16 @@ function changeCraft()
     if(LimitBreak.checked === true)
     {
         i = Number(Craft.value) * 2;
-        craft = craftTable[i];
-        CraftATK.value = Number(craft["atk_final"]);
+        $('#CraftMax').prop('disabled',false);
     }  
     if(LimitBreak.checked === false)
     { 
         i = Number(Craft.value) * 2 - 1;
-        craft = craftTable[i];
-        var atk_20 = Math.floor(FGOcal.GetCraftStat(craft["atk_init"], craft["atk_final"], craft["rare"], 20));
-        CraftATK.value = Number(atk_20);
+        CraftMax.checked = false;
+        $('#CraftMax').prop('disabled',true);
     }
+    changeCraftATK();
+    craft = craftTable[i];
     var arraytemp = Object.entries(craftTable[i]);
     for(var j=0; j<buffLength; j++){
         CraftBuff[j] = arraytemp[j+5][1];
@@ -592,12 +594,27 @@ function changeCraft()
     updateBuff();
 
 }
+function changeCraftATK(){
+    var i = Number(Craft.value) * 2;
+    var craft = craftTable[i];
+    if(CraftMax.checked === true){
+        CraftATK.value = Number(craft["atk_final"]);
+    }
+    else{
+        var atk_20 = FGOcal.GetCraftStat(craft["atk_init"], craft["atk_final"], craft["rare"], 20);
+        CraftATK.value = Number(atk_20);
+    }
+}
 Craft.addEventListener("change",function(){//예장 드롭다운 이벤트
     changeCraft();
 })
 
 LimitBreak.addEventListener("change",function(){//성배작 체크박스 이벤트
     changeCraft();
+})
+
+CraftMax.addEventListener("change",function(){//예장 만렙 체크박스 이벤트
+    changeCraftATK();
 })
 
 function changeSupporter(support) {
