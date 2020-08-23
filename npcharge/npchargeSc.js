@@ -575,8 +575,8 @@ function updateBuff(){
         allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i] + CraftBuff[i] + MysticBuff[i];
     }
 
-    if(Number(NpCommand.value)===3 && (allbuf[1]!=prevbuf[1])) CmdBuff.value = allbuf[1];
-    else if(Number(NpCommand.value)===1 && (allbuf[2]!=prevbuf[2])) CmdBuff.value = allbuf[2];
+    if(Number(NpCommand.value)===3) CmdBuff.value = allbuf[1];
+    else if(Number(NpCommand.value)===1) CmdBuff.value = allbuf[2];
     if(allbuf[3]!=prevbuf[3]) NpBuff.value = allbuf[3];
     if(allbuf[4]!=prevbuf[4]) AtkBuff.value = allbuf[4];
     if(allbuf[5]!=prevbuf[5]) DmgPlus.value = allbuf[5];
