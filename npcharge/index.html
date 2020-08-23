@@ -429,66 +429,93 @@
 
     </form>
     <br>
-    <button type = "button" id="calc" class="btn btn-primary btn-lg btn-block">계산하기</button>
-    <br>
 
-    <!-- Result -->
-    <div class="card card-primary">
-        <h3 class="card-header" align="center">
-            계산 결과
-        </h3>
-        <div class="card-body">
+    <ul class = "nav nav-tabs">
+        <li class = "nav-item">
+            <a class = "nav-link active" data-toggle="tab" href="#cal1">계산1</a>
+        </li>
+        <li class = "nav-item">
+            <a class = "nav-link" data-toggle="tab" href="#cal2">계산2</a>
+        </li>
+        <li class = "nav-item">
+            <a class = "nav-link" data-toggle="tab" href="#cal3">계산3</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id ="cal1">
+            <p>기능1</p>
             <br>
-            <h2 id="AverNpDmg" align = "center">무상성 난수 1 보구 대미지 : </h2>
+            <button type = "button" id="calc" class="btn btn-primary btn-lg btn-block">계산하기</button>
             <br>
 
-            <div class="table-responsive-md">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th scope="col">Parameters</th>
-                        <th scope="col">Enemy 1</th>
-                        <th scope="col">Enemy 2</th>
-                        <th scope="col">Enemy 3</th>
-                        <th scope="col">Sum</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>최저난수 오버킬 (회)</td>
-                        <td><span id="Enemy1OverNumMin">0</span></td>
-                        <td><span id="Enemy2OverNumMin">0</span></td>
-                        <td><span id="Enemy3OverNumMin">0</span></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NP 리차지 (%)</td>
-                        <td><span id="Enemy1OverNpMin">0</span></td>
-                        <td><span id="Enemy2OverNpMin">0</span></td>
-                        <td><span id="Enemy3OverNpMin">0</span></td>
-                        <td><span id="OverNpMinSum">0</span></td>
-                    </tr>
-                    <tr>
-                        <td>최고난수 오버킬 (회)</td>
-                        <td><span id="Enemy1OverNumMax">0</span></td>
-                        <td><span id="Enemy2OverNumMax">0</span></td>
-                        <td><span id="Enemy3OverNumMax">0</span></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NP 리차지 (%)</td>
-                        <td><span id="Enemy1OverNpMax">0</span></td>
-                        <td><span id="Enemy2OverNpMax">0</span></td>
-                        <td><span id="Enemy3OverNpMax">0</span></td>
-                        <td><span id="OverNpMaxSum">0</span></td>
-                    </tr>
+            <!-- Result -->
+            <div class="card card-primary">
+                <h3 class="card-header" align="center">
+                    계산 결과
+                </h3>
+                <div class="card-body">
+                    <br>
+                    <h2 id="AverNpDmg" align = "center">무상성 난수 1 보구 대미지 : </h2>
+                    <br>
 
-                    </tbody>
-                </table>
+                    <div class="table-responsive-md">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Enemy 1</th>
+                                <th scope="col">Enemy 2</th>
+                                <th scope="col">Enemy 3</th>
+                                <th scope="col">Sum</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>최저난수 오버킬 (회)</td>
+                                <td><span id="Enemy1OverNumMin">0</span></td>
+                                <td><span id="Enemy2OverNumMin">0</span></td>
+                                <td><span id="Enemy3OverNumMin">0</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>NP 리차지 (%)</td>
+                                <td><span id="Enemy1OverNpMin">0</span></td>
+                                <td><span id="Enemy2OverNpMin">0</span></td>
+                                <td><span id="Enemy3OverNpMin">0</span></td>
+                                <td><span id="OverNpMinSum">0</span></td>
+                            </tr>
+                            <tr>
+                                <td>최고난수 오버킬 (회)</td>
+                                <td><span id="Enemy1OverNumMax">0</span></td>
+                                <td><span id="Enemy2OverNumMax">0</span></td>
+                                <td><span id="Enemy3OverNumMax">0</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>NP 리차지 (%)</td>
+                                <td><span id="Enemy1OverNpMax">0</span></td>
+                                <td><span id="Enemy2OverNpMax">0</span></td>
+                                <td><span id="Enemy3OverNpMax">0</span></td>
+                                <td><span id="OverNpMaxSum">0</span></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
+        </div>
+        <div class="tab-pane fade" id ="cal2">
+            <p>기능2</p>
+
+        </div>
+        <div class="tab-pane fade" id ="cal3">
+            <p>기능3</p>
 
         </div>
     </div>
+
     <br>
     <!-- Extra Button -->
     <!-- 디버깅용
