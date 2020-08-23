@@ -132,7 +132,7 @@ function getData() {
         }
     });
 
-    var supportskilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/SupporterSkillData.csv",{
+    var supportskilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/SupporterSkillData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -142,7 +142,7 @@ function getData() {
         }
     });
 
-    var mysticdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/MysticCodeData.csv",{
+    var mysticdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/MysticCodeData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -154,7 +154,7 @@ function getData() {
             }
         }
     });
-    var mysticdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop2/Data/MysticCodeSkillData.csv",{
+    var mysticdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/MysticCodeSkillData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -621,7 +621,7 @@ function changeSupporter(support) {
     var id;
     if(support===1){
         id = Supporter1.value;
-        if(Number(id)==0){
+        if(Number(id)===0){
             Skill1_1.checked=false;
             $('#Skill1_1').prop('disabled',true);
             Skill1_2.checked=false;
@@ -645,7 +645,7 @@ function changeSupporter(support) {
     }
     else if(support===2){
         id = Supporter2.value;
-        if(Number(id)==0){
+        if(Number(id)===0){
             Skill2_1.checked=false;
             $('#Skill2_1').prop('disabled',true);
             Skill2_2.checked=false;
@@ -669,7 +669,7 @@ function changeSupporter(support) {
         }
     else if(support===3){
         id = Supporter3.value;
-        if(Number(id)==0){
+        if(Number(id)===0){
             $('#MysticCode').prop('disabled',false);
             Skill3_1.checked=false;
             $('#Skill3_1').prop('disabled',true);
