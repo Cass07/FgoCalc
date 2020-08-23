@@ -310,7 +310,7 @@ const ClassNpRechargeMagTable = new Array(1,1,1,1.1,1.2,0.9,0.8,1,1,1,1.2,1,1);/
 const CommandMagTable = {
   1 : 0.8,
   3 : 1
-};//커멘드 보정계수
+};//커맨드 보정계수
 
 const ClassIndexTable=//클래스 텍스트 인덱스 테이블
     {
@@ -387,7 +387,7 @@ function NpDmgCalc()//무상성 비난수 보구 대미지 계산&출력
 
 function NpDmgCalc_Serv(EnemyClass, EnemyHiddenClass,EnemyDef, EnemyCmd, EnemyNpDmg,RanNum)//에너미별 실제 보구 대미지 계산, param은 Number로 받을것
 {
-    var tmp1 = Number(ATK)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]]//공*0.23*커멘계수*클래스보정
+    var tmp1 = Number(ATK)*0.23*CommandMagTable[NpCommand.value]*ClassDmgMagTable[ClassIndexTable[ServantClass]]//공*0.23*커맨계수*클래스보정
     *ClassDefMag[ClassIndexTable[ServantClass]][EnemyClass]//상성계수
     *HiddenClassDefMag[HiddenClass.value-1][EnemyHiddenClass-1]//히든상성
     *Number(NpMag.value)/100*RanNum;//보구배율/100*난수
@@ -431,7 +431,7 @@ function OverkillCal(NpDmgFinal, EnemyHP)//오버킬 횟수 계산
 
 function NpRechargeCal(EnemyClass,IsEnemyCase2,OverkillCnt,EnemyCmd)
 {
-    var tmp1 = Number(NpRate.value)*Number(NpCommand.value)*(100+EnemyCmd+Number(CmdBuff.value))//기본수급*커멘카드계수(1,3)*커멘뻥*100
+    var tmp1 = Number(NpRate.value)*Number(NpCommand.value)*(100+EnemyCmd+Number(CmdBuff.value))//기본수급*커맨카드계수(1,3)*커맨뻥*100
     *ClassNpRechargeMagTable[Number(EnemyClass)]*(100+Number(NpBuff.value))/100;//적 클래스 수급보정*수급뻥
     if(IsEnemyCase2.checked === true)//case2의 경우 수급보정 1.2배 가산
     {
