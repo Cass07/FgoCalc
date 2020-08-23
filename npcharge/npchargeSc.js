@@ -179,6 +179,7 @@ var Goldfow = document.getElementById("Goldfow");
 var Grail = document.getElementById("Grail");
 var ATK;
 var GrailATK;
+var allbuf = makeZeroArray(buffLength);;
 var LimitBreak = document.getElementById("LimitBreak");
 var CraftMax = document.getElementById("CraftMax");
 var SupportBuff1 = makeZeroArray(buffLength);
@@ -543,17 +544,18 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
 })
 
 function updateBuff(){
-    var allbuf = makeZeroArray(buffLength);
+    var prevbuf = allbuf;
+    allbuf = makeZeroArray(buffLength);
     for(var i = 0; i<buffLength; i++){
         allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i] + CraftBuff[i] + MysticBuff[i];
     }
-//    console.log(allbuf);
-    if(Number(NpCommand.value)===3) CmdBuff.value = allbuf[1];
-    else if(Number(NpCommand.value)===1) CmdBuff.value = allbuf[2];
-    NpBuff.value = allbuf[3];
-    AtkBuff.value = allbuf[4];
-    DmgPlus.value = allbuf[5];
-    NpDmgBuff.value = allbuf[8];
+
+    if(Number(NpCommand.value)===3 && (allbuf[1]!=prevbuf[1])) CmdBuff.value = allbuf[1];
+    else if(Number(NpCommand.value)===1 && (allbuf[2]!=prevbuf[2])) CmdBuff.value = allbuf[2];
+    if(allbuf[3]!=prevbuf[3]) NpBuff.value = allbuf[3];
+    if(allbuf[4]!=prevbuf[4]) AtkBuff.value = allbuf[4];
+    if(allbuf[5]!=prevbuf[5]) DmgPlus.value = allbuf[5];
+    if(allbuf[8]!=prevbuf[8]) NpDmgBuff.value = allbuf[8];
 }
 
 function makeZeroArray(length){
