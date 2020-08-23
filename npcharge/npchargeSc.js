@@ -593,18 +593,25 @@ function updateBuff_one(subbuf,addbuf){
         for(var i=0;i<buffLength; i++){
             allbuf[i] = allbuf[i] - subbuf[i];
         }
+        if(Number(NpCommand.value)===3) CmdBuff.value = Number(CmdBuff.value) - subbuf[1];
+        else if(Number(NpCommand.value)===1) CmdBuff.value = Number(CmdBuff.value) - subbuf[2];
+        NpBuff.value = Number(NpBuff.value) - subbuf[3];
+        AtkBuff.value = Number(AtkBuff.value) - subbuf[4];
+        DmgPlus.value = Number(DmgPlus.value) - subbuf[5];
+        NpDmgBuff.value = Number(NpDmgBuff.value) - subbuf[8];
     }
     if(addbuf!=null){
         for(var i=0;i<buffLength; i++){
             allbuf[i] = allbuf[i] + addbuf[i];
         }
+        if(Number(NpCommand.value)===3) CmdBuff.value = Number(CmdBuff.value) + allbuf[1];
+        else if(Number(NpCommand.value)===1) CmdBuff.value = Number(CmdBuff.value) + allbuf[2];
+        NpBuff.value = Number(NpBuff.value) + addbuf[3];
+        AtkBuff.value = Number(AtkBuff.value) + addbuf[4];
+        DmgPlus.value = Number(DmgPlus.value) + addbuf[5];
+        NpDmgBuff.value = Number(NpDmgBuff.value) + addbuf[8];
     }
-    if(Number(NpCommand.value)===3) CmdBuff.value = allbuf[1];
-    else if(Number(NpCommand.value)===1) CmdBuff.value = allbuf[2];
-    if(allbuf[3]!=prevbuf[3]) NpBuff.value = allbuf[3];
-    if(allbuf[4]!=prevbuf[4]) AtkBuff.value = allbuf[4];
-    if(allbuf[5]!=prevbuf[5]) DmgPlus.value = allbuf[5];
-    if(allbuf[8]!=prevbuf[8]) NpDmgBuff.value = allbuf[8];
+     
 }
 
 function changeCraft()
