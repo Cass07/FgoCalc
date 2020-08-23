@@ -14,7 +14,6 @@ var buffLength = 13;
 
 //csv 데이터 호출, 파싱 함수
 function getData() {
-<<<<<<< HEAD
     //(StartStat,MaxStat, Rare, GrailLev)
     var servdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/ServDataBase.csv",{
         delimiter : ",",
@@ -28,9 +27,6 @@ function getData() {
     });
 
     var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/npRecharge.csv",{
-=======
-    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/npRecharge.csv",{
->>>>>>> c6dc46883261f1c2da71493bbec47f967d6c54f6
         delimiter : ",",
         download: true,
         header:true,
