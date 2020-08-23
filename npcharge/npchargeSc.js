@@ -63,6 +63,7 @@ function getData() {
             {
                 NpMag.value= NpMag_tmp*2;
             }
+            unchecked_all();
         }
     });
 
@@ -539,10 +540,33 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
         }
 
     }
+    
     updateBuff();
 
 })
 
+function unchecked_all(){
+    Skill1_1.checked=false;
+    Skill1_2.checked=false;
+    Skill1_3.checked=false;
+    Skill2_1.checked=false;
+    Skill2_2.checked=false;
+    Skill2_3.checked=false;
+    Skill3_1.checked=false;
+    Skill3_2.checked=false;
+    Skill3_3.checked=false;
+    Bond1.checked=false;
+    Bond2.checked=false;
+    Bond3.checked=false;
+    Grail.checked=false;
+    Goldfow.checked=false;
+    MysticSkill1.checked=false;
+    MysticSkill2.checked=false;
+    MysticSkill3.checked=false;
+    CraftMax.checked=false;
+    LimitBreak.checked=false;
+
+}
 function updateBuff(){
     var prevbuf = allbuf;
     allbuf = makeZeroArray(buffLength);
