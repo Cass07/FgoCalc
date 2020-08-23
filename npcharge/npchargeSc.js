@@ -604,13 +604,14 @@ function updateBuff_one(subbuf,addbuf){
         for(var i=0;i<buffLength; i++){
             allbuf[i] = allbuf[i] + addbuf[i];
         }
-        if(Number(NpCommand.value)===3) CmdBuff.value = Number(CmdBuff.value) + allbuf[1];
-        else if(Number(NpCommand.value)===1) CmdBuff.value = Number(CmdBuff.value) + allbuf[2];
+        if(Number(NpCommand.value)===3) CmdBuff.value = Number(CmdBuff.value) + addbuf[1];
+        else if(Number(NpCommand.value)===1) CmdBuff.value = Number(CmdBuff.value) + addbuf[2];
         NpBuff.value = Number(NpBuff.value) + addbuf[3];
         AtkBuff.value = Number(AtkBuff.value) + addbuf[4];
         DmgPlus.value = Number(DmgPlus.value) + addbuf[5];
         NpDmgBuff.value = Number(NpDmgBuff.value) + addbuf[8];
     }
+
      
 }
 
