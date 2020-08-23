@@ -538,6 +538,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
         }
 
     }
+    updateBuff();
 
 })
 
@@ -547,8 +548,8 @@ function updateBuff(){
         allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i] + CraftBuff[i] + MysticBuff[i];
     }
     console.log(allbuf);
-    if(NpCommand===3) CmdBuff.value = allbuf[1];
-    else if(NpCommand===1) CmdBuff.value = allbuf[2];
+    if(Number(NpCommand.value)===3) CmdBuff.value = allbuf[1];
+    else if(Number(NpCommand.value)===1) CmdBuff.value = allbuf[2];
     NpBuff.value = allbuf[3];
     AtkBuff.value = allbuf[4];
     DmgPlus.value = allbuf[5];
