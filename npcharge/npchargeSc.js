@@ -92,6 +92,7 @@ function getData() {
             }
             $('#LimitBreak').prop('disabled',true);
             $('#CraftMax').prop('disabled',true);
+            CraftATK.value = 0;
         }
     });
 
