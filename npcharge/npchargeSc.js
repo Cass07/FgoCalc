@@ -154,6 +154,7 @@ function getData() {
             for(var i = 0; i < mysticTable.length-1; i++) {
                 MysticCode.innerHTML += "<option value = \"" + String(i) + "\">"+mysticTable[i]["name"]+"</option>";
             }
+            $('#MysticSkill2').prop('disabled',true);
         }
     });
     var mysticdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/MysticCodeSkillData.csv",{
@@ -541,8 +542,7 @@ Servant.addEventListener("change",function(){//서번트 드롭다운 이벤트
         }
 
     }
-    
-    updateBuff();
+    updateBuff_all();
 
 })
 
@@ -568,7 +568,7 @@ function unchecked_all(){
     LimitBreak.checked=false;
 
 }
-function updateBuff(){
+function updateBuff_all(){
     var prevbuf = allbuf;
     allbuf = makeZeroArray(buffLength);
     for(var i = 0; i<buffLength; i++){
@@ -587,20 +587,40 @@ function makeZeroArray(length){
     return Array.apply(null, new Array(length)).map(Number.prototype.valueOf,0);
 }
 
+function updateBuff_one(subbuf,addbuf){
+    var prevbuf = allbuf.slice;
+    if(subbuf!=null){
+        for(var i=0;i<buffLength; i++){
+            allbuf[i] = allbuf[i] - subbuf[i];
+        }
+    }
+    if(addbuf!=null){
+        for(var i=0;i<buffLength; i++){
+            allbuf[i] = allbuf[i] + addbuf[i];
+        }
+    }
+    if(Number(NpCommand.value)===3) CmdBuff.value = allbuf[1];
+    else if(Number(NpCommand.value)===1) CmdBuff.value = allbuf[2];
+    if(allbuf[3]!=prevbuf[3]) NpBuff.value = allbuf[3];
+    if(allbuf[4]!=prevbuf[4]) AtkBuff.value = allbuf[4];
+    if(allbuf[5]!=prevbuf[5]) DmgPlus.value = allbuf[5];
+    if(allbuf[8]!=prevbuf[8]) NpDmgBuff.value = allbuf[8];
+}
+
 function changeCraft()
 {
     var i;
     var craft;
+    var prevbuf = CraftBuff;
     CraftBuff = makeZeroArray(buffLength);
     if(Number(Craft.value)===0){
         $('#LimitBreak').prop('disabled',true);
         $('#CraftMax').prop('disabled',true);
+        updateBuff_one(prevbuf,null);
         LimitBreak.checked = false;
         CraftATK.value = 0;
-        updateBuff();
         return;
     }
-  
     $('#LimitBreak').prop('disabled',false);
     if(LimitBreak.checked === true)
     {
@@ -619,9 +639,9 @@ function changeCraft()
     for(var j=0; j<buffLength; j++){
         CraftBuff[j] = arraytemp[j+5][1];
     }
-    updateBuff();
-
+    updateBuff_one(prevbuf,CraftBuff);
 }
+
 function changeCraftATK(){
     var i = Number(Craft.value) * 2;
     var craft = craftTable[i];
@@ -647,6 +667,7 @@ CraftMax.addEventListener("change",function(){//예장 만렙 체크박스 이�
 
 function changeSupporter(support) {
     var id;
+    var prevbuf;
     if(support===1){
         id = Supporter1.value;
         if(Number(id)===0){
@@ -665,6 +686,7 @@ function changeSupporter(support) {
             $('#Skill1_3').prop('disabled',false);
             $('#Bond1').prop('disabled',false);
         }
+        prevbuf = SupportBuff1;
         SupportBuff1 = makeZeroArray(buffLength);
         if(Bond1.checked === true) changeSupporterSkill(SupportBuff1,id,0,true);
         if(Skill1_1.checked === true) changeSupporterSkill(SupportBuff1,id,1,true);
@@ -689,6 +711,7 @@ function changeSupporter(support) {
             $('#Skill2_3').prop('disabled',false);
             $('#Bond2').prop('disabled',false);
         }
+        prevbuf = SupportBuff2;
         SupportBuff2 = makeZeroArray(buffLength);
         if(Bond2.checked === true) changeSupporterSkill(SupportBuff2,id,0,true);
         if(Skill2_1.checked === true) changeSupporterSkill(SupportBuff2,id,1,true);
@@ -708,46 +731,48 @@ function changeSupporter(support) {
             Bond3.checked=false;
             $('#Bond3').prop('disabled',true);
             MysticSkill3.checked = false;
-//            $('#MysticCode').prop('disabled',false);
         }
         else{
             if(MysticCode.value!=1){
                 MysticCode.value = 1;
                 changeMysticCode();
-                MysticSkill3.checked = true;
-                $('#MysticCode').prop('disabled',true);
             }
+            MysticSkill3.checked = true;
+            $('#MysticCode').prop('disabled',true);
             $('#Skill3_1').prop('disabled',false);
             $('#Skill3_2').prop('disabled',false);
             $('#Skill3_3').prop('disabled',false);
             $('#Bond3').prop('disabled',false);
         }
-
+        prevbuf = SupportBuff3;
         SupportBuff3 = makeZeroArray(buffLength);
         if(Bond3.checked === true) changeSupporterSkill(SupportBuff3,id,0,true);
         if(Skill3_1.checked === true) changeSupporterSkill(SupportBuff3,id,1,true);
         if(Skill3_2.checked === true) changeSupporterSkill(SupportBuff3,id,2,true);
         if(Skill3_3.checked === true) changeSupporterSkill(SupportBuff3,id,3,true);
     }
-    updateBuff();
+    updateBuff_one(prevbuf,null);
 }
 
 function changeSupporterSkill(SupportBuff, id, skill, onoff){
     if(Number(id) === 0) return ;
     var i = (Number(id) * 4) -3 + Number(skill);
-    var arraytemp = Object.entries(supportSkillTable[i]);
-
+    var objecttemp = Object.entries(supportSkillTable[i]);
+    var arraytemp = makeZeroArray(buffLength);
     if(onoff === true){
         for(var j=0; j<buffLength; j++){
-          SupportBuff[j] = SupportBuff[j] + arraytemp[j+3][1];
+          SupportBuff[j] = SupportBuff[j] + objecttemp[j+3][1];
+          arraytemp[j] = objecttemp[j+3][1];
         }
+        updateBuff_one(null,arraytemp);
     }
     else if(onoff === false){
         for(var j=0; j<buffLength; j++){
-            SupportBuff[j] = SupportBuff[j] - arraytemp[j+3][1];
+            SupportBuff[j] = SupportBuff[j] - objecttemp[j+3][1];
+            arraytemp[j] = objecttemp[j+3][1];
         }
+        updateBuff_one(arraytemp,null);
     }
-    updateBuff();
 }
 
 Supporter1.addEventListener("change",function(){//서포터1 변경 이벤트
@@ -883,6 +908,7 @@ Skill3_3.addEventListener("change",function(){//서포터3 스킬3 변경 이벤
 })
 
 function changeMysticCode(){
+    updateBuff_one(MysticBuff,null);
     MysticBuff = makeZeroArray(buffLength);
     var i = Number(MysticCode.value) * 3;
     if(mysticSkillTable[i]["used"]===0){
@@ -910,7 +936,6 @@ function changeMysticCode(){
     if(MysticSkill1.checked === true) changeMysticSkill(1,true);
     if(MysticSkill2.checked === true) changeMysticSkill(2,true);
     if(MysticSkill3.checked === true) changeMysticSkill(3,true);
-    updateBuff();
 
 }
 
@@ -919,19 +944,22 @@ MysticCode.addEventListener("change",function(){//마술예장 드롭다운 이�
 })
 function changeMysticSkill(skill, onoff){
     var i = Number(MysticCode.value) * 3 - 1 + Number(skill);
-    var arraytemp = Object.entries(mysticSkillTable[i]);
-
+    var objecttemp = Object.entries(mysticSkillTable[i]);
+    var arraytemp = makeZeroArray(buffLength);
     if(onoff === true){
         for(var j=0; j<buffLength; j++){
-          MysticBuff[j] = MysticBuff[j] + arraytemp[j+3][1];
+          MysticBuff[j] = MysticBuff[j] + objecttemp[j+3][1];
+          arraytemp[j] = objecttemp[j+3][1];
         }
+        updateBuff_one(null,arraytemp);
     }
     else if(onoff === false){
         for(var j=0; j<buffLength; j++){
-          MysticBuff[j] = MysticBuff[j] - arraytemp[j+3][1];
+          MysticBuff[j] = MysticBuff[j] - objecttemp[j+3][1];
+          arraytemp[j] = objecttemp[j+3][1];
         }
+        updateBuff_one(arraytemp,null);
     }
-    updateBuff();
 }
 MysticSkill1.addEventListener("change",function(){//마술예장 스킬1 변경 이벤트
     if(this.checked === true)
