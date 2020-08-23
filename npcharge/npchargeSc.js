@@ -547,7 +547,7 @@ function updateBuff(){
     for(var i = 0; i<buffLength; i++){
         allbuf[i] = SupportBuff1[i] + SupportBuff2[i] + SupportBuff3[i] + CraftBuff[i] + MysticBuff[i];
     }
-    console.log(allbuf);
+//    console.log(allbuf);
     if(Number(NpCommand.value)===3) CmdBuff.value = allbuf[1];
     else if(Number(NpCommand.value)===1) CmdBuff.value = allbuf[2];
     NpBuff.value = allbuf[3];
@@ -680,6 +680,8 @@ function changeSupporter(support) {
             $('#Skill3_3').prop('disabled',true);
             Bond3.checked=false;
             $('#Bond3').prop('disabled',true);
+            MysticSkill3.checked = false;
+//            $('#MysticCode').prop('disabled',false);
         }
         else{
             if(MysticCode.value!=1){
@@ -719,20 +721,6 @@ function changeSupporterSkill(SupportBuff, id, skill, onoff){
         }
     }
     updateBuff();
-    /*
-    Support_atkbuf = supportTable[i]["atkbuf"];
-    Support_busterbuf = supportTable[i]["busterbuf"];
-    Support_artsbuf = supportTable[i]["artsbuf"];
-    Support_quickbuf = supportTable[i]["quickbuf"];
-    Support_dmgplus = supportTable[i]["dmgplus"];
-    Support_npplus = supportTable[i]["npplus"];
-    Support_npgainbuf = supportTable[i]["npgainbuf"];
-    Support_starbuf = supportTable[i]["starbuf"];
-    Support_npextramul = supportTable[i]["npextramul"];
-    Support_criiticalbuf = supportTable[i]["criticalbuf"];
- */
-   // AtkBuff.value = Number(AtkBuff.value) + Number(Support_atkbuf);
-
 }
 
 Supporter1.addEventListener("change",function(){//서포터1 변경 이벤트
