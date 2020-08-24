@@ -1,2 +1,11 @@
-name,id,busterbuf,artsbuf,quickbuf,npgainbuf,atkbuf,dmgplus,npplus,starbuf,npbuf,criticalbuf,npextramul
-공명,0,0,0,0,0,30,500,50,0,0,50,0
+id,name
+0,없음
+1,알트리아 캐스터
+2,타마모노마에
+3,파라켈수스
+4,난릉왕
+5,스카사하=스카디
+6,멀린
+7,사마의 [라이네스]
+8,제갈공명
+9,네로 클라우디스 [브라이드]
