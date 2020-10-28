@@ -762,7 +762,18 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
     if(Serv["dmgplus"]>0)
         tmp += "대미지 플러스 "+Serv["dmgplus"]+"<br>";
     if(Serv["hppronp"]>0)
-        tmp += "HP 반비례 추가 대미지 배율 "+Math.floor(Number(Serv["hppronp"]*100))/100+"%";
+        tmp += "HP 반비례 추가 대미지 배율 "+Math.floor(Number(Serv["hppronp"]*100))/100+"%" + "<br>";
+    if(Serv["npmul"] == 0)//보구퀘 여부
+    {
+        tmp += "보구퀘 X";
+    }else if (Serv["npmul"] == 1) {
+        tmp += "보구퀘 O";
+    }else
+    {
+        tmp += "보구퀘 O : 특수배율<br>";
+        tmp += NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][0] + "% ~ " +
+            NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][4] + "%";
+    }
 
 
     return tmp + "\">"+ Serv["name"]+"</span>"
