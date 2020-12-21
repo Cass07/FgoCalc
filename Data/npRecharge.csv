@@ -1,4 +1,4 @@
-id,name,name_list,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,mag10
+﻿id,name,name_list,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,mag10
 245,Lakshmibai,라크슈미 바이,1.01,1,3,0,saber,4,10,20,30,40,0,0,0,0,0,0
 254,Jason,이아손,0.37,3,2,0,saber,5,6,13,20,26,35,0,0,0,0,0
 216,JeanneArcher,잔 다르크 (아처),0.68,3,3,0,archer,4,10,20,30,40,0,0,0,0,0,0
@@ -6,6 +6,7 @@ id,name,name_list,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4
 14,Atalante,아탈란테,0.5,1,2,1,archer,10,3,5,3,7,8,10,12,14,16,22
 271,NightingaleArcher,나이팅게일[산타],0.6,1,3,0,archer,6,4,9,14,19,23,31,0,0,0,0
 232,Bradamante,브라다만테,0.7,1,2,0,lancer,5,6,13,20,26,35,0,0,0,0,0
+301,Vritra,브리트라,0.55,3,1,0,lancer,3,16,33,51,0,0,0,0,0,0,0
 214,Valkyrie,발키리,0.86,1,1,0,lancer,7,3,7,10,14,17,21,28,0,0,0
 183,Parvati,파르바티,1.08,1,1,0,lancer,4,10,20,30,40,0,0,0,0,0,0
 87,Fionn,핀 막 쿨,0.55,3,1,1,lancer,3,16,33,51,0,0,0,0,0,0,0
@@ -16,7 +17,7 @@ id,name,name_list,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4
 29,Marie,마리 앙투아네트,1,1,3,1,rider,5,6,13,20,26,35,0,0,0,0,0
 132,ModredRider,모드레드 (라이더),0.71,3,2,0,rider,5,6,13,20,26,35,0,0,0,0,0
 182,IshtarRider,이슈타르 (라이더),0.68,1,1,0,rider,4,10,20,30,40,0,0,0,0,0,0
-257,Bartholomew,바솔로뮤,0.65,1,3,0,rider,4,9,14,19,23,31,0,0,0,0,
+257,Bartholomew,바솔로뮤,0.65,1,3,0,rider,6,4,9,14,19,23,31,0,0,0,0
 169,Scheherazade,셰에라자드,0.51,3,3,1,caster,5,6,13,20,26,35,0,0,0,0,0
 201,Anastasia,아나스타샤,0.51,3,3,0,caster,4,10,20,30,40,0,0,0,0,0,0
 237,Sikibu,무라사키 시키부,0.51,3,3,0,caster,6,4,9,14,19,23,31,0,0,0,0
@@ -35,6 +36,7 @@ id,name,name_list,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4
 268,SpaseIshtarArts,어슈타르(아츠),0.69,3,4,0,avenger,3,16,33,51,0,0,0,0,0,0,0
 204,Salieri,살리에리,0.7,3,2,0,avenger,3,16,33,51,0,0,0,0,0,0,0
 167,Kiara,키아라,0.55,3,5,1,alterego,3,16,33,51,0,0,0,0,0,0,0
+297,Doumann,도만,0.7,1,2,0,alterego,5,6,13,20,26,35,0,0,0,0,0
 198,Hokusai,호쿠사이,0.33,3,3,0,foreigner,5,6,13,20,26,35,0,0,0,0,0
 281,Voyager,보이저,0.56,1,4,0,foreigner,5,6,13,20,26,35,0,0,0,0,0
 285,KiaraMoon,수아라,0.6,3,2,0,mooncancer,3,16,33,51,0,0,0,0,0,0,0
