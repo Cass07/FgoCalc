@@ -309,6 +309,7 @@ FilRareAllUnCkd.addEventListener("click",function() {
     $('#FilRare5').prop('checked', false);
 })//레어도 필터 전체 선택해제 버튼 이벤트
 
+/*
 index1SortUp.addEventListener("click",function () {
     //ResultTbl.deleteRow(ResultTbl.rows.length-1);
     TableSortingUpText(ResultTbl,10);
@@ -365,6 +366,7 @@ index10SortUp.addEventListener("click",function () {
 index10SortDown.addEventListener("click",function () {
     TableSortingDown(ResultTbl,9);
 })
+ */
 
 FilNPLevInd.addEventListener("change",function()
 {
@@ -413,6 +415,7 @@ EnemyClass.addEventListener("change", function()
 
 //함수
 
+/*
 var mytimer;
 var index = 0;
 var isSortDown = true;
@@ -562,6 +565,9 @@ function TableSortingDownText(table,colindex)
         closeLoadingMask();
     },0);
 }
+
+ */
+
 
 function TableDeleteAll(table)//1열빼고 다지우기
 {
@@ -968,7 +974,11 @@ $("#HiddenModal").on('hidden.bs.modal',function(){
         TableSortingDown(ResultTbl,3);
     }
 
-})
+});
+
+$('#colserv').on('click', function(){
+    TableSortingUpText(ResultTbl,10);
+});
 
 //기타
 $('body').tooltip({
@@ -982,10 +992,10 @@ GotoTop.addEventListener("click",function(){
         left:0,
         top:body.offsetTop
     });
-})
+});
 
 //main버튼 클릭 이벤트 함수
 GotoMain.addEventListener("click",function()
 {
     window.location = '../';
-})
+});

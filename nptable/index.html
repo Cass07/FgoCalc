@@ -30,6 +30,8 @@
     <meta property="og:image:height" content = "630">
     <meta property="og:image:type" content = "image/png">
 
+    <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.min.css" />
+
     <style>
         div.tooltip-inner {
             max-width: 350px;
@@ -70,7 +72,7 @@
 
 
     <div class="form-row" style="align:center;">
-        <table class="table table-bordered table-sm nptable" align = "middle" id="ResultTbl">
+        <table class="table table-bordered table-sm nptable table-sort-itself" align = "middle" id="ResultTbl">
             <colgroup>
                 <col width = "17%">
                 <col width = "8%">
@@ -79,39 +81,23 @@
             </colgroup>
             <thead class="thead-dark" id="tablehd">
             <tr>
-                <th scope="col" id = "colserv" style="text-align:center; vertical-align:middle;">서번트
-                    <button type="button" id = "index1SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index1SortDown" class="btn btn-primary btn-sm">▼</button>
+                <th scope="col" class = "string" id = "colserv" style="text-align:center; vertical-align:middle;">서번트
                 </th>
-                <th scope="col" id = "colclass" style="text-align:center; vertical-align:middle;">클래스</th>
-                <th scope="col" id = "colcmd" style="text-align:center; vertical-align:middle;">보구색</th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">보구 1렙
-                    <button type="button" id = "index4SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index4SortDown" class="btn btn-primary btn-sm">▼</button></th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">보구 2렙
-                    <button type="button" id = "index5SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index5SortDown" class="btn btn-primary btn-sm">▼</button>
+                <th scope="col" class = "none" id = "colclass" style="text-align:center; vertical-align:middle;">클래스</th>
+                <th scope="col" class = "none" id = "colcmd" style="text-align:center; vertical-align:middle;">보구색</th>
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 1렙</th>
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 2렙
                 </th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">보구 3렙
-                    <button type="button" id = "index6SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index6SortDown" class="btn btn-primary btn-sm">▼</button>
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 3렙
                 </th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">보구 4렙
-                    <button type="button" id = "index7SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index7SortDown" class="btn btn-primary btn-sm">▼</button>
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 4렙
                 </th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">보구 5렙
-                    <button type="button" id = "index8SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index8SortDown" class="btn btn-primary btn-sm">▼</button></th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 5렙
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">
                     보구 레벨
-                    <button type="button" id = "index9SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index9SortDown" class="btn btn-primary btn-sm">▼</button>
                 </th>
-                <th scope="col" style="text-align:center; vertical-align:middle;">
+                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">
                     보구딜
-                    <button type="button" id = "index10SortUp" class="btn btn-primary btn-sm">▲</button>
-                    <button type="button" id = "index10SortDown" class="btn btn-primary btn-sm">▼</button>
                 </th>
                 <th scope="col" style="text-align:center; vertical-align:middle;">
                     ServNameDummy
@@ -445,9 +431,8 @@
     <button type = "button" id="GotoMain" class="btn btn-success btn-block">To Main...</button><br>
 
     <script src="../lib/PapaParse/papaparse.min.js"></script>
-
     <script src="../lib/FGOcalculate/fgocalculate.js"></script>
-
+    <script src="../lib/table_sort.js"></script>
     <script src="nptableSc.js"></script>
 </div>
 
