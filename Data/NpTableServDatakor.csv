@@ -1,4 +1,4 @@
-name,id,rare,atk,cmdbuf,atkbuf,npbuf,npextramul,dmgplus,hppronp,npcmd,nptype,npmul,class,charge,isextranp,isdebuf,isclassmul,isreward
+﻿name,id,rare,atk,cmdbuf,atkbuf,npbuf,npextramul,dmgplus,hppronp,npcmd,nptype,npmul,class,charge,isextranp,isdebuf,isclassmul,isreward
 청밥,2,5,11221,50,18,0,0,0,0,buster,army,1,saber,0,0,0,0,0
 흑밥,3,4,10248,50,12,0,0,0,0,buster,army,2,saber,0,0,0,0,0
 세릴리,4,4,7726,50,0,0,0,0,0,buster,army,3,saber,0,0,0,0,1
