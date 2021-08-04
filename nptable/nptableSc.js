@@ -36,6 +36,7 @@ var FilClsAvenger = document.getElementById("FilClsAvenger");
 var FilClsMooncancer = document.getElementById("FilClsMooncancer");
 var FilClsAlterego = document.getElementById("FilClsAlterego");
 var FilClsForeigner = document.getElementById("FilClsForeigner");
+var FilClsPretender = document.getElementById("FilClsPretender");
 var FilClsAllCkd = document.getElementById("FilClsAllCkd");
 var FilClsAllUnCkd = document.getElementById("FilClsAllUnCkd");
 
@@ -117,9 +118,9 @@ const ClassIndex=
         "foreigner" : 12
     };//클래스 텍스트 인덱스 테이블
 
-const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1);//클래스 보정계수
+const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1,1);//클래스 보정계수
 const ClassNameKor = new Array("세이버", "아처", "랜서", "라이더", "캐스터", "어새신", "버서커", "실더", "룰러",
-    "어벤저", "문캔서", "얼터에고", "포리너");
+    "어벤저", "문캔서", "얼터에고", "포리너", "프리텐더");
 const CommTextHTML = [
     "<span style=\"color:#c00000; font-weight:bold; \">Buster</span>",
     "<span style=\"color:#0059da; font-weight:bold; \">Arts</span>",
@@ -276,6 +277,7 @@ FilClsAllCkd.addEventListener("click",function(){
     $('#FilClsMooncancer').prop('checked', true);
     $('#FilClsAlterego').prop('checked', true);
     $('#FilClsForeigner').prop('checked', true);
+    $('#FilClsPretender').prop('checked', true);
 })//클래스 필터 전체 선택 버튼 이벤트
 
 FilClsAllUnCkd.addEventListener("click",function(){
@@ -291,6 +293,7 @@ FilClsAllUnCkd.addEventListener("click",function(){
     $('#FilClsMooncancer').prop('checked', false);
     $('#FilClsAlterego').prop('checked', false);
     $('#FilClsForeigner').prop('checked', false);
+    $('#FilClsPretender').prop('checked', true);
 })//클래스 필터 전체 선택해제 버튼 이벤트
 
 FilRareAllCkd.addEventListener("click",function(){
@@ -309,6 +312,7 @@ FilRareAllUnCkd.addEventListener("click",function() {
     $('#FilRare5').prop('checked', false);
 })//레어도 필터 전체 선택해제 버튼 이벤트
 
+/*
 index1SortUp.addEventListener("click",function () {
     //ResultTbl.deleteRow(ResultTbl.rows.length-1);
     TableSortingUpText(ResultTbl,10);
@@ -365,6 +369,7 @@ index10SortUp.addEventListener("click",function () {
 index10SortDown.addEventListener("click",function () {
     TableSortingDown(ResultTbl,9);
 })
+ */
 
 FilNPLevInd.addEventListener("change",function()
 {
@@ -413,6 +418,7 @@ EnemyClass.addEventListener("change", function()
 
 //함수
 
+/*
 var mytimer;
 var index = 0;
 var isSortDown = true;
@@ -563,6 +569,9 @@ function TableSortingDownText(table,colindex)
     },0);
 }
 
+ */
+
+
 function TableDeleteAll(table)//1열빼고 다지우기
 {
     while(table.rows.length>1)
@@ -600,7 +609,7 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
         if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer") || (Serv["class"] == "alterego")
-            || (Serv["class"] == "foreigner")) {
+            || (Serv["class"] == "foreigner") || (Serv["class"] == "pretender")) {
             ClassMagMul = 2;
         }
     }
@@ -691,6 +700,8 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
     if(!$('#FilClsAlterego').is(":checked") && (Serv["class"] == "alterego"))
         return false;
     if(!$('#FilClsForeigner').is(":checked") && (Serv["class"] == "foreigner"))
+        return false;
+    if(!$('#FilClsPretender').is(":checked") && (Serv["class"] == "pretender"))
         return false;
     //레어
     if(!$('#FilRare1').is(":checked") && (Serv["rare"] == "1"))
@@ -968,7 +979,11 @@ $("#HiddenModal").on('hidden.bs.modal',function(){
         TableSortingDown(ResultTbl,3);
     }
 
-})
+});
+
+$('#colserv').on('click', function(){
+    TableSortingUpText(ResultTbl,10);
+});
 
 //기타
 $('body').tooltip({
@@ -982,10 +997,10 @@ GotoTop.addEventListener("click",function(){
         left:0,
         top:body.offsetTop
     });
-})
+});
 
 //main버튼 클릭 이벤트 함수
 GotoMain.addEventListener("click",function()
 {
     window.location = '../';
-})
+});
