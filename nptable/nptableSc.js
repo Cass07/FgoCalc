@@ -293,7 +293,7 @@ FilClsAllUnCkd.addEventListener("click",function(){
     $('#FilClsMooncancer').prop('checked', false);
     $('#FilClsAlterego').prop('checked', false);
     $('#FilClsForeigner').prop('checked', false);
-    $('#FilClsPretender').prop('checked', true);
+    $('#FilClsPretender').prop('checked', false);
 })//클래스 필터 전체 선택해제 버튼 이벤트
 
 FilRareAllCkd.addEventListener("click",function(){
