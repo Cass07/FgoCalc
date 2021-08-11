@@ -115,7 +115,8 @@ const ClassIndex=
         "avenger" : 9,
         "mooncancer" : 10,
         "alterego" : 11,
-        "foreigner" : 12
+        "foreigner" : 12,
+        "pretender" : 13
     };//클래스 텍스트 인덱스 테이블
 
 const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1,1);//클래스 보정계수

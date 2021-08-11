@@ -111,7 +111,8 @@ const ClassNameIndex=
         "avenger" : "어벤저",
         "mooncancer" : "문캔서",
         "alterego" : "얼터에고",
-        "foreigner" : "포리너"
+        "foreigner" : "포리너",
+        "pretender" : "프리텐더"
     };
 
 const ClassIndexTable=//클래스 텍스트 인덱스 테이블
@@ -128,7 +129,8 @@ const ClassIndexTable=//클래스 텍스트 인덱스 테이블
         "어벤저" : 9,
         "문캔서" : 10,
         "얼터에고" : 11,
-        "포리너" : 12
+        "포리너" : 12,
+        "프리텐더" : 13
     };
 
 function NameTooltipAdder(Serv, NpChargeTableData)
