@@ -1,5 +1,6 @@
 ﻿id,name,name_list,npa,command,hidden,npupgrade,class,npcount,mag1,mag2,mag3,mag4,mag5,mag6,mag7,mag8,mag9,mag10
 302,Muramasa,시로마사,0.59,3,3,0,saber,3,16,33,51,0,0,0,0,0,0,0
+317,OkitaAltSaber,수앵얼,0.67,1,3,0,saber,8,3,6,10,13,16,13,10,29,0,0
 245,Lakshmibai,라크슈미 바이,1.01,1,3,0,saber,4,10,20,30,40,0,0,0,0,0,0
 290,TomoeSaber,수모에,0.55,3,2,0,saber,3,16,33,51,0,0,0,0,0,0,0
 254,Jason,이아손,0.37,3,2,0,saber,5,6,13,20,26,35,0,0,0,0,0
@@ -40,6 +41,7 @@
 96,Gannkutsuou,암굴왕,0.62,1,3,1,avenger,8,3,6,10,13,16,13,10,29,0,0
 268,SpaseIshtarQuick,어슈타르(퀵),0.69,1,4,0,avenger,3,16,33,51,0,0,0,0,0,0,0
 268,SpaseIshtarArts,어슈타르(아츠),0.69,3,4,0,avenger,3,16,33,51,0,0,0,0,0,0,0
+321,KamaAven,수카마,0.52,3,1,0,avenger,4,10,20,30,40,0,0,0,0,0,0
 204,Salieri,살리에리,0.7,3,2,0,avenger,3,16,33,51,0,0,0,0,0,0,0
 167,Kiara,키아라,0.55,3,5,1,alterego,3,16,33,51,0,0,0,0,0,0,0
 297,Doumann,도만,0.7,1,2,0,alterego,5,6,13,20,26,35,0,0,0,0,0
