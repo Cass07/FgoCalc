@@ -15,7 +15,7 @@ var buffLength = 13;
 //csv 데이터 호출, 파싱 함수
 function getData() {
     //(StartStat,MaxStat, Rare, GrailLev)
-    var servdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/ServDataBase.csv",{
+    var servdata2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -26,7 +26,7 @@ function getData() {
         }
     });
 
-    var data = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/npRecharge.csv",{
+    var data = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/npRecharge.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -56,7 +56,7 @@ function getData() {
                 servTable[0]["mag12"],servTable[0]["mag13"],servTable[0]["mag14"],servTable[0]["mag15"]];
             NpUpgrade.value = servTable[0]["npupgrade"];
             NpCount = servTable[0]["npcount"];
-            ServantClass = servTable[0]["class"];s
+            ServantClass = servTable[0]["class"];
             var NpMag_tmp = NpDmTable[0] + 100 * NpUpgrade.value;
             if(NpCommand.value == 3) {
                 NpMag.value=NpMag_tmp*1.5;
@@ -81,7 +81,7 @@ function getData() {
         }
     });
 
-    var craftlist = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/CraftList.csv",{
+    var craftlist = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/CraftList.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -97,7 +97,7 @@ function getData() {
         }
     });
 
-    var craftdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/CraftData.csv",{
+    var craftdata = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/CraftData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -108,7 +108,7 @@ function getData() {
     });
 
         //console.log(data);
-    var supportdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/SupporterData.csv",{
+    var supportdata = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/SupporterData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -135,7 +135,7 @@ function getData() {
         }
     });
 
-    var supportskilldata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/SupporterSkillData.csv",{
+    var supportskilldata = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/SupporterSkillData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -145,7 +145,7 @@ function getData() {
         }
     });
 
-    var mysticdata = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/MysticCodeData.csv",{
+    var mysticdata = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/MysticCodeData.csv",{
         delimiter : ",",
         download: true,
         header:true,
@@ -158,7 +158,7 @@ function getData() {
             $('#MysticSkill2').prop('disabled',true);
         }
     });
-    var mysticdata2 = Papa.parse("https://raw.githubusercontent.com/goingtofgo/FgoCalc/develop1/Data/MysticCodeSkillData.csv",{
+    var mysticdata2 = Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/MysticCodeSkillData.csv",{
         delimiter : ",",
         download: true,
         header:true,
