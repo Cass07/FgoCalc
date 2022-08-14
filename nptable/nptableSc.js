@@ -589,10 +589,11 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
 
     if($('#StatGrailed').is(":checked"))
     {
+        let grailedLevel = Number(document.getElementById("GrailedLevel").value);
         ServFinalHP = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["hp_init"]),Number(ServDataBase[Serv["id"]]["hp"]),
-            Number(Serv["rare"]),100) + Number(FourHP.value) + Number(CraftHP.value);
+            Number(Serv["rare"]),grailedLevel) + Number(FourHP.value) + Number(CraftHP.value);
         ServFinalATK = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]),Number(Serv["atk"]),
-            Number(Serv["rare"]),100) + Number(FourATK.value) + Number(CraftATK.value);
+            Number(Serv["rare"]),grailedLevel) + Number(FourATK.value) + Number(CraftATK.value);
         //console.log("성배" + Serv["name"] + " 체 : " + ServFinalHP + "공 : " + ServFinalATK);
     }else if(Number(FourHP.value) + Number(CraftHP.value) != 1000)
     {
@@ -676,6 +677,9 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         Number(Serv["npextramul"]), Number(Serv["dmgplus"]), HpproNp, Number(RanNum.value),HiddenDefMagMul);
 }
 
+/**
+ * @return {boolean}
+ */
 function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
 {
     //클래스
@@ -732,6 +736,12 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
     if(!$('#FilNPExtra').is(":checked") && (Serv["isextranp"] == "1"))
         return false;
     if(!$('#FilNPExtraNot').is(":checked") && (Serv["isextranp"] == "0"))
+        return false;
+
+    //조건부보구여부
+    if(!$('#FilDebuf').is(":checked") && (Serv["isdebuf"] == "1"))
+        return false;
+    if(!$('#FilDebufNot').is(":checked") && (Serv["isdebuf"] == "0"))
         return false;
 
     //엑스트라 상성 적용시 얼터에고 1.5배 필터링
