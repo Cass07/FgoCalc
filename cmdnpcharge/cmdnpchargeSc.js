@@ -112,7 +112,8 @@ const ClassNameIndex=
         "mooncancer" : "문캔서",
         "alterego" : "얼터에고",
         "foreigner" : "포리너",
-        "pretender" : "프리텐더"
+        "pretender" : "프리텐더",
+        "draco" : "비스트(드라코)"
     };
 
 const ClassIndexTable=//클래스 텍스트 인덱스 테이블
@@ -130,7 +131,8 @@ const ClassIndexTable=//클래스 텍스트 인덱스 테이블
         "문캔서" : 10,
         "얼터에고" : 11,
         "포리너" : 12,
-        "프리텐더" : 13
+        "프리텐더" : 13,
+        "비스트(드라코)" : 14,
     };
 
 function NameTooltipAdder(Serv, NpChargeTableData)

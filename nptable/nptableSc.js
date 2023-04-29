@@ -116,12 +116,13 @@ const ClassIndex=
         "mooncancer" : 10,
         "alterego" : 11,
         "foreigner" : 12,
-        "pretender" : 13
+        "pretender" : 13,
+        "draco" : 14
     };//클래스 텍스트 인덱스 테이블
 
-const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1,1);//클래스 보정계수
+const ClassDmgMagTable = new Array (1,0.95,1.05,1,0.9,0.9,1.1,1,1.1,1.1,1,1,1,1,1);//클래스 보정계수
 const ClassNameKor = new Array("세이버", "아처", "랜서", "라이더", "캐스터", "어새신", "버서커", "실더", "룰러",
-    "어벤저", "문캔서", "얼터에고", "포리너", "프리텐더");
+    "어벤저", "문캔서", "얼터에고", "포리너", "프리텐더","비스트(드라코)");
 const CommTextHTML = [
     "<span style=\"color:#c00000; font-weight:bold; \">Buster</span>",
     "<span style=\"color:#0059da; font-weight:bold; \">Arts</span>",
@@ -153,7 +154,8 @@ const NpDmTableArtsUnit = [
     [1200,1500,1650,1725,1800],
     [1200,1200,1200,1200,1200],//에우리알레
     [150*12,200*12,225*12,237*12,250*12],//에우리알레 남성특공 계수
-    [600,750,825,862.5,900]//메데이아
+    [600,750,825,862.5,900],//메데이아
+    [900*1.5, 1200 * 1.625, 1350 * 1.75, 1425 * 1.875, 1500 * 2]//드라코 특공
 ];
 const NpDmTableQuickArmy = [
     [600,800,900,950,1000],
@@ -280,6 +282,7 @@ FilClsAllCkd.addEventListener("click",function(){
     $('#FilClsAlterego').prop('checked', true);
     $('#FilClsForeigner').prop('checked', true);
     $('#FilClsPretender').prop('checked', true);
+    $('#FilClsDraco').prop('checked', true);
 })//클래스 필터 전체 선택 버튼 이벤트
 
 FilClsAllUnCkd.addEventListener("click",function(){
@@ -296,6 +299,7 @@ FilClsAllUnCkd.addEventListener("click",function(){
     $('#FilClsAlterego').prop('checked', false);
     $('#FilClsForeigner').prop('checked', false);
     $('#FilClsPretender').prop('checked', false);
+    $('#FilClsDraco').prop('checked', false);
 })//클래스 필터 전체 선택해제 버튼 이벤트
 
 FilRareAllCkd.addEventListener("click",function(){
@@ -612,7 +616,7 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
         if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer") || (Serv["class"] == "alterego")
-            || (Serv["class"] == "foreigner") || (Serv["class"] == "pretender")) {
+            || (Serv["class"] == "foreigner") || (Serv["class"] == "pretender")  || (Serv["class"] == "draco")) {
             ClassMagMul = 2;
         }
     }
@@ -708,6 +712,8 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
     if(!$('#FilClsForeigner').is(":checked") && (Serv["class"] == "foreigner"))
         return false;
     if(!$('#FilClsPretender').is(":checked") && (Serv["class"] == "pretender"))
+        return false;
+    if(!$('#FilClsDraco').is(":checked") && (Serv["class"] == "drace"))
         return false;
     //레어
     if(!$('#FilRare1').is(":checked") && (Serv["rare"] == "1"))
