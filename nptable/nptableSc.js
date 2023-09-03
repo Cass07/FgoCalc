@@ -318,64 +318,6 @@ FilRareAllUnCkd.addEventListener("click",function() {
     $('#FilRare5').prop('checked', false);
 })//레어도 필터 전체 선택해제 버튼 이벤트
 
-/*
-index1SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUpText(ResultTbl,10);
-})//오름&내림차순 버튼 이벤트
-index1SortDown.addEventListener("click",function () {
-    TableSortingDownText(ResultTbl,10);
-})
-index4SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,3);
-})
-index4SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,3);
-})
-index5SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,4);
-})
-index5SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,4);
-})
-index6SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,5);
-})
-index6SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,5);
-})
-index7SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,6);
-})
-index7SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,6);
-})
-index8SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,7);
-})
-index8SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,7);
-})
-index9SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,8);
-})
-index9SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,8);
-})
-index10SortUp.addEventListener("click",function () {
-    //ResultTbl.deleteRow(ResultTbl.rows.length-1);
-    TableSortingUp(ResultTbl,9);
-})
-index10SortDown.addEventListener("click",function () {
-    TableSortingDown(ResultTbl,9);
-})
- */
 
 FilNPLevInd.addEventListener("change",function()
 {
@@ -421,161 +363,6 @@ EnemyClass.addEventListener("change", function()
     }
 });
 
-
-//함수
-
-/*
-var mytimer;
-var index = 0;
-var isSortDown = true;
-function TableSortingUp(table, colindex)
-{
-    var tablerows = table.rows.length;//행 크기
-    wrapWindowLoadingMask();
-
-    index = colindex;
-    isSortDown = false;
-
-    clearTimeout(mytimer);
-
-    mytimer = setTimeout(function()
-    {
-        var datas = new Array();
-        for(var i = 1; i < tablerows; i++)
-        {
-            datas[i-1] = table.rows[i];
-        }
-        datas.sort(compareCells);
-        for(var i = 1; i < tablerows; i++)
-        {
-            table.appendChild(datas[i-1]);
-        }
-
-        closeLoadingMask();
-    },0);
-
-}
-
-function TableSortingDown(table,colindex)
-{
-    var tablerows = table.rows.length;//행 크기
-    wrapWindowLoadingMask();
-
-    index = colindex;
-    isSortDown = true;
-
-    clearTimeout(mytimer);
-
-    mytimer = setTimeout(function()
-    {
-        var datas = new Array();
-        for(var i = 1; i < tablerows; i++)
-        {
-            datas[i-1] = table.rows[i];
-        }
-        datas.sort(compareCells);
-        for(var i = 1; i < tablerows; i++)
-        {
-            table.appendChild(datas[i-1]);
-        }
-
-        closeLoadingMask();
-    },0);
-}
-function compareCells(a,b)
-{
-    var aVal = Number(a.cells[index].innerHTML);
-    var bVal = Number(b.cells[index].innerHTML);
-
-    if(isSortDown)
-    {
-        var tmp = aVal;
-        aVal = bVal;
-        bVal = tmp;
-    }
-
-    if(aVal> bVal)
-        return 1;
-    else if(aVal<bVal)
-        return -1;
-    else
-        return 0;
-
-}
-
-function compareCellsText(a,b) {
-    var aVal = a.cells[index].innerHTML;
-    var bVal = b.cells[index].innerHTML;
-
-    if (isSortDown) {
-        var tmp = aVal;
-        aVal = bVal;
-        bVal = tmp;
-    }
-
-    if (aVal > bVal)
-        return 1;
-    else if (aVal < bVal)
-        return -1;
-    else
-        return 0;
-
-}
-
-function TableSortingUpText(table, colindex)
-{
-    var tablerows = table.rows.length;//행 크기
-    wrapWindowLoadingMask();
-
-    index = colindex;
-    isSortDown = false;
-
-    clearTimeout(mytimer);
-    mytimer = setTimeout(function()
-    {
-        var datas = new Array();
-        for(var i = 1; i < tablerows; i++)
-        {
-            datas[i-1] = table.rows[i];
-        }
-        datas.sort(compareCellsText);
-        for(var i = 1; i < tablerows; i++)
-        {
-            table.appendChild(datas[i-1]);
-        }
-
-        closeLoadingMask();
-    },0);
-}
-
-function TableSortingDownText(table,colindex)
-{
-    var tablerows = table.rows.length;//행 크기
-    wrapWindowLoadingMask();
-
-    index = colindex;
-    isSortDown = true;
-
-    clearTimeout(mytimer);
-
-    mytimer = setTimeout(function()
-    {
-        var datas = new Array();
-        for(var i = 1; i < tablerows; i++)
-        {
-            datas[i-1] = table.rows[i];
-        }
-        datas.sort(compareCellsText);
-        for(var i = 1; i < tablerows; i++)
-        {
-            table.appendChild(datas[i-1]);
-        }
-
-        closeLoadingMask();
-    },0);
-}
-
- */
 
 
 function TableDeleteAll(table)//1열빼고 다지우기
@@ -626,7 +413,13 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     }
     var AtkBuf = Number(Serv["atkbuf"]);
     var CmdBuf = Number(Serv["cmdbuf"]);
+    /*
+    npbuf - 보뻥
+    npspebuf - 특공뻥
+    npbufmul - 보뻥 N배 계수 (오베론)
+     */
     var NpBuf = Number(Serv["npbuf"]);
+    let NpSpeBuf = Number(Serv["npspebuf"]);
     if (Serv["npcmd"] == "buster") {
         AtkBuf += Number(CraftBufBusterAtk.value);
         CmdBuf += Number(CraftBufBuster.value);
@@ -640,6 +433,25 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
         CmdBuf += Number(CraftBufQuick.value);
         NpBuf += Number(CraftBufQuickNp.value);
     }
+
+    let NpBufMul = Number(Serv["npbufmul"]);
+
+    //보뻥계수가 0도 아니고 1도 아니라면 보뻥배수연산이 있는것
+    if(NpBufMul > 1) {
+        NpBuf *= NpBufMul;
+    }else if (Serv["npcmd"] == "buster" && $('#FilNpBufMulBuster').is(":checked")) {
+        NpBuf *= 2;
+    }else if (Serv["npcmd"] == "arts" && $('#FilNpBufMulArts').is(":checked")) {
+        NpBuf *= 2;
+    }else if (Serv["npcmd"] == "quick" && $('#FilNpBufMulQuick').is(":checked")) {
+        NpBuf *= 2;
+    }
+
+    //보뻥계수 연산 끝난 후 특공뻥을 더해준다
+    if(NpSpeBuf > 0) {
+        NpBuf += NpSpeBuf;
+    }
+
 
     if($('#RewardServNpLev5').is(":checked") && !($('#FilNPLevInd').is(":checked"))){
         if(Serv["isreward"] == 1)
@@ -713,7 +525,7 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
         return false;
     if(!$('#FilClsPretender').is(":checked") && (Serv["class"] == "pretender"))
         return false;
-    if(!$('#FilClsDraco').is(":checked") && (Serv["class"] == "drace"))
+    if(!$('#FilClsDraco').is(":checked") && (Serv["class"] == "draco"))
         return false;
     //레어
     if(!$('#FilRare1').is(":checked") && (Serv["rare"] == "1"))
@@ -785,7 +597,16 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
         tmp += "공격력 버프 "+Serv["atkbuf"]+"%"+"<br>";
     //수급뻥
     if(Serv["npbuf"] > 0)
-        tmp += "보구 위력 버프 + 특공 버프 "+Serv["npbuf"]+"%"+"<br>";
+    {
+        tmp += "보구 위력 버프 "+Serv["npbuf"]+"%";
+        if(Serv["npbufmul"] > 1){
+            tmp += "* 보구 위력 버프 "+Serv["npbufmul"]+"배";
+        }
+        tmp += "<br>";
+
+    }
+    if(Serv["npspebuf"] > 0)
+        tmp += "특공 버프 "+Serv["npspebuf"]+"%"+"<br>";
     if(Serv["npextramul"]>0)
         tmp += "특공보구 특공 배율 "+Serv["npextramul"]+"%"+"<br>";
     if(Serv["dmgplus"]>0)
