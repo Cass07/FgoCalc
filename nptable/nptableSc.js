@@ -545,6 +545,11 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
     if (!$('#FilDebufNot').is(":checked") && (Serv["isdebuf"] == "0"))
         return false;
 
+    //NP범위필터
+    if(Serv["charge"] < $('#npChargeMin').val() || Serv["charge"] > $('#npChargeMax').val()) {
+        return false;
+    }
+
     //엑스트라 상성 적용시 얼터에고 1.5배 필터링
     if ($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) == 1))
         return false;
