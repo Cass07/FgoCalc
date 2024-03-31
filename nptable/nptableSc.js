@@ -207,6 +207,8 @@ let NpTable;
 
 let ServDataBase;
 
+let ClassScoreData = {};
+
 function getData() {
     Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServData.csv", {
         delimiter: ",",
@@ -254,10 +256,68 @@ function getData() {
     });
 }
 
+function getClassScoreData() {
+    let normalClassArray = [ "saber", "archer", "lancer", "rider","caster", "assassin", "berserker"];
+    let extra1ClassArray = ["sheilder", "ruler", "avenger", "mooncancer"]; //sheilder shielder 오타 주의
+    let extra2ClassArray = ["alterego", "foreigner", "pretender"];
+    let beastClassArray = ["draco"];
+    let emptyClassData = {"buster" : 0, "arts" : 0, "quick" : 0, "np" : 0};
+
+    normalClassArray.forEach(className => {
+        let classData = {};
+        classData["buster"] = Number($("#Score" + className + "Buster").val());
+        classData["arts"] = Number($("#Score" + className + "Arts").val());
+        classData["quick"] = Number($("#Score" + className + "Quick").val());
+        classData["np"] = Number($("#Score" + className + "NP").val());
+        ClassScoreData[className] = classData;
+    });
+
+    let extra1ClassData = {
+        "buster" : Number($("#Scoreextra1Buster").val()),
+        "arts" : Number($("#Scoreextra1Arts").val()),
+        "quick" : Number($("#Scoreextra1Quick").val()),
+        "np" : Number($("#Scoreextra1NP").val())
+    }
+
+    extra1ClassArray.forEach(className => {
+        if($('#extra1'+className).is(":checked")) {
+            ClassScoreData[className] = extra1ClassData;
+        } else {
+            ClassScoreData[className] = emptyClassData;
+        }
+    });
+
+    let extra2ClassData = {
+        "buster" : Number($("#Scoreextra2Buster").val()),
+        "arts" : Number($("#Scoreextra2Arts").val()),
+        "quick" : Number($("#Scoreextra2Quick").val()),
+        "np" : Number($("#Scoreextra2NP").val())
+    }
+
+
+    extra2ClassArray.forEach(className => {
+        if($('#extra2'+className).is(":checked")) {
+            ClassScoreData[className] = extra2ClassData;
+        } else {
+            ClassScoreData[className] = emptyClassData;
+        }
+    });
+
+    //beast는 따로 또 체크
+    beastClassArray.forEach(className => {
+        if($('#extra2beast').is(":checked")) {
+            ClassScoreData[className] = extra2ClassData;
+        } else {
+            ClassScoreData[className] = emptyClassData;
+        }
+    });
+}
+
 // 서번트 데이터 테이블 참조해서 히든속성 데이터 받아올것 (add? 100렙 데이터 추가해서 100렙데이터 비교해버리기
 // 이후 히든적용 체크, 히든선택 - 히든속성적용 (계산식은 라이브러리에 적용완료)
 
 document.addEventListener('DOMContentLoaded', function () {
+    getClassScoreData();
 
     getData();
     printDate(UpdateDate);
@@ -401,20 +461,23 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     npbuf - 보뻥
     npspebuf - 특공뻥
     npbufmul - 보뻥 N배 계수 (오베론)
+
+    클래스스코어 같이 합산
      */
     let NpBuf = Number(Serv["npbuf"]);
+    NpBuf += ClassScoreData[Serv['class']]['np'];
     let NpSpeBuf = Number(Serv["npspebuf"]);
     if (Serv["npcmd"] === "buster") {
         AtkBuf += Number(CraftBufBusterAtk.value);
-        CmdBuf += Number(CraftBufBuster.value);
+        CmdBuf += (Number(CraftBufBuster.value) + ClassScoreData[Serv['class']]['buster']);
         NpBuf += Number(CraftBufBusterNp.value);
     } else if (Serv["npcmd"] === "arts") {
         AtkBuf += Number(CraftBufArtsAtk.value);
-        CmdBuf += Number(CraftBufArts.value);
+        CmdBuf += (Number(CraftBufArts.value) + ClassScoreData[Serv['class']]['arts']);
         NpBuf += Number(CraftBufArtsNp.value);
     } else if (Serv["npcmd"] === "quick") {
         AtkBuf += Number(CraftBufQuickAtk.value);
-        CmdBuf += Number(CraftBufQuick.value);
+        CmdBuf += (Number(CraftBufQuick.value) + ClassScoreData[Serv['class']]['quick']);
         NpBuf += Number(CraftBufQuickNp.value);
     }
 
@@ -770,7 +833,9 @@ function printDate(dateid)//UpdateDate
     dateid.innerHTML = "업데이트 날짜 : " + date;
 }
 
-$("#HiddenModal").on('hidden.bs.modal', function () {
+$("#HiddenModal, #modalClassScore").on('hidden.bs.modal', function () {
+
+    getClassScoreData();
 
     TableDeleteAll(ResultTbl);
 

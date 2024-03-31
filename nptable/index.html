@@ -66,6 +66,9 @@
 
     <form>
     <div class="form-row justify-content-end">
+        <div class="col-md-3" style = "padding-bottom: 5px;">
+            <button type="button" id="classScoreModalBtn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalClassScore">클래스 스코어</button>
+        </div>
         <div class="col-md-3">
             <button type="button" id="BaseTableFilter" class="btn btn-primary btn-block" data-toggle="modal" data-target="#HiddenModal">필터</button>
         </div>
@@ -117,7 +120,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="HiddenModalTitle">Filter</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="FilterCloseX"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close FilterCloseX" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <p class = "lead">클래스 필터</p>
@@ -476,7 +479,300 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="FilterCloseBtn">Close</button>
+                    <button type="button" class="btn btn-primary FilterCloseBtn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalClassScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalClassScoreTitle">클래스 스코어</h4>
+                    <button type="button" class="close FilterCloseX" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p class = "lead"> <img src="../Data/image/classicon/saber.png" width="36" height ="36"> 세이버</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScoresaberBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScoresaberBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoresaberArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScoresaberArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoresaberQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScoresaberQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoresaberNP">
+                                보구 위력
+                            </label>
+                            <input id="ScoresaberNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/archer.png" width="36" height ="36"> 아처</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScorearcherBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScorearcherBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorearcherArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScorearcherArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorearcherQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScorearcherQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorearcherNP">
+                                보구 위력
+                            </label>
+                            <input id="ScorearcherNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/lancer.png" width="36" height ="36"> 랜서</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScorelancerBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScorelancerBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorelancerArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScorelancerArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorelancerQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScorelancerQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorelancerNP">
+                                보구 위력
+                            </label>
+                            <input id="ScorelancerNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/rider.png" width="36" height ="36"> 라이더</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScoreriderBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScoreriderBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreriderArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScoreriderArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreriderQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScoreriderQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreriderNP">
+                                보구 위력
+                            </label>
+                            <input id="ScoreriderNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/caster.png" width="36" height ="36"> 캐스터</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScorecasterBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScorecasterBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorecasterArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScorecasterArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorecasterQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScorecasterQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScorecasterNP">
+                                보구 위력
+                            </label>
+                            <input id="ScorecasterNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/assassin.png" width="36" height ="36"> 어새신</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScoreassassinBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScoreassassinBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreassassinArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScoreassassinArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreassassinQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScoreassassinQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreassassinNP">
+                                보구 위력
+                            </label>
+                            <input id="ScoreassassinNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/berserker.png" width="36" height ="36"> 버서커</p>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="ScoreberserkerBuster">
+                                버스터 위력
+                            </label>
+                            <input id="ScoreberserkerBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreberserkerArts">
+                                아츠 위력
+                            </label>
+                            <input id="ScoreberserkerArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreberserkerQuick">
+                                퀵 위력
+                            </label>
+                            <input id="ScoreberserkerQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="ScoreberserkerNP">
+                                보구 위력
+                            </label>
+                            <input id="ScoreberserkerNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+
+                    <p class = "lead"> <img src="../Data/image/classicon/extra1.png" width="36" height ="36"> 엑스트라 1</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra1sheilder" >
+                                <img src="../Data/image/classicon/shielder.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra1ruler" >
+                                <img src="../Data/image/classicon/ruler.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra1avenger" checked>
+                                <img src="../Data/image/classicon/avenger.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra1mooncancer" >
+                                <img src="../Data/image/classicon/mooncancer.png" width="36" height ="36">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="Scoreextra1Buster">
+                                버스터 위력
+                            </label>
+                            <input id="Scoreextra1Buster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="Scoreextra1Arts">
+                                아츠 위력
+                            </label>
+                            <input id="Scoreextra1Arts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="Scoreextra1Quick">
+                                퀵 위력
+                            </label>
+                            <input id="Scoreextra1Quick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="Scoreextra1NP">
+                                보구 위력
+                            </label>
+                            <input id="Scoreextra1NP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+                    <p class = "lead"> <img src="../Data/image/classicon/extra2.png" width="36" height ="36"> 엑스트라 2</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra2alterego" checked>
+                                <img src="../Data/image/classicon/alterego.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra2foreigner" >
+                                <img src="../Data/image/classicon/foreigner.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra2pretender" >
+                                <img src="../Data/image/classicon/pretender.png" width="36" height ="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id = "extra2beast" >
+                                <img src="../Data/image/classicon/beast.png" width="36" height ="36">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label for="Scoreextra2Buster">
+                                버스터 위력
+                            </label>
+                            <input id="Scoreextra2Buster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="Scoreextra2Arts">
+                                아츠 위력
+                            </label>
+                            <input id="Scoreextra2Arts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="Scoreextra2Quick">
+                                퀵 위력
+                            </label>
+                            <input id="Scoreextra2Quick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="Scoreextra2NP">
+                                보구 위력
+                            </label>
+                            <input id="Scoreextra2NP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary FilterCloseBtn" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
