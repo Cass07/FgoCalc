@@ -670,7 +670,15 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
 
     }
     if (Serv["charge"] > 0) {
-        tmp += `최대 즉발 차지 ${Serv["charge"]}%`;
+        tmp += `최대 즉발 차지 ${Serv["charge"]}%<br>`;
+    }
+
+    if (Serv["dmgNpPierce"] === 1) {
+        tmp += `방어무시 보구<br>`;
+    }
+
+    if (Serv["memo"] !== "") {
+        tmp += `메모 : ${Serv["memo"]}<br>`;
     }
 
     return `${tmp}\">${Serv["name"]}</span>`;
