@@ -677,7 +677,8 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
         tmp += `방어무시 보구<br>`;
     }
 
-    if (Serv["memo"] !== "" || Serv["memo"] !== null) {
+    if (Serv["memo"] !== "" && Serv["memo"] !== null) {
+        console.log(Serv["memo"]);
         tmp += `메모 : ${Serv["memo"]}<br>`;
     }
 
