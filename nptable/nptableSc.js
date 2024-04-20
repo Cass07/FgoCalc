@@ -119,6 +119,10 @@ const ClassIndex =
         "draco": 14
     };//클래스 텍스트 인덱스 테이블
 
+// 클래스 2배상성 관련 필터용
+const generalClassNotBurseker = ["saber", "archer", "lancer", "rider", "caster", "assassin"];
+const extraClassNotBeast = ["ruler", "avenger", "mooncancer", "alterego", "foreigner", "pretender"];
+
 const ClassDmgMagTable = [1, 0.95, 1.05, 1, 0.9, 0.9, 1.1, 1, 1.1, 1.1, 1, 1, 1, 1, 1];//클래스 보정계수
 const ClassNameKor = ["세이버", "아처", "랜서", "라이더", "캐스터", "어새신", "버서커", "실더", "룰러",
     "어벤저", "문캔서", "얼터에고", "포리너", "프리텐더", "비스트(드라코)"];
@@ -441,18 +445,16 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     if ((Number(Serv["isclassmul"]) === 1) || (Serv["class"] === "berserker"))
         ClassMagMul = 1.5;
     if ($('#FilClsDmgMul').is(":checked")) {
-        if ((Serv["class"] === "saber") || (Serv["class"] === "archer") || (Serv["class"] === "lancer") || (Serv["class"] === "rider")
-            || (Serv["class"] === "caster") || (Serv["class"] === "assassin")) {
+        if(generalClassNotBurseker.includes(Serv["class"])) {
             ClassMagMul = 2;
         }
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
-        if ((Serv["class"] == "ruler") || (Serv["class"] == "avenger") || (Serv["class"] == "mooncancer") || (Serv["class"] == "alterego")
-            || (Serv["class"] == "foreigner") || (Serv["class"] == "pretender") || (Serv["class"] == "draco")) {
+        if(extraClassNotBeast.includes(Serv["class"])) {
             ClassMagMul = 2;
         }
     }
-    if (EnemyClass.value != "-1") {
+    if (EnemyClass.value !== "-1") {
         ClassMagMul = FGOcal.GetClassMagMul(Serv["class"], Number(EnemyClass.value));
     }
     let AtkBuf = Number(Serv["atkbuf"]);
@@ -613,13 +615,14 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
         return false;
     }
 
-    //엑스트라 상성 적용시 얼터에고 1.5배 필터링
-    if ($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) == 1))
+    //엑스트라 상성 적용시 얼터에고 1.5배 필터링 (드라코 제외)
+    if ($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) === 1) && extraClassNotBeast.includes(Serv["class"])) {
         return false;
+    }
     //적 서번트 클래스 적용시 얼터에고 1.5배 필터링
-    if ((EnemyClass.value != "-1") && (Number(Serv["isclassmul"]) == 1))
+    if ((EnemyClass.value !== "-1") && (Number(Serv["isclassmul"]) === 1)){
         return false;
-
+    }
 
     return true;
 
@@ -697,7 +700,7 @@ function GetFilteredResult() {
             if (IsServFilt(NpTable[i])) {
                 for (let j = 0; j < 5; j++) {
                     let gRows = ResultTbl.insertRow();
-                    let oCell = new Array();
+                    let oCell = [];
                     for (let k = 0; k < ResultTbl.rows[0].cells.length; k++) {
                         oCell[k] = gRows.insertCell();
                     }
@@ -712,7 +715,7 @@ function GetFilteredResult() {
         } else {
             if (IsServFilt(NpTable[i])) {
                 let gRows = ResultTbl.insertRow();
-                let oCell = new Array();
+                let oCell = [];
                 for (let j = 0; j < ResultTbl.rows[0].cells.length; j++) {
                     oCell[j] = gRows.insertCell();
                 }
