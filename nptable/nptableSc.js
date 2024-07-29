@@ -255,7 +255,10 @@ function getData() {
         header: true,
         dynamicTyping: true,
         complete: function (results) {
-            ServDataBase = results.data;
+            ServDataBase = {};
+            results.data.forEach(serv =>  {
+                ServDataBase[serv['id']] = serv;
+            })
         }
     });
 }
