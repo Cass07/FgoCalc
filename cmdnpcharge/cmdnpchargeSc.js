@@ -113,7 +113,8 @@ const ClassNameIndex =
         "alterego": "얼터에고",
         "foreigner": "포리너",
         "pretender": "프리텐더",
-        "draco": "비스트(드라코)"
+        "draco": "비스트(드라코)",
+        "eresh": "비스트(에레)"
     };
 
 const ClassIndexTable =//클래스 텍스트 인덱스 테이블
@@ -133,6 +134,7 @@ const ClassIndexTable =//클래스 텍스트 인덱스 테이블
         "포리너": 12,
         "프리텐더": 13,
         "비스트(드라코)": 14,
+        "비스트(에레)": 15
     };
 
 function NameTooltipAdder(Serv, NpChargeTableData) {
