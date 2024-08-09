@@ -634,6 +634,22 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
 function NameTooltipAdder(Serv)//이름 툴팁 출력
 {
     let tmp = "<span data-toggle=\"tooltip\" data-placement=\"top\" data-html=\"true\" title=\"";
+
+    //서번트 공격력
+    let classMul = Number(FGOcal.GetClassDmgMag(Serv["class"]));
+    let baseAtk = Number(Serv["atk"]);
+    let grailedLevelText = "";
+    if ($('#StatGrailed').is(":checked")) {
+        let grailedLevel = Number(document.getElementById("GrailedLevel").value);
+        baseAtk = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]), Number(Serv["atk"]),
+            Number(Serv["rare"]), grailedLevel);
+        grailedLevelText = ` (성배 ${grailedLevel}Lv.)`;
+    }
+    let finalAtk = Math.round((baseAtk + Number(FourATK.value) + Number(CraftATK.value)) * classMul * 100) / 100;
+
+    tmp += `최종 ATK ${finalAtk}<br>`;
+    tmp += `(기본 ${baseAtk}${grailedLevelText} + 포우 ${FourATK.value} + 예장 ${CraftATK.value}) × 클래스 보정 ${classMul}<br>`;
+
     //아뻥
     if (Serv["cmdbuf"] > 0) {
         if (CommIndex[Serv["npcmd"]] == 0) {
