@@ -109,7 +109,7 @@ const ClassIndex =
         "caster": 4,
         "assassin": 5,
         "berserker": 6,
-        "sheilder": 7,
+        "shielder": 7,
         "ruler": 8,
         "avenger": 9,
         "mooncancer": 10,
@@ -190,7 +190,7 @@ const ClassDefMag =
         [1, 1, 1, 0.5, 1, 2, 2, 1, 0.5, 1, 1, 1, 1],//caster
         [1, 1, 1, 2, 0.5, 1, 2, 1, 0.5, 1, 1, 1, 1],//assassin
         [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1, 1.5, 1.5, 1.5, 1.5, 0.5],//berserker
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],//sheilder
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],//shielder
         [1, 1, 1, 1, 1, 1, 2, 1, 1, 0.5, 2, 1, 1],//ruler
         [1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0.5, 1, 1],//avenger
         [1, 1, 1, 1, 1, 1, 2, 1, 0.5, 2, 1, 1, 1],//mooncancer
@@ -214,6 +214,18 @@ let ServDataBase;
 let ClassScoreData = {};
 
 function getData() {
+    Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv", {
+        delimiter: ",",
+        download: true,
+        header: true,
+        dynamicTyping: true,
+        complete: function (results) {
+            ServDataBase = {};
+            results.data.forEach(serv =>  {
+                ServDataBase[serv['id']] = serv;
+            })
+        }
+    });
     Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServData.csv", {
         delimiter: ",",
         download: true,
@@ -249,23 +261,11 @@ function getData() {
 
         }
     });
-    Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv", {
-        delimiter: ",",
-        download: true,
-        header: true,
-        dynamicTyping: true,
-        complete: function (results) {
-            ServDataBase = {};
-            results.data.forEach(serv =>  {
-                ServDataBase[serv['id']] = serv;
-            })
-        }
-    });
 }
 
 function getClassScoreData() {
     let normalClassArray = [ "saber", "archer", "lancer", "rider","caster", "assassin", "berserker"];
-    let extra1ClassArray = ["sheilder", "ruler", "avenger", "mooncancer"]; //sheilder shielder 오타 주의
+    let extra1ClassArray = ["shielder", "ruler", "avenger", "mooncancer"]; //shielder shielder 오타 주의
     let extra2ClassArray = ["alterego", "foreigner", "pretender"];
     let beastClassArray = ["draco", "eresh"];
     let emptyClassData = {"buster" : 0, "arts" : 0, "quick" : 0, "np" : 0};
@@ -429,36 +429,34 @@ function TableDeleteAll(table)//1열빼고 다지우기
 
 function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프 같이 계산
 {
-    let ServFinalATK = Number(Serv["atk"]) + Number(FourATK.value) + Number(CraftATK.value);
-    let ServFinalHP = 0;
+    let ServFinalATK = Number(ServDataBase[Serv["id"]]["atk"]) + Number(FourATK.value) + Number(CraftATK.value);
+    let ServFinalHP = Number(ServDataBase[Serv["id"]]["hp"]) + Number(FourHP.value) + Number(CraftHP.value);
 
     if ($('#StatGrailed').is(":checked")) {
         let grailedLevel = Number(document.getElementById("GrailedLevel").value);
         ServFinalHP = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["hp_init"]), Number(ServDataBase[Serv["id"]]["hp"]),
-            Number(Serv["rare"]), grailedLevel) + Number(FourHP.value) + Number(CraftHP.value);
-        ServFinalATK = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]), Number(Serv["atk"]),
-            Number(Serv["rare"]), grailedLevel) + Number(FourATK.value) + Number(CraftATK.value);
+            Number(Number(ServDataBase[Serv["id"]]["rare"])), grailedLevel) + Number(FourHP.value) + Number(CraftHP.value);
+        ServFinalATK = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]), Number(ServDataBase[Serv["id"]]["atk"]),
+            Number(Number(ServDataBase[Serv["id"]]["rare"])), grailedLevel) + Number(FourATK.value) + Number(CraftATK.value);
         //console.log("성배" + Serv["name"] + " 체 : " + ServFinalHP + "공 : " + ServFinalATK);
-    } else if (Number(FourHP.value) + Number(CraftHP.value) != 1000) {
-        ServFinalHP = Number(ServDataBase[Serv["id"]]["hp"]) + Number(FourHP.value) + Number(CraftHP.value);
     }
 
 
     let ClassMagMul = 1;
-    if ((Number(Serv["isclassmul"]) === 1) || (Serv["class"] === "berserker"))
+    if ((Number(Serv["isclassmul"]) === 1) || (ServDataBase[Serv["id"]]["class"] === "berserker"))
         ClassMagMul = 1.5;
     if ($('#FilClsDmgMul').is(":checked")) {
-        if(generalClassNotBurseker.includes(Serv["class"])) {
+        if(generalClassNotBurseker.includes(ServDataBase[Serv["id"]]["class"])) {
             ClassMagMul = 2;
         }
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
-        if(extraClassNotBeast.includes(Serv["class"])) {
+        if(extraClassNotBeast.includes(ServDataBase[Serv["id"]]["class"])) {
             ClassMagMul = 2;
         }
     }
     if (EnemyClass.value !== "-1") {
-        ClassMagMul = FGOcal.GetClassMagMul(Serv["class"], Number(EnemyClass.value));
+        ClassMagMul = FGOcal.GetClassMagMul(ServDataBase[Serv["id"]]["class"], Number(EnemyClass.value));
     }
     let AtkBuf = Number(Serv["atkbuf"]);
     let CmdBuf = Number(Serv["cmdbuf"]);
@@ -510,7 +508,7 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
             NpLev = 5;
     }
     if ($('#LowRareServNpLev5').is(":checked") && !($('#FilNPLevInd').is(":checked"))) {
-        if (Number(Serv["rare"]) < 4)
+        if (Number(Number(ServDataBase[Serv["id"]]["rare"])) < 4)
             NpLev = 5;
     }
 
@@ -539,7 +537,7 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     //console.log("최종공 : "+ServFinalATK + "상성배율 : "+ ClassMagMul + Serv["npcmd"]+Serv["nptype"]+Number(Serv["npmul"])+"보렙 : "+NpLev
     //+"공벞 : "+AtkBuf+"색벞" +CmdBuf + "보벞"+NpBuf+ "특공보구 : "+Number(Serv["npextramul"]));
 
-    return FGOcal.NpDamageCalc(ServFinalATK, Serv["class"], ClassMagMul, Serv["npcmd"],
+    return FGOcal.NpDamageCalc(ServFinalATK, ServDataBase[Serv["id"]]["class"], ClassMagMul, Serv["npcmd"],
         NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][NpLev - 1], AtkBuf, CmdBuf, NpBuf,
         Number(Serv["npextramul"]), Number(Serv["dmgplus"]), HpproNp, Number(RanNum.value), HiddenDefMagMul);
 }
@@ -550,44 +548,44 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
 function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
 {
     //클래스
-    if (!$('#FilClsSaber').is(":checked") && (Serv["class"] == "saber"))
+    if (!$('#FilClsSaber').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "saber"))
         return false;
-    if (!$('#FilClsArcher').is(":checked") && (Serv["class"] == "archer"))
+    if (!$('#FilClsArcher').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "archer"))
         return false;
-    if (!$('#FilClsLancer').is(":checked") && (Serv["class"] == "lancer"))
+    if (!$('#FilClsLancer').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "lancer"))
         return false;
-    if (!$('#FilClsRider').is(":checked") && (Serv["class"] == "rider"))
+    if (!$('#FilClsRider').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "rider"))
         return false;
-    if (!$('#FilClsCaster').is(":checked") && (Serv["class"] == "caster"))
+    if (!$('#FilClsCaster').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "caster"))
         return false;
-    if (!$('#FilClsAssassin').is(":checked") && (Serv["class"] == "assassin"))
+    if (!$('#FilClsAssassin').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "assassin"))
         return false;
-    if (!$('#FilClsBerserker').is(":checked") && (Serv["class"] == "berserker"))
+    if (!$('#FilClsBerserker').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "berserker"))
         return false;
-    if (!$('#FilClsRuler').is(":checked") && (Serv["class"] == "ruler"))
+    if (!$('#FilClsRuler').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "ruler"))
         return false;
-    if (!$('#FilClsAvenger').is(":checked") && (Serv["class"] == "avenger"))
+    if (!$('#FilClsAvenger').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "avenger"))
         return false;
-    if (!$('#FilClsMooncancer').is(":checked") && (Serv["class"] == "mooncancer"))
+    if (!$('#FilClsMooncancer').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "mooncancer"))
         return false;
-    if (!$('#FilClsAlterego').is(":checked") && (Serv["class"] == "alterego"))
+    if (!$('#FilClsAlterego').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "alterego"))
         return false;
-    if (!$('#FilClsForeigner').is(":checked") && (Serv["class"] == "foreigner"))
+    if (!$('#FilClsForeigner').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "foreigner"))
         return false;
-    if (!$('#FilClsPretender').is(":checked") && (Serv["class"] == "pretender"))
+    if (!$('#FilClsPretender').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "pretender"))
         return false;
-    if (!$('#FilClsDraco').is(":checked") && (Serv["class"] == "draco" || Serv["class"] == "eresh"))
+    if (!$('#FilClsDraco').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "draco" || ServDataBase[Serv["id"]]["class"] == "eresh"))
         return false;
     //레어
-    if (!$('#FilRare1').is(":checked") && (Serv["rare"] == "1"))
+    if (!$('#FilRare1').is(":checked") && (Number(ServDataBase[Serv["id"]]["rare"]) == "1"))
         return false;
-    if (!$('#FilRare2').is(":checked") && (Serv["rare"] == "2"))
+    if (!$('#FilRare2').is(":checked") && (Number(ServDataBase[Serv["id"]]["rare"]) == "2"))
         return false;
-    if (!$('#FilRare3').is(":checked") && (Serv["rare"] == "3"))
+    if (!$('#FilRare3').is(":checked") && (Number(ServDataBase[Serv["id"]]["rare"]) == "3"))
         return false;
-    if (!$('#FilRare4').is(":checked") && (Serv["rare"] == "4"))
+    if (!$('#FilRare4').is(":checked") && (Number(ServDataBase[Serv["id"]]["rare"]) == "4"))
         return false;
-    if (!$('#FilRare5').is(":checked") && (Serv["rare"] == "5"))
+    if (!$('#FilRare5').is(":checked") && (Number(ServDataBase[Serv["id"]]["rare"]) == "5"))
         return false;
     //보구커멘
     if (!$('#FilNPCommBuster').is(":checked") && (Serv["npcmd"] == "buster"))
@@ -619,7 +617,7 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
     }
 
     //엑스트라 상성 적용시 얼터에고 1.5배 필터링 (드라코 제외)
-    if ($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) === 1) && extraClassNotBeast.includes(Serv["class"])) {
+    if ($('#FilClsExtraDmgMul').is(":checked") && (Number(Serv["isclassmul"]) === 1) && extraClassNotBeast.includes(ServDataBase[Serv["id"]]["class"])) {
         return false;
     }
     //적 서번트 클래스 적용시 얼터에고 1.5배 필터링
@@ -636,13 +634,13 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
     let tmp = "<span data-toggle=\"tooltip\" data-placement=\"top\" data-html=\"true\" title=\"";
 
     //서번트 공격력
-    let classMul = Number(FGOcal.GetClassDmgMag(Serv["class"]));
-    let baseAtk = Number(Serv["atk"]);
+    let classMul = Number(FGOcal.GetClassDmgMag(ServDataBase[Serv["id"]]["class"]));
+    let baseAtk = Number(Number(ServDataBase[Serv["id"]]["atk"]));
     let grailedLevelText = "";
     if ($('#StatGrailed').is(":checked")) {
         let grailedLevel = Number(document.getElementById("GrailedLevel").value);
-        baseAtk = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]), Number(Serv["atk"]),
-            Number(Serv["rare"]), grailedLevel);
+        baseAtk = FGOcal.GetGrailStat(Number(ServDataBase[Serv["id"]]["atk_init"]), Number(Number(ServDataBase[Serv["id"]]["atk"])),
+            Number(Number(ServDataBase[Serv["id"]]["rare"])), grailedLevel);
         grailedLevelText = ` (성배 ${grailedLevel}Lv.)`;
     }
     let finalAtk = Math.round((baseAtk + Number(FourATK.value) + Number(CraftATK.value)) * classMul * 100) / 100;

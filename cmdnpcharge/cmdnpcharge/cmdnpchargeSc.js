@@ -126,7 +126,7 @@ const ClassNameIndex=
         "caster" : "캐스터",
         "assassin" : "어새신",
         "berserker" : "버서커",
-        "sheilder" : "실더",
+        "shielder" : "실더",
         "ruler" : "룰러",
         "avenger" : "어벤저",
         "mooncancer" : "문캔서",
