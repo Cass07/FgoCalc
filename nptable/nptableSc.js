@@ -658,7 +658,7 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
     let tmp = "<span data-toggle=\"tooltip\" data-placement=\"top\" data-html=\"true\" title=\"";
 
     //서번트 공격력
-    let classMul = Number(FGOcal.GetClassDmgMag(ServDataBase[Serv["id"]]["class"]));
+    let classMul = Number(FGOcal.GetClassDmgMag(Serv["class"]));
     let baseAtk = Number(Number(ServDataBase[Serv["id"]]["atk"]));
     let grailedLevelText = "";
     if ($('#StatGrailed').is(":checked")) {
