@@ -117,7 +117,7 @@ const ClassIndex =
         "foreigner": 12,
         "pretender": 13,
         "draco": 14,
-        "eresh" : 15
+        "eresh": 15
     };//클래스 텍스트 인덱스 테이블
 
 // 클래스 2배상성 관련 필터용
@@ -213,62 +213,86 @@ let ServDataBase;
 
 let ClassScoreData = {};
 
-function getData() {
-    Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv", {
-        delimiter: ",",
-        download: true,
-        header: true,
-        dynamicTyping: true,
-        complete: function (results) {
-            ServDataBase = {};
-            results.data.forEach(serv =>  {
-                ServDataBase[serv['id']] = serv;
-            })
-        }
-    });
-    Papa.parse("https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServData.csv", {
-        delimiter: ",",
-        download: true,
-        header: true,
-        dynamicTyping: true,
-        complete: function (results) {
-            NpTable = results.data;
-
-
-            for (let i = 0; i < NpTable.length - 1; i++) {
-                if (IsServFilt(NpTable[i])) {
-                    let gRows = ResultTbl.insertRow();
-                    let oCell = [];
-                    for (let j = 0; j < ResultTbl.rows[0].cells.length; j++) {
-                        oCell[j] = gRows.insertCell();
-                    }
-                    oCell[0].innerHTML = NameTooltipAdder(NpTable[i]);//NpTable[i]["name"];
-                    oCell[1].innerHTML = ClassNameKor[ClassIndex[NpTable[i]["class"]]];
-                    oCell[2].innerHTML = CommTextHTML[CommIndex[NpTable[i]["npcmd"]]];
-                    for (j = 1; j < 6; j++) {
-                        oCell[j + 2].innerHTML = NpDamageCalcFin(NpTable[i], j);
-                    }
-                    oCell[10].innerHTML = NpTable[i]["name"];
-
-                }
+function readServant() {
+    let servantCsv = "https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/ServDataBase.csv";
+    return new Promise((resolve, reject) => {
+        Papa.parse(servantCsv, {
+            delimiter: ",",
+            download: true,
+            header: true,
+            dynamicTyping: true,
+            complete: function (results) {
+                ServDataBase = {};
+                results.data.forEach(serv => {
+                    ServDataBase[serv['id']] = serv;
+                });
+                resolve();
+            },
+            error: function (err) {
+                console.log(err);
+                reject();
             }
+        });
+    });
+}
 
-            TableSortingDown(ResultTbl, 3);
+function initialTable() {
+    let npTable = "https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/NpTableServData.csv";
+    return new Promise( (resolve, reject) => {
+        Papa.parse(npTable, {
+            delimiter: ",",
+            download: true,
+            header: true,
+            dynamicTyping: true,
+            complete: function (results) {
+                NpTable = results.data;
 
-            $('#ResultTbl tr > *:nth-child(9)').hide();
-            $('#ResultTbl tr > *:nth-child(10)').hide();
-            $('#ResultTbl tr > *:nth-child(11)').hide();
 
-        }
+                for (let i = 0; i < NpTable.length - 1; i++) {
+                    if (IsServFilt(NpTable[i])) {
+                        let gRows = ResultTbl.insertRow();
+                        let oCell = [];
+                        for (let j = 0; j < ResultTbl.rows[0].cells.length; j++) {
+                            oCell[j] = gRows.insertCell();
+                        }
+                        oCell[0].innerHTML = NameTooltipAdder(NpTable[i]);//NpTable[i]["name"];
+                        oCell[1].innerHTML = ClassNameKor[ClassIndex[NpTable[i]["class"]]];
+                        oCell[2].innerHTML = CommTextHTML[CommIndex[NpTable[i]["npcmd"]]];
+                        for (j = 1; j < 6; j++) {
+                            oCell[j + 2].innerHTML = NpDamageCalcFin(NpTable[i], j);
+                        }
+                        oCell[10].innerHTML = NpTable[i]["name"];
+                    }
+                }
+
+                TableSortingDown(ResultTbl, 3);
+
+                $('#ResultTbl tr > *:nth-child(9)').hide();
+                $('#ResultTbl tr > *:nth-child(10)').hide();
+                $('#ResultTbl tr > *:nth-child(11)').hide();
+
+                resolve();
+            },
+            error: function (err) {
+                console.log(err);
+                reject();
+            }
+        });
+    });
+}
+
+function getData() {
+    readServant().then(() => {
+        initialTable();
     });
 }
 
 function getClassScoreData() {
-    let normalClassArray = [ "saber", "archer", "lancer", "rider","caster", "assassin", "berserker"];
+    let normalClassArray = ["saber", "archer", "lancer", "rider", "caster", "assassin", "berserker"];
     let extra1ClassArray = ["shielder", "ruler", "avenger", "mooncancer"]; //shielder shielder 오타 주의
     let extra2ClassArray = ["alterego", "foreigner", "pretender"];
     let beastClassArray = ["draco", "eresh"];
-    let emptyClassData = {"buster" : 0, "arts" : 0, "quick" : 0, "np" : 0};
+    let emptyClassData = {"buster": 0, "arts": 0, "quick": 0, "np": 0};
 
     normalClassArray.forEach(className => {
         let classData = {};
@@ -280,14 +304,14 @@ function getClassScoreData() {
     });
 
     let extra1ClassData = {
-        "buster" : Number($("#Scoreextra1Buster").val()),
-        "arts" : Number($("#Scoreextra1Arts").val()),
-        "quick" : Number($("#Scoreextra1Quick").val()),
-        "np" : Number($("#Scoreextra1NP").val())
+        "buster": Number($("#Scoreextra1Buster").val()),
+        "arts": Number($("#Scoreextra1Arts").val()),
+        "quick": Number($("#Scoreextra1Quick").val()),
+        "np": Number($("#Scoreextra1NP").val())
     }
 
     extra1ClassArray.forEach(className => {
-        if($('#extra1'+className).is(":checked")) {
+        if ($('#extra1' + className).is(":checked")) {
             ClassScoreData[className] = extra1ClassData;
         } else {
             ClassScoreData[className] = emptyClassData;
@@ -295,15 +319,15 @@ function getClassScoreData() {
     });
 
     let extra2ClassData = {
-        "buster" : Number($("#Scoreextra2Buster").val()),
-        "arts" : Number($("#Scoreextra2Arts").val()),
-        "quick" : Number($("#Scoreextra2Quick").val()),
-        "np" : Number($("#Scoreextra2NP").val())
+        "buster": Number($("#Scoreextra2Buster").val()),
+        "arts": Number($("#Scoreextra2Arts").val()),
+        "quick": Number($("#Scoreextra2Quick").val()),
+        "np": Number($("#Scoreextra2NP").val())
     }
 
 
     extra2ClassArray.forEach(className => {
-        if($('#extra2'+className).is(":checked")) {
+        if ($('#extra2' + className).is(":checked")) {
             ClassScoreData[className] = extra2ClassData;
         } else {
             ClassScoreData[className] = emptyClassData;
@@ -312,7 +336,7 @@ function getClassScoreData() {
 
     //beast는 따로 또 체크
     beastClassArray.forEach(className => {
-        if($('#extra2beast').is(":checked")) {
+        if ($('#extra2beast').is(":checked")) {
             ClassScoreData[className] = extra2ClassData;
         } else {
             ClassScoreData[className] = emptyClassData;
@@ -446,12 +470,12 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     if ((Number(Serv["isclassmul"]) === 1) || (ServDataBase[Serv["id"]]["class"] === "berserker"))
         ClassMagMul = 1.5;
     if ($('#FilClsDmgMul').is(":checked")) {
-        if(generalClassNotBurseker.includes(ServDataBase[Serv["id"]]["class"])) {
+        if (generalClassNotBurseker.includes(ServDataBase[Serv["id"]]["class"])) {
             ClassMagMul = 2;
         }
     }
     if ($('#FilClsExtraDmgMul').is(":checked")) {
-        if(extraClassNotBeast.includes(ServDataBase[Serv["id"]]["class"])) {
+        if (extraClassNotBeast.includes(ServDataBase[Serv["id"]]["class"])) {
             ClassMagMul = 2;
         }
     }
@@ -612,7 +636,7 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
         return false;
 
     //NP범위필터
-    if(Serv["charge"] < $('#npChargeMin').val() || Serv["charge"] > $('#npChargeMax').val()) {
+    if (Serv["charge"] < $('#npChargeMin').val() || Serv["charge"] > $('#npChargeMax').val()) {
         return false;
     }
 
@@ -621,7 +645,7 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
         return false;
     }
     //적 서번트 클래스 적용시 얼터에고 1.5배 필터링
-    if ((EnemyClass.value !== "-1") && (Number(Serv["isclassmul"]) === 1)){
+    if ((EnemyClass.value !== "-1") && (Number(Serv["isclassmul"]) === 1)) {
         return false;
     }
 
@@ -678,7 +702,7 @@ function NameTooltipAdder(Serv)//이름 툴팁 출력
     if (Serv["dmgplus"] > 0)
         tmp += `대미지 플러스 ${Serv["dmgplus"]}<br>`;
     if (Serv["hppronp"] > 0)
-        tmp += `HP 반비례 추가 대미지 배율 ${Math.floor(Number(Serv["hppronp"] * 100)) / 100 }%<br>`;
+        tmp += `HP 반비례 추가 대미지 배율 ${Math.floor(Number(Serv["hppronp"] * 100)) / 100}%<br>`;
     if (Serv["npmul"] == 0)//보구퀘 여부
     {
         tmp += "보구퀘 X<br>";
