@@ -537,7 +537,7 @@ function NpDamageCalcFin(Serv, NpLev)//NpTable[i] 형식의 입력, 추가버프
     //console.log("최종공 : "+ServFinalATK + "상성배율 : "+ ClassMagMul + Serv["npcmd"]+Serv["nptype"]+Number(Serv["npmul"])+"보렙 : "+NpLev
     //+"공벞 : "+AtkBuf+"색벞" +CmdBuf + "보벞"+NpBuf+ "특공보구 : "+Number(Serv["npextramul"]));
 
-    return FGOcal.NpDamageCalc(ServFinalATK, ServDataBase[Serv["id"]]["class"], ClassMagMul, Serv["npcmd"],
+    return FGOcal.NpDamageCalc(ServFinalATK, Serv["class"], ClassMagMul, Serv["npcmd"],
         NpDmTable[NpTypeIndex[Serv["nptype"]]][CommIndex[Serv["npcmd"]]][Number(Serv["npmul"])][NpLev - 1], AtkBuf, CmdBuf, NpBuf,
         Number(Serv["npextramul"]), Number(Serv["dmgplus"]), HpproNp, Number(RanNum.value), HiddenDefMagMul);
 }
