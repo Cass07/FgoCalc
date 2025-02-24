@@ -1,0 +1,37 @@
+name: Update ServDataBase CSV
+
+on:
+  push:
+    branches:
+      - master
+  repository_dispatch:
+    types: [update-csv]
+
+jobs:
+  update-csv:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout csv repository
+        uses: actions/checkout@v4
+        with:
+          repository: "Cass07/fgoParser"
+          token: ${{ secrets.FGOPARSER_PAT }}
+          path: "./fgoParser"
+
+      - name: Move CSV to Data directory
+        run: mv ./fgoParser/file/ServDataBase.csv ./Data/ServDataBase.csv
+
+      - name: Remove Checkout directory
+        run: rm -rf ./fgoParser
+
+      - name: Commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto Update ServDataBase.csv"
