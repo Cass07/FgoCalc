@@ -364,6 +364,7 @@ FilClsAllCkd.addEventListener("click", function () {
     $('#FilClsCaster').prop('checked', true);
     $('#FilClsAssassin').prop('checked', true);
     $('#FilClsBerserker').prop('checked', true);
+    $('#FilClsShielder').prop('checked', true);
     $('#FilClsRuler').prop('checked', true);
     $('#FilClsAvenger').prop('checked', true);
     $('#FilClsMooncancer').prop('checked', true);
@@ -381,6 +382,7 @@ FilClsAllUnCkd.addEventListener("click", function () {
     $('#FilClsCaster').prop('checked', false);
     $('#FilClsAssassin').prop('checked', false);
     $('#FilClsBerserker').prop('checked', false);
+    $('#FilClsShielder').prop('checked', false);
     $('#FilClsRuler').prop('checked', false);
     $('#FilClsAvenger').prop('checked', false);
     $('#FilClsMooncancer').prop('checked', false);
@@ -585,6 +587,8 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
     if (!$('#FilClsAssassin').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "assassin"))
         return false;
     if (!$('#FilClsBerserker').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "berserker"))
+        return false;
+    if (!$('#FilClsShielder').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "shielder"))
         return false;
     if (!$('#FilClsRuler').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "ruler"))
         return false;
