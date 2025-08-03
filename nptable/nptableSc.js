@@ -117,7 +117,8 @@ const ClassIndex =
         "foreigner": 12,
         "pretender": 13,
         "draco": 14,
-        "eresh": 15
+        "eresh": 15,
+        "olga" : 16
     };//클래스 텍스트 인덱스 테이블
 
 // 클래스 2배상성 관련 필터용
@@ -125,7 +126,7 @@ const generalClassNotBurseker = ["saber", "archer", "lancer", "rider", "caster",
 const extraClassNotBeast = ["ruler", "avenger", "mooncancer", "alterego", "foreigner", "pretender"];
 
 const ClassNameKor = ["세이버", "아처", "랜서", "라이더", "캐스터", "어새신", "버서커", "실더", "룰러",
-    "어벤저", "문캔서", "얼터에고", "포리너", "프리텐더", "비스트(드라코)", "비스트(에레)"];
+    "어벤저", "문캔서", "얼터에고", "포리너", "프리텐더", "비스트(드라코)", "비스트(에레)", "언비스트"];
 const CommTextHTML = [
     "<span style=\"color:#c00000; font-weight:bold; \">Buster</span>",
     "<span style=\"color:#0059da; font-weight:bold; \">Arts</span>",
@@ -291,7 +292,7 @@ function getClassScoreData() {
     let normalClassArray = ["saber", "archer", "lancer", "rider", "caster", "assassin", "berserker"];
     let extra1ClassArray = ["shielder", "ruler", "avenger", "mooncancer"]; //shielder shielder 오타 주의
     let extra2ClassArray = ["alterego", "foreigner", "pretender"];
-    let beastClassArray = ["draco", "eresh"];
+    let beastClassArray = ["draco", "eresh", "olga"];
     let emptyClassData = {"buster": 0, "arts": 0, "quick": 0, "np": 0};
 
     normalClassArray.forEach(className => {
@@ -602,7 +603,8 @@ function IsServFilt(Serv)//NpTable[i]형식의 입력, 필터 처리 함수
         return false;
     if (!$('#FilClsPretender').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "pretender"))
         return false;
-    if (!$('#FilClsDraco').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "draco" || ServDataBase[Serv["id"]]["class"] == "eresh"))
+    if (!$('#FilClsDraco').is(":checked") && (ServDataBase[Serv["id"]]["class"] == "draco" || ServDataBase[Serv["id"]]["class"] == "eresh"
+        || ServDataBase[Serv["id"]]["class"] == "olga"))
         return false;
     //레어
     if (!$('#FilRare1').is(":checked") && (Number(ServDataBase[Serv["id"]]["rare"]) == "1"))
