@@ -5,7 +5,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143004793-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-143004793-1');
@@ -15,34 +19,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>페그오 보구딜표</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="../32.ico">
     <link rel="shortcut icon" type="image/png" sizes="16x16" href="../16.ico">
 
-    <meta property="og:title" content = "페그오 보구딜표">
+    <meta property="og:title" content="페그오 보구딜표">
     <meta property="og:description" content="일판 페그오(일그오) 데이터를 기준으로 한 필터링 가능한 보구딜표.">
-    <meta property="og:site_name" content = "페그오 보구딜표">
-    <meta property="og:image" content = "https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/image/metaimage.png">
-    <meta property="og:image:width" content = "1200">
-    <meta property="og:image:height" content = "630">
-    <meta property="og:image:type" content = "image/png">
+    <meta property="og:site_name" content="페그오 보구딜표">
+    <meta property="og:image"
+          content="https://raw.githubusercontent.com/Cass07/FgoCalc/master/Data/image/metaimage.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
 
-    <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.min.css"/>
 
     <style>
         div.tooltip-inner {
             max-width: 350px;
         }
-        .nptable{
-            margin:auto;
-            overflow-x : auto;
+
+        .nptable {
+            margin: auto;
+            overflow-x: auto;
         }
+
         .nptable tr td:nth-child(1),
-        .nptable tr td:nth-child(2)
-        {
+        .nptable tr td:nth-child(2) {
             white-space: nowrap;
         }
     </style>
@@ -51,270 +58,290 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 
 <div class="container">
 
     <h1 align="center">페그오 보구딜표</h1><br>
     <p align="center">일판 페그오(일그오) 데이터를 기준으로 한 필터링 가능한 보구딜표.</p>
-    <p align = "center" id = "UpdateDate"></p>
-    <p align = "center">유튜브 영상 등에 이용시 출처 표기 부탁드릴게요 ~!</p>
-    <p align = "center" style = "font-size : 80%">서번트 이름에 마우스 호버 & 터치(모바일) 시 적용된 자버프를 확인 가능합니다.</p>
+    <p align="center" id="UpdateDate"></p>
+    <p align="center">유튜브 영상 등에 이용시 출처 표기 부탁드릴게요 ~!</p>
+    <p align="center" style="font-size : 80%">서번트 소지 버프 모두 적용 & 버서커는 1.5배 상성 & 클래스 스코어 MAX 기준<br>서번트 이름에 마우스 호버 & 터치(모바일) 시 적용된 자버프를 확인 가능합니다.</p>
 
     <form>
-    <div class="form-row justify-content-end">
-        <div class="col-md-3" style = "padding-bottom: 5px;">
-            <button type="button" id="classScoreModalBtn" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalClassScore">클래스 스코어</button>
+        <div class="form-row justify-content-end">
+            <div class="col-md-3" style="padding-bottom: 5px;">
+                <button type="button" id="classScoreModalBtn" class="btn btn-primary btn-block" data-toggle="modal"
+                        data-target="#modalClassScore">클래스 스코어
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="BaseTableFilter" class="btn btn-primary btn-block" data-toggle="modal"
+                        data-target="#HiddenModal">필터
+                </button>
+            </div>
         </div>
-        <div class="col-md-3">
-            <button type="button" id="BaseTableFilter" class="btn btn-primary btn-block" data-toggle="modal" data-target="#HiddenModal">필터</button>
+        <br>
+
+
+        <div class="form-row">
+            <table class="table table-bordered table-sm nptable table-sort-itself" align="middle" id="ResultTbl">
+                <colgroup>
+                    <col width="17%">
+                    <col width="8%">
+                    <col width="8%">
+
+                </colgroup>
+                <thead class="thead-dark" id="tablehd">
+                <tr>
+                    <th scope="col" class="string" id="colserv" style="text-align:center; vertical-align:middle;">서번트
+                    </th>
+                    <th scope="col" class="none" id="colclass" style="text-align:center; vertical-align:middle;">클래스
+                    </th>
+                    <th scope="col" class="none" id="colcmd" style="text-align:center; vertical-align:middle;">보구색</th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;">보구 1렙</th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;">보구 2렙</th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;">보구 3렙</th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;">보구 4렙</th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;">보구 5렙</th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;display: none;">
+                        보구 레벨
+                    </th>
+                    <th scope="col" class="number" style="text-align:center; vertical-align:middle;display: none;">
+                        보구딜
+                    </th>
+                    <th scope="col" style="text-align:center; vertical-align:middle;display: none;">
+                        ServNameDummy
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="tablebd">
+                </tbody>
+            </table>
         </div>
-    </div><br>
-
-
-    <div class="form-row">
-        <table class="table table-bordered table-sm nptable table-sort-itself" align = "middle" id="ResultTbl">
-            <colgroup>
-                <col width = "17%">
-                <col width = "8%">
-                <col width = "8%">
-
-            </colgroup>
-            <thead class="thead-dark" id="tablehd">
-            <tr>
-                <th scope="col" class = "string" id = "colserv" style="text-align:center; vertical-align:middle;">서번트
-                </th>
-                <th scope="col" class = "none" id = "colclass" style="text-align:center; vertical-align:middle;">클래스</th>
-                <th scope="col" class = "none" id = "colcmd" style="text-align:center; vertical-align:middle;">보구색</th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 1렙</th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 2렙</th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 3렙</th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 4렙</th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;">보구 5렙</th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;display: none;">
-                    보구 레벨
-                </th>
-                <th scope="col" class = "number" style="text-align:center; vertical-align:middle;display: none;">
-                    보구딜
-                </th>
-                <th scope="col" style="text-align:center; vertical-align:middle;display: none;">
-                    ServNameDummy
-                </th>
-            </tr>
-            </thead>
-            <tbody id="tablebd">
-            </tbody>
-        </table>
-    </div>
     </form>
 
 
-    <div class="modal fade" id="HiddenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="HiddenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="HiddenModalTitle">Filter</h4>
-                    <button type="button" class="close FilterCloseX" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close FilterCloseX" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <p class = "lead">클래스 필터</p>
+                    <p class="lead">클래스 필터</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsSaber" checked>
-                                <img src="../Data/image/classicon/saber.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsSaber" checked>
+                                <img src="../Data/image/classicon/saber.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsArcher" checked>
-                                <img src="../Data/image/classicon/archer.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsArcher" checked>
+                                <img src="../Data/image/classicon/archer.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsLancer" checked>
-                                <img src="../Data/image/classicon/lancer.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsLancer" checked>
+                                <img src="../Data/image/classicon/lancer.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsRider" checked>
-                                <img src="../Data/image/classicon/rider.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsRider" checked>
+                                <img src="../Data/image/classicon/rider.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsCaster" checked>
-                                <img src="../Data/image/classicon/caster.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsCaster" checked>
+                                <img src="../Data/image/classicon/caster.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsAssassin" checked>
-                                <img src="../Data/image/classicon/assassin.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsAssassin" checked>
+                                <img src="../Data/image/classicon/assassin.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsBerserker" checked>
-                                <img src="../Data/image/classicon/berserker.png" width="36" height ="36">
-                            </label>
-                            <br>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsShielder" checked>
-                                <img src="../Data/image/classicon/shielder.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsRuler" checked>
-                                <img src="../Data/image/classicon/ruler.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsAvenger" checked>
-                                <img src="../Data/image/classicon/avenger.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsMooncancer" checked>
-                                <img src="../Data/image/classicon/mooncancer.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsAlterego" checked>
-                                <img src="../Data/image/classicon/alterego.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsForeigner" checked>
-                                <img src="../Data/image/classicon/foreigner.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsPretender" checked>
-                                <img src="../Data/image/classicon/pretender.png" width="36" height ="36">
-                            </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsDraco" checked>
-                                <img src="../Data/image/classicon/beast.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsBerserker" checked>
+                                <img src="../Data/image/classicon/berserker.png" width="36" height="36">
                             </label>
                             <br>
-                            <button type = "button" id = "FilClsAllCkd" class = "btn btn-primary btn-sm">모두 선택</button>
-                            <button type = "button" id = "FilClsAllUnCkd" class = "btn btn-primary btn-sm">모두 선택해제</button>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsShielder" checked>
+                                <img src="../Data/image/classicon/shielder.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsRuler" checked>
+                                <img src="../Data/image/classicon/ruler.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsAvenger" checked>
+                                <img src="../Data/image/classicon/avenger.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsMooncancer" checked>
+                                <img src="../Data/image/classicon/mooncancer.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsAlterego" checked>
+                                <img src="../Data/image/classicon/alterego.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsForeigner" checked>
+                                <img src="../Data/image/classicon/foreigner.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsPretender" checked>
+                                <img src="../Data/image/classicon/pretender.png" width="36" height="36">
+                            </label>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsDraco" checked>
+                                <img src="../Data/image/classicon/beast.png" width="36" height="36">
+                            </label>
+                            <br>
+                            <button type="button" id="FilClsAllCkd" class="btn btn-primary btn-sm">모두 선택</button>
+                            <button type="button" id="FilClsAllUnCkd" class="btn btn-primary btn-sm">모두 선택해제</button>
                         </div>
                     </div>
-                    <p class = "lead">레어도 필터</p>
+                    <p class="lead">레어도 필터</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare1" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilRare1" checked>
                                 1성
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare2" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilRare2" checked>
                                 2성
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare3" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilRare3" checked>
                                 3성
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare4" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilRare4" checked>
                                 4성
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilRare5" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilRare5" checked>
                                 5성
                             </label>
                             <br>
-                            <button type = "button" id = "FilRareAllCkd" class = "btn btn-primary btn-sm">모두 선택</button>
-                            <button type = "button" id = "FilRareAllUnCkd" class = "btn btn-primary btn-sm">모두 선택해제</button>
+                            <button type="button" id="FilRareAllCkd" class="btn btn-primary btn-sm">모두 선택</button>
+                            <button type="button" id="FilRareAllUnCkd" class="btn btn-primary btn-sm">모두 선택해제</button>
                         </div>
                     </div>
-                    <p class = "lead">보구 커멘드 필터</p>
+                    <p class="lead">보구 커멘드 필터</p>
                     <div class="form-row">
-                        <div class = "form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommBuster" checked>
-                                <img src="../Data/image/commandicon/Buster.png" width="70" height ="70">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPCommBuster" checked>
+                                <img src="../Data/image/commandicon/Buster.png" width="70" height="70">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommArts" checked>
-                                <img src="../Data/image/commandicon/Arts.png" width="70" height ="70">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPCommArts" checked>
+                                <img src="../Data/image/commandicon/Arts.png" width="70" height="70">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPCommQuick" checked>
-                                <img src="../Data/image/commandicon/Quick.png" width="70" height ="70">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPCommQuick" checked>
+                                <img src="../Data/image/commandicon/Quick.png" width="70" height="70">
                             </label>
                         </div>
                     </div>
-                    <p class = "lead">보구 타입 필터</p>
+                    <p class="lead">보구 타입 필터</p>
                     <div class="form-row">
-                        <div class = "form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPTypeArmy" checked>
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPTypeArmy" checked>
                                 대군보구
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPTypeUnit">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPTypeUnit">
                                 대인보구
                             </label>
                         </div>
                     </div>
-                    <p class = "lead">특공 필터</p>
-                    <div class = "form-row">
-                        <div class = "form-group col-12">
-                            <label class = "checkbox-inline"><input type = "checkbox" id = "FilNPExtra" checked>
+                    <p class="lead">특공 필터</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPExtra" checked>
                                 특공 보구
                             </label>
-                            <label class = "checkbox-inline"><input type = "checkbox" id = "FilNPExtraNot" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPExtraNot" checked>
                                 비 특공 보구
                             </label>
 
                         </div>
                     </div>
-                    <p class = "lead">조건부 필터</p>
-                    <div class = "form-row">
-                        <div class = "form-group col-12">
-                            <label class = "checkbox-inline"><input type = "checkbox" id = "FilDebuf" checked>
-                                <span data-toggle="tooltip" data-placement="top" title="적 조건부 디버프 (대군보구일 경우 단체디버프) 등 확정부여가 불가능한 경우나, 버프 사용 후 피격, 선제평타, 상태 중첩, 턴 소모 등 단순 스킬 사용 이상의 조건이 필요한 경우<br>일반적인 디버프는 제외">조건부 보구 대미지</span>
+                    <p class="lead">조건부 필터</p>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilDebuf" checked>
+                                <span data-toggle="tooltip" data-placement="top"
+                                      title="적 조건부 디버프 (대군보구일 경우 단체디버프) 등 확정부여가 불가능한 경우나, 버프 사용 후 피격, 선제평타, 상태 중첩, 턴 소모 등 단순 스킬 사용 이상의 조건이 필요한 경우<br>일반적인 디버프는 제외">조건부 보구 대미지</span>
                             </label>
-                            <label class = "checkbox-inline"><input type = "checkbox" id = "FilDebufNot" checked>
-                                <span data-toggle="tooltip" data-placement="top" title="스킬 사용만으로 만족 가능한 경우">비 조건부 보구 대미지</span>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilDebufNot" checked>
+                                <span data-toggle="tooltip" data-placement="top"
+                                      title="스킬 사용만으로 만족 가능한 경우">비 조건부 보구 대미지</span>
                             </label>
 
                         </div>
                     </div>
-                    <p class = "lead">즉발차지 필터</p>
-                    <div class = "form-row">
+                    <p class="lead">즉발차지 필터</p>
+                    <div class="form-row">
                         <div class="form-group col-6">
                             <label for="npChargeMin">
                                 최소
                             </label>
-                            <input id="npChargeMin" type="number" class="form-control" min="0" max="300" step = "10" value="0">
+                            <input id="npChargeMin" type="number" class="form-control" min="0" max="300" step="10"
+                                   value="0">
                         </div>
                         <div class="form-group col-6">
                             <label for="npChargeMax">
                                 최대
                             </label>
-                            <input id="npChargeMax" type="number" class="form-control" min="0" max="300" step = "10" value="300">
+                            <input id="npChargeMax" type="number" class="form-control" min="0" max="300" step="10"
+                                   value="300">
                         </div>
                     </div>
-                    <p class = "lead">보구 레벨 표시</p>
+                    <p class="lead">보구 레벨 표시</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev1" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPLev1" checked>
                                 Lv.1
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev2" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPLev2" checked>
                                 Lv.2
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev3" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPLev3" checked>
                                 Lv.3
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev4" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPLev4" checked>
                                 Lv.4
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLev5" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPLev5" checked>
                                 Lv.5
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNPLevInd" >
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNPLevInd">
                                 레벨별로 따로 보기
                             </label>
                         </div>
                     </div>
-                    <p class = "lead">포우작, 예장 공격력 세팅</p>
+                    <p class="lead">포우작, 예장 공격력 세팅</p>
                     <div class="form-row">
                         <div class="form-group col-6">
                             <label for="FourATK">
                                 ATK 포우작 수치
                             </label>
-                            <input id="FourATK" type="number" class="form-control" min="0" max="2000" step = "1000" value="1000">
+                            <input id="FourATK" type="number" class="form-control" min="0" max="2000" step="1000"
+                                   value="1000">
                         </div>
                         <div class="form-group col-6">
                             <label for="CraftATK">
                                 개념예장 공격력
                             </label>
-                            <input id="CraftATK" type="number" class="form-control" min="0" step = "1000" value="786">
+                            <input id="CraftATK" type="number" class="form-control" min="0" step="1000" value="786">
                         </div>
                     </div>
-                    <p class = "lead">포우작, 예장 체력 세팅</p>
+                    <p class="lead">포우작, 예장 체력 세팅</p>
                     <div class="form-row">
                         <div class="form-group col-6">
                             <label for="FourHP">
                                 HP 포우작 수치
                             </label>
-                            <input id="FourHP" type="number" class="form-control" min="0" max="2000" step = "1000" value="1000">
+                            <input id="FourHP" type="number" class="form-control" min="0" max="2000" step="1000"
+                                   value="1000">
                         </div>
                         <div class="form-group col-6">
                             <label for="CraftHP">
                                 개념예장 체력
                             </label>
-                            <input id="CraftHP" type="number" class="form-control" min="0" step = "1000" value="0">
+                            <input id="CraftHP" type="number" class="form-control" min="0" step="1000" value="0">
                         </div>
                     </div>
-                    <p class = "lead">추가 버프 세팅</p>
+                    <p class="lead">추가 버프 세팅</p>
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="CraftBufBuster">
@@ -376,33 +403,34 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class = "form-group col-12">
-                            <p data-toggle="tooltip" data-placement="top" title="오베론 3스킬 10레벨의 보구 위력 UP 부스트 100% 적용">보구 위력 UP 부스트</p>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNpBufMulBuster">
-                                <img src="../Data/image/commandicon/Buster.png" width="70" height ="70">
+                        <div class="form-group col-12">
+                            <p data-toggle="tooltip" data-placement="top" title="오베론 3스킬 10레벨의 보구 위력 UP 부스트 100% 적용">보구
+                                위력 UP 부스트</p>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNpBufMulBuster">
+                                <img src="../Data/image/commandicon/Buster.png" width="70" height="70">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNpBufMulArts">
-                                <img src="../Data/image/commandicon/Arts.png" width="70" height ="70">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNpBufMulArts">
+                                <img src="../Data/image/commandicon/Arts.png" width="70" height="70">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilNpBufMulQuick">
-                                <img src="../Data/image/commandicon/Quick.png" width="70" height ="70">
+                            <label class="checkbox-inline"><input type="checkbox" id="FilNpBufMulQuick">
+                                <img src="../Data/image/commandicon/Quick.png" width="70" height="70">
                             </label>
                         </div>
                     </div>
-                    <p class = "lead">난수, 히든상성, 적 클래스 세팅</p>
-                    <div class = "form-row">
-                        <div class = "form-group col-4">
-                            <label for = "RanNum">
+                    <p class="lead">난수, 히든상성, 적 클래스 세팅</p>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="RanNum">
                                 난수 (0.9~1.1)
                             </label>
-                            <input id = "RanNum" type = "number" class = "form-control" min = "0.9" max = "1.1" value = "1">
+                            <input id="RanNum" type="number" class="form-control" min="0.9" max="1.1" value="1">
                         </div>
-                        <div class = "form-group col-4">
-                            <label for = "EnemyHidden">
-                                    적 히든 클래스
+                        <div class="form-group col-4">
+                            <label for="EnemyHidden">
+                                적 히든 클래스
                             </label>
-                            <select class = "form-control" id = "EnemyHidden">
-                                <option value ="0">미적용</option>
+                            <select class="form-control" id="EnemyHidden">
+                                <option value="0">미적용</option>
                                 <option value="1">천(天)</option>
                                 <option value="2">지(地)</option>
                                 <option value="3">인(人)</option>
@@ -410,29 +438,29 @@
                                 <option value="5">수(獣)</option>
                             </select>
                         </div>
-                        <div class = "form-group col-4">
-                            <label for = "EnemyClass">
+                        <div class="form-group col-4">
+                            <label for="EnemyClass">
                                 적 클래스
                             </label>
-                            <select class = "form-control" id = "EnemyClass">
-                                <option value = "-1">미적용</option>
-                                <option value = "0">세이버</option>
-                                <option value = "1">아처</option>
-                                <option value = "2">랜서</option>
-                                <option value = "3">라이더</option>
-                                <option value = "4">캐스터</option>
-                                <option value = "5">어새신</option>
-                                <option value = "6">버서커</option>
-                                <option value = "7">실더</option>
-                                <option value = "8">룰러</option>
-                                <option value = "9">어벤저</option>
-                                <option value = "10">문캔서</option>
-                                <option value = "11">얼터에고</option>
-                                <option value = "12">포리너</option>
-                                <option value = "13">프리텐더</option>
-                                <option value = "14">비스트(드라코)</option>
-                                <option value = "15">비스트(에레)</option>
-                                <option value = "16">언비스트</option>
+                            <select class="form-control" id="EnemyClass">
+                                <option value="-1">미적용</option>
+                                <option value="0">세이버</option>
+                                <option value="1">아처</option>
+                                <option value="2">랜서</option>
+                                <option value="3">라이더</option>
+                                <option value="4">캐스터</option>
+                                <option value="5">어새신</option>
+                                <option value="6">버서커</option>
+                                <option value="7">실더</option>
+                                <option value="8">룰러</option>
+                                <option value="9">어벤저</option>
+                                <option value="10">문캔서</option>
+                                <option value="11">얼터에고</option>
+                                <option value="12">포리너</option>
+                                <option value="13">프리텐더</option>
+                                <option value="14">비스트(드라코)</option>
+                                <option value="15">비스트(에레)</option>
+                                <option value="16">언비스트</option>
                             </select>
                         </div>
                     </div>
@@ -452,32 +480,34 @@
                         </div>
                     </div>
                     -->
-                    <p class = "lead">기타</p>
+                    <p class="lead">기타</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsDmgMul">
-                                <span data-toggle="tooltip" data-placement="top" title="세이버, 아처, 랜서, 라이더, 캐스터, 어새신 상성 보구딜 (2배) 적용">정규 클래스 상성 적용</span>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsDmgMul">
+                                <span data-toggle="tooltip" data-placement="top"
+                                      title="세이버, 아처, 랜서, 라이더, 캐스터, 어새신 상성 보구딜 (2배) 적용">정규 클래스 상성 적용</span>
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "FilClsExtraDmgMul">
-                                <span data-toggle="tooltip" data-placement="top" title="룰러, 어벤저, 문캔서, 얼터에고, 포리너, 프리텐더 상성 보구딜 (2배) 적용">엑스트라 클래스 상성 적용</span>
+                            <label class="checkbox-inline"><input type="checkbox" id="FilClsExtraDmgMul">
+                                <span data-toggle="tooltip" data-placement="top"
+                                      title="룰러, 어벤저, 문캔서, 얼터에고, 포리너, 프리텐더 상성 보구딜 (2배) 적용">엑스트라 클래스 상성 적용</span>
                             </label><br>
-                            <label class="checkbox-inline"><input type="checkbox" id = "NameTooltipUse" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="NameTooltipUse" checked>
                                 적용 버프 툴팁 보여주기
                             </label><br>
-                            <label class="checkbox-inline"><input type = "checkbox" id = "RewardServNpLev5" checked>
+                            <label class="checkbox-inline"><input type="checkbox" id="RewardServNpLev5" checked>
                                 배포 서번트 보구 5레벨 고정
                             </label>
-                            <label class="checkbox-inline"><input type = "checkbox" id = "LowRareServNpLev5">
+                            <label class="checkbox-inline"><input type="checkbox" id="LowRareServNpLev5">
                                 3성 이하 서번트 보구 5레벨 고정
                             </label><br>
                         </div>
-                        <div class = "form-group col-12">
-                            <label class = "checkbox-inline"><input type = "checkbox" id = "StatGrailed">
+                        <div class="form-group col-12">
+                            <label class="checkbox-inline"><input type="checkbox" id="StatGrailed">
                                 성배작 스탯 적용
                             </label>
-                            <select class = "form-control" id = "GrailedLevel">
-                                <option value = "100">100레벨</option>
-                                <option value = "120">120레벨</option>
+                            <select class="form-control" id="GrailedLevel">
+                                <option value="100">100레벨</option>
+                                <option value="120">120레벨</option>
                             </select>
                         </div>
                     </div>
@@ -489,218 +519,248 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalClassScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="modalClassScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modalClassScoreTitle">클래스 스코어</h4>
-                    <button type="button" class="close FilterCloseX" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close FilterCloseX" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <p class = "lead"> <img src="../Data/image/classicon/saber.png" width="36" height ="36"> 세이버</p>
+                    <p class="lead"><img src="../Data/image/classicon/saber.png" width="36" height="36"> 세이버</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScoresaberBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScoresaberBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoresaberBuster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoresaberArts">
                                 아츠 위력
                             </label>
-                            <input id="ScoresaberArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoresaberArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoresaberQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScoresaberQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoresaberQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoresaberNP">
                                 보구 위력
                             </label>
-                            <input id="ScoresaberNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScoresaberNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/archer.png" width="36" height ="36"> 아처</p>
+                    <p class="lead"><img src="../Data/image/classicon/archer.png" width="36" height="36"> 아처</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScorearcherBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScorearcherBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorearcherBuster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorearcherArts">
                                 아츠 위력
                             </label>
-                            <input id="ScorearcherArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorearcherArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorearcherQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScorearcherQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorearcherQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorearcherNP">
                                 보구 위력
                             </label>
-                            <input id="ScorearcherNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScorearcherNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/lancer.png" width="36" height ="36"> 랜서</p>
+                    <p class="lead"><img src="../Data/image/classicon/lancer.png" width="36" height="36"> 랜서</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScorelancerBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScorelancerBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorelancerBuster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorelancerArts">
                                 아츠 위력
                             </label>
-                            <input id="ScorelancerArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorelancerArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorelancerQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScorelancerQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorelancerQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorelancerNP">
                                 보구 위력
                             </label>
-                            <input id="ScorelancerNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScorelancerNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/rider.png" width="36" height ="36"> 라이더</p>
+                    <p class="lead"><img src="../Data/image/classicon/rider.png" width="36" height="36"> 라이더</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScoreriderBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScoreriderBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreriderBuster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreriderArts">
                                 아츠 위력
                             </label>
-                            <input id="ScoreriderArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreriderArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreriderQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScoreriderQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreriderQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreriderNP">
                                 보구 위력
                             </label>
-                            <input id="ScoreriderNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScoreriderNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/caster.png" width="36" height ="36"> 캐스터</p>
+                    <p class="lead"><img src="../Data/image/classicon/caster.png" width="36" height="36"> 캐스터</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScorecasterBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScorecasterBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorecasterBuster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorecasterArts">
                                 아츠 위력
                             </label>
-                            <input id="ScorecasterArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorecasterArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorecasterQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScorecasterQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScorecasterQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScorecasterNP">
                                 보구 위력
                             </label>
-                            <input id="ScorecasterNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScorecasterNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/assassin.png" width="36" height ="36"> 어새신</p>
+                    <p class="lead"><img src="../Data/image/classicon/assassin.png" width="36" height="36"> 어새신</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScoreassassinBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScoreassassinBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreassassinBuster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreassassinArts">
                                 아츠 위력
                             </label>
-                            <input id="ScoreassassinArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreassassinArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreassassinQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScoreassassinQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreassassinQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreassassinNP">
                                 보구 위력
                             </label>
-                            <input id="ScoreassassinNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScoreassassinNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/berserker.png" width="36" height ="36"> 버서커</p>
+                    <p class="lead"><img src="../Data/image/classicon/berserker.png" width="36" height="36"> 버서커</p>
                     <div class="form-row">
                         <div class="form-group col-3">
                             <label for="ScoreberserkerBuster">
                                 버스터 위력
                             </label>
-                            <input id="ScoreberserkerBuster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreberserkerBuster" type="number" class="form-control" min="0" max="20"
+                                   step="2" value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreberserkerArts">
                                 아츠 위력
                             </label>
-                            <input id="ScoreberserkerArts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreberserkerArts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreberserkerQuick">
                                 퀵 위력
                             </label>
-                            <input id="ScoreberserkerQuick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="ScoreberserkerQuick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="ScoreberserkerNP">
                                 보구 위력
                             </label>
-                            <input id="ScoreberserkerNP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="ScoreberserkerNP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
 
-                    <p class = "lead"> <img src="../Data/image/classicon/extra1.png" width="36" height ="36"> 엑스트라 1</p>
+                    <p class="lead"><img src="../Data/image/classicon/extra1.png" width="36" height="36"> 엑스트라 1</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra1shielder" checked>
-                                <img src="../Data/image/classicon/shielder.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra1shielder" checked>
+                                <img src="../Data/image/classicon/shielder.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra1ruler" checked>
-                                <img src="../Data/image/classicon/ruler.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra1ruler" checked>
+                                <img src="../Data/image/classicon/ruler.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra1avenger" checked>
-                                <img src="../Data/image/classicon/avenger.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra1avenger" checked>
+                                <img src="../Data/image/classicon/avenger.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra1mooncancer" checked>
-                                <img src="../Data/image/classicon/mooncancer.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra1mooncancer" checked>
+                                <img src="../Data/image/classicon/mooncancer.png" width="36" height="36">
                             </label>
                         </div>
                     </div>
@@ -709,41 +769,45 @@
                             <label for="Scoreextra1Buster">
                                 버스터 위력
                             </label>
-                            <input id="Scoreextra1Buster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="Scoreextra1Buster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="Scoreextra1Arts">
                                 아츠 위력
                             </label>
-                            <input id="Scoreextra1Arts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="Scoreextra1Arts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="Scoreextra1Quick">
                                 퀵 위력
                             </label>
-                            <input id="Scoreextra1Quick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="Scoreextra1Quick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="Scoreextra1NP">
                                 보구 위력
                             </label>
-                            <input id="Scoreextra1NP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="Scoreextra1NP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
-                    <p class = "lead"> <img src="../Data/image/classicon/extra2.png" width="36" height ="36"> 엑스트라 2</p>
+                    <p class="lead"><img src="../Data/image/classicon/extra2.png" width="36" height="36"> 엑스트라 2</p>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra2alterego" checked>
-                                <img src="../Data/image/classicon/alterego.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra2alterego" checked>
+                                <img src="../Data/image/classicon/alterego.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra2foreigner" checked>
-                                <img src="../Data/image/classicon/foreigner.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra2foreigner" checked>
+                                <img src="../Data/image/classicon/foreigner.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra2pretender" checked>
-                                <img src="../Data/image/classicon/pretender.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra2pretender" checked>
+                                <img src="../Data/image/classicon/pretender.png" width="36" height="36">
                             </label>
-                            <label class="checkbox-inline"><input type="checkbox" id = "extra2beast" checked>
-                                <img src="../Data/image/classicon/beast.png" width="36" height ="36">
+                            <label class="checkbox-inline"><input type="checkbox" id="extra2beast" checked>
+                                <img src="../Data/image/classicon/beast.png" width="36" height="36">
                             </label>
                         </div>
                     </div>
@@ -752,25 +816,29 @@
                             <label for="Scoreextra2Buster">
                                 버스터 위력
                             </label>
-                            <input id="Scoreextra2Buster" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="Scoreextra2Buster" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="Scoreextra2Arts">
                                 아츠 위력
                             </label>
-                            <input id="Scoreextra2Arts" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="Scoreextra2Arts" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="Scoreextra2Quick">
                                 퀵 위력
                             </label>
-                            <input id="Scoreextra2Quick" type="number" class="form-control" min="0" max="20" step = "2" value="0">
+                            <input id="Scoreextra2Quick" type="number" class="form-control" min="0" max="20" step="2"
+                                   value="20">
                         </div>
                         <div class="form-group col-3">
                             <label for="Scoreextra2NP">
                                 보구 위력
                             </label>
-                            <input id="Scoreextra2NP" type="number" class="form-control" min="0" max="10" step="5" value="0">
+                            <input id="Scoreextra2NP" type="number" class="form-control" min="0" max="10" step="5"
+                                   value="10">
                         </div>
                     </div>
 
@@ -783,9 +851,11 @@
     </div>
 
     <br>
-    <button type = "button" id="GotoTop" class="btn btn-success btn-block">▲Top</button><br>
+    <button type="button" id="GotoTop" class="btn btn-success btn-block">▲Top</button>
+    <br>
 
-    <button type = "button" id="GotoMain" class="btn btn-success btn-block">To Main...</button><br>
+    <button type="button" id="GotoMain" class="btn btn-success btn-block">To Main...</button>
+    <br>
 
     <script src="../lib/PapaParse/papaparse.min.js"></script>
     <script src="../lib/FGOcalculate/fgocalculate.js"></script>
