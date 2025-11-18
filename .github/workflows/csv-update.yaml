@@ -3,7 +3,8 @@ name: Update ServDataBase CSV
 on:
   push:
     branches:
-      - master
+      - feature/*
+      - develop
   repository_dispatch:
     types: [update-csv]
 
